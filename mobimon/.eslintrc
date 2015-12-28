@@ -1,0 +1,88 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "react"
+  ],
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true
+  },
+  "globals": {
+    "__DEV__": false,
+    "Firebase": true
+  },
+  "rules": {
+    "react/display-name": [1, {
+      "acceptTranspilerName": true
+    }],
+    "react/jsx-boolean-value": [1, "always"],
+    "react/jsx-closing-bracket-location": [1, {"location": "after-props"}],
+    "react/jsx-curly-spacing": 1,
+    "react/jsx-indent-props": [2, 2],
+    "react/jsx-no-duplicate-props": 1,
+    "react/jsx-no-undef": 1,
+    "react/jsx-uses-react": 1,
+    "react/jsx-uses-vars": 1,
+    "react/no-danger": 1,
+    "react/no-did-mount-set-state": 1,
+    "react/no-did-update-set-state": 1,
+    "react/no-multi-comp": 1,
+    "react/no-unknown-property": 1,
+    "react/prop-types": 1,
+    "react/react-in-jsx-scope": 1,
+    "react/require-extension": 1,
+    "react/self-closing-comp": 1,
+    "react/sort-comp": 1,
+    "react/wrap-multilines": 1,
+    "jsx-quotes": 1,
+    "space-infix-ops": [2, {"int32Hint": false}],
+    "key-spacing": [2, {
+        "beforeColon": false,
+        "afterColon": true
+    }],
+    "comma-spacing": [2, {
+        "before": false, "after": true
+    }],
+    "max-len": [2, 180, 2],
+    "no-underscore-dangle": 0,
+    "handle-callback-err": 0,
+    "no-bitwise": 1,
+    "camelcase": 0,
+    "wrap-iife": [2, "inside"],
+    "no-use-before-define": 1,
+    "new-cap": 2,
+    "no-caller": 2,
+    "no-trailing-spaces": 2,
+    "dot-notation": 0,
+    "quotes": [1, "single"],
+    "strict": [2, "global"],
+    "no-debugger": 2,
+    "no-dupe-keys": 2,
+    "no-empty": 0,
+    "no-extra-boolean-cast": 0,
+    "no-extra-parens": 0,
+    "no-extra-semi": 2,
+    "no-func-assign": 2,
+    "no-invalid-regexp": 2,
+    "no-irregular-whitespace": 2,
+    "quote-props": 0,
+    "no-sparse-arrays": 2,
+    "no-unreachable": 2,
+    "valid-jsdoc": [2, {
+      "requireReturn": false,
+      "requireReturnDescription": false
+    }],
+    "semi": 2,
+    "curly": 2,
+    "eqeqeq": 2,
+    "indent": [2, 2],
+    "no-unused-vars": 2,
+    "no-undef": 2
+  }
+}

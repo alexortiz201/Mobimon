@@ -1,0 +1,25 @@
+@color-bg: #C8C9C1;
+@color-shadow: #95968E;
+
+.character {
+  background: @color-bg;
+  border-radius: 50%;
+  overflow: hidden;
+
+  svg {
+    margin: 10px;
+  }
+
+  .shadow {
+  	background: @color-shadow;
+    height: 7px;
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 50%;
+    opacity: .5;
+    position: relative;
+    top: -16px;
+    // z-index: 2;
+  }
+}
+

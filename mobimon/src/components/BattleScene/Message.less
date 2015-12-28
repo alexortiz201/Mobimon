@@ -1,0 +1,44 @@
+@color-background: #555555;
+@color-background-friendly: #653D99;
+@color-background-monster: #1D3847;
+
+.message-container {
+  position: relative;
+  display: flex;
+  flex: 1;
+  font-size: 0.8em;
+  justify-content: center;
+  background-color: @color-background;
+  border-radius: 50px;
+  &.friendly {
+    background-color: @color-background-friendly;
+  }
+  &.monster {
+   background-color: @color-background-monster;
+  }
+  h3 {
+    font-weight: 100;
+  }
+}
+
+.speech-tail {
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  background-color: @color-background;
+  transform: rotate(-14deg);
+}
+
+.friendly .speech-tail {
+  right: 5px;
+  top: 5px;
+  transform: rotate(4deg);
+  background-color: @color-background-friendly;
+}
+
+.monster .speech-tail {
+  left: 5px;
+  top: 5px;
+  transform: rotate(14deg);
+  background-color: @color-background-monster;
+}

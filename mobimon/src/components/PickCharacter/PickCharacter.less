@@ -1,0 +1,44 @@
+@color-bg: #C8C9C1;
+@color-bg-selected: #1D3847;
+
+.pick-character {
+	.character-list {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+	}
+
+	.character {
+		transition: background 100ms ease-in;
+		min-width: 120px;
+    margin: 10px 20px;
+
+    @media (max-width: 375px) {
+		  float:none !important;
+			margin: 10px auto !important;
+	    width: 140px !important;
+		}
+	}
+
+	.character.selected {
+		transition: background 100ms linear;
+		background: @color-bg-selected;
+	}
+
+	.character:hover {
+		transition: background 100ms linear;
+		cursor: pointer;
+		background: @color-bg-selected;
+	}
+
+	.character.selected:hover {
+		cursor: default;
+	}
+
+	.npc {
+		text-align: center;
+		@media (max-width: 375px) {
+		  padding: 30px !important;
+		}
+	}
+}
