@@ -1,8 +1,8 @@
 ## Mobimon Coming Soon....
 
 TODO:
-  ..* Project Scaffolding
+  * Project Scaffolding
 
 Game Architecure:
-  ..* `core` - Game Platform
-  ..* `plugins` - Game extensions
+  * `core` - Game Platform
+  * `plugins` - Game extensions
