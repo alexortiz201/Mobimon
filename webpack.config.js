@@ -52,4 +52,21 @@ module.exports = {
     filename: '/dist/bundle.js',
     path: __dirname
   }
+  // ,
+  // preLoaders: [
+  //   {
+  //     test: /\.(js|jsx)$/,
+  //     include: path.join(__dirname, 'src'),
+  //     loader: 'eslint-loader'
+  //   }
+  // ],
+  // module : {
+  //   loaders : [
+  //     {
+  //       test : /\.jsx?/,
+  //       include : APP_DIR,
+  //       loader : 'babel'
+  //     }
+  //   ]
+  // }
 };
