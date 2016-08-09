@@ -1,0 +1,10 @@
+# common
+.DS_Store
+
+# Dependency directory
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
+node_modules
+
+# Old Project - remove when done with old assets
+mobimon_old
+mobimon_old.zip
