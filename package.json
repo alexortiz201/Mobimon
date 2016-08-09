@@ -1,0 +1,13 @@
+{
+  "name": "mobimon",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Mobimon",
+  "main": "",
+  "scripts": {},
+  "repository": "https://github.com/alexortiz201/Mobimon",
+  "keywords": [],
+  "author": "Alex Ortiz",
+  "devDependencies": {},
+  "dependencies": {}
+}
