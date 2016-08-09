@@ -3,6 +3,6 @@
 TODO:
   * Project Scaffolding
 
-Game Architecure:
+Game Architecture:
   * `core` - Game Platform
   * `plugins` - Game extensions
