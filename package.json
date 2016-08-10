@@ -4,7 +4,11 @@
   "version": "0.0.1",
   "description": "Mobimon",
   "main": "",
-  "scripts": {},
+  "scripts": {
+    "start": "webpack-dev-server --inline --hot",
+    "test": "npm run lint",
+    "lint": "eslint ./core"
+  },
   "repository": "https://github.com/alexortiz201/Mobimon",
   "keywords": [],
   "author": "Alex Ortiz",
@@ -13,6 +17,7 @@
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
     "eslint": "^3.2.2",
     "eslint-config-airbnb-base": "^5.0.1",
     "eslint-loader": "^1.5.0",
