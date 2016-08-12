@@ -22,14 +22,9 @@ indent_size = 4
 [Makefile]
 indent_style = tab
 
-# Indentation override for all JS under lib and core directory
+# Indentation override for all JS, JSX, JSON,
 # and markdown
-[{lib,core}/**.js, **.js, **.md]
-indent_style = space
-indent_size = 2
-
-# Indentation override for README
-[README.md]
+[**.{js,jsx,json,md}]
 indent_style = space
 indent_size = 2
 
