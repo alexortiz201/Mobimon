@@ -7,7 +7,8 @@ import Main from './page/Main/Main';
 
 render((
     <Router history={browserHistory}>
-      <Route path="/" component={Main}></Route>
+      <Route path="/" component={Main}>
+      </Route>
     </Router>
 ), document.getElementById('app'));
 /* eslint-enable */

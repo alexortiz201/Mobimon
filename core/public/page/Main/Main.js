@@ -13,13 +13,11 @@ export default class Main extends React.Component {
     messages: [],
   };
 
-  componentWillMount() {
-    this.renderMessage('Howdy!');
-  }
+  componentWillMount() {}
 
   renderMessage(message) {
     return (
-      <h3>{message}</h3>
+      <h3 style={{ textAlign: 'center' }}>{message}</h3>
     );
   }
 
