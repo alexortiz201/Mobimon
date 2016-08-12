@@ -5,7 +5,7 @@
   "description": "Mobimon",
   "main": "",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot",
+    "start": "node core/server/webpack-dev-server-init.js --env=dev",
     "test": "npm run lint",
     "lint": "eslint ./core/public"
   },

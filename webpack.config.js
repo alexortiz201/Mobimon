@@ -17,8 +17,8 @@ if (args._.length > 0 && args._.indexOf('start') !== -1) {
 
 // // Get available configurations
 var configs = {
-  base: require(path.join(__dirname, configDirPath + '/webpack-base'))
-  //dev: require(path.join(__dirname, 'config/webpack-dev')),
+  base: require(path.join(__dirname, configDirPath + '/webpack-base')),
+  dev: require(path.join(__dirname, 'config/webpack-dev'))
   //dist: require(path.join(__dirname, 'config/webpack-dist')),
   //test: require(path.join(__dirname, 'config/webpack-test'))
 };
@@ -42,7 +42,7 @@ function getValidEnv(env) {
  */
 function buildConfig(env) {
   var usedEnv = getValidEnv(env);
-  return configs[usedEnv];
+  return configs[usedEnv](configs.base);
 }
 
 module.exports = buildConfig(env);
