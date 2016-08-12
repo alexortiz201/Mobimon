@@ -1,14 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
-// import { createHashHistory } from 'history';
-import Main from './page/Main/Main';
+import configureStore from './utils/store/configureStore';
+import Root from './components/Root/Root';
 
-render((
-    <Router history={browserHistory}>
-      <Route path="/" component={Main}>
-      </Route>
-    </Router>
-), document.getElementById('app'));
-/* eslint-enable */
+const store = configureStore();
+
+render(<Root store={store} />, document.getElementById('app'));
+/* eslint-enable no-unused-vars */

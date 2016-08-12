@@ -10,11 +10,11 @@ insert_final_newline = true
 
 # Matches multiple files with brace expansion notation
 # Set default charset
-[*.{js,py}]
+[**.{js,py}]
 charset = utf-8
 
 # 4 space indentation
-[*.py]
+[**.py]
 indent_style = space
 indent_size = 4
 
@@ -24,7 +24,7 @@ indent_style = tab
 
 # Indentation override for all JS under lib and core directory
 # and markdown
-[{lib,core}/**.js, **.md]
+[{lib,core}/**.js, **.js, **.md]
 indent_style = space
 indent_size = 2
 
