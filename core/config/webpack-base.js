@@ -2,22 +2,26 @@ var path = require('path');
 
 var port = 8000;
 var srcPath = path.join(__dirname, '/../public');
-var publicPath = '/public/';
+
+// The url after http://localhost:8000/
+// that loads app
+var appRenderPath = '';
 
 module.exports = {
   port: port,
   debug: true,
   output: {
     path: path.join(__dirname, '/../dist/public'),
-    filename: 'app.js',
-    publicPath: publicPath
+    filename: 'index.js',
+    publicPath: appRenderPath
   },
   devServer: {
-    contentBase: './core/',
+    contentBase: './core/public',
     historyApiFallback: true,
     hot: true,
+    colors: true,
     port: port,
-    publicPath: publicPath,
+    publicPath: appRenderPath,
     noInfo: false
   },
   resolve: {
@@ -34,7 +38,7 @@ module.exports = {
     preLoaders: [
       {
         test: /\.(js|jsx)$/,
-        include: path.join(__dirname, 'public'),
+        include: path.join(__dirname, '/../public'),
         loader: 'eslint-loader'
       }
     ],
