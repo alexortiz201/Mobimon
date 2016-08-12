@@ -15,7 +15,10 @@ if (args._.length > 0 && args._.indexOf('start') !== -1) {
   env = args.env;
 }
 
-// // Get available configurations
+/**
+ * base config is object others are factories that take base,
+ * and return merged config for particular env
+ */
 var configs = {
   base: require(path.join(__dirname, configDirPath + '/webpack-base')),
   dev: require(path.join(__dirname, 'config/webpack-dev'))
