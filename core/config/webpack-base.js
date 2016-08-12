@@ -5,7 +5,7 @@ var srcPath = path.join(__dirname, '/../public');
 
 // The url after http://localhost:8000/
 // that loads app
-var appRenderPath = '';
+var appRenderPathUrl = '';
 
 module.exports = {
   port: port,
@@ -13,7 +13,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/../dist/public'),
     filename: 'index.js',
-    publicPath: appRenderPath
+    publicPath: appRenderPathUrl
   },
   devServer: {
     contentBase: './core/public',
@@ -21,7 +21,7 @@ module.exports = {
     hot: true,
     colors: true,
     port: port,
-    publicPath: appRenderPath,
+    publicPath: appRenderPathUrl,
     noInfo: false
   },
   resolve: {
