@@ -1,12 +1,12 @@
 {
   "name": "Alexander Ortiz",
   "social": {
-    "linkedin": "linkedIn.com/in/alexortiz201",
-    "github": "github.com/alexortiz201",
+    "linkedin": "LinkedIn.com/in/AlexOrtiz201",
+    "github": "Github.com/AlexOrtiz201",
     "twitter": "@AOrtiz201",
     "site": "AlexOrtiz201.com"
   },
-  "jobs": [
+  "experience": [
     {
       "position": "Front End Engineer",
       "company": "Chartbeat",
@@ -49,7 +49,7 @@
     },
     {
       "position": "Front End Engineer",
-      "company": "Purple Dreams - Latest Freelance Project: Artlane",
+      "company": "Purple Dreams | Latest: Artlane",
       "date": "April 2006 - Present",
       "tech": ["JS","ES6","React","Redux","Webpack","Less","Git","Cordova",
       "Photoshop","Illustrator"],

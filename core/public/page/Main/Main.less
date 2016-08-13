@@ -1,12 +1,12 @@
 /* Base Application Styles */
-html, body, #app{
-  color: #fff;
-  background-color: #152934;
-  height: 100%;
-  overflow: hidden;
-  font-family: "skolar-sans-latin", Helvetica, sans-serif;
-}
+@import '../../utils/less/variables.less';
+@import '../../utils/less/mixins.less';
 
+html, body, #app {
+  color: @text-color;
+  background-color: @color-bg;
+  .sans-serif-family();
+}
 .app-container {
   height: 100%;
 }
@@ -28,7 +28,7 @@ html, body, #app{
 }
 
 .material-shadow {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: @materialBoxShadow;
 }
 
 .gameIndex,

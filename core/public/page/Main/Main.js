@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import 'normalize.css';
 import './Main.less';
+import * as template from './Main.jsx';
 
 export default class Main extends React.Component {
   static propTypes = {
@@ -17,16 +18,16 @@ export default class Main extends React.Component {
 
   renderMessage(message) {
     return (
-      <h3 style={{ textAlign: 'center' }}>{message}</h3>
+      template.renderMessage(message)
     );
   }
 
   render() {
     return (
-      <div className="app-container">
-        {this.props.children}
-        {this.renderMessage('Howdy!')}
-      </div>
+      template.main({
+        children: this.props.children,
+        message: this.renderMessage('Howdy!'),
+      })
     );
   }
 }

@@ -1,32 +1,109 @@
-.about {
-  @color-purple:    #AB1FD8;
-  @color-turquois:  #00FFE0;
-  @color-green:     #ABC65D;
-  @color-orange:    #DFB626;
-  @color-pink:      #fe57a1;
-  @color-link:      #cccccc;
+@import '../../utils/less/variables.less';
+@import '../../utils/less/mixins.less';
 
+.about {
   padding: 20px;
 
-  h3, h4 {
+  h3 {
+    margin: 40px 10px 0 0;
+    .serif-family();
+    letter-spacing: .5px;
+    color: @color-orange;
+  }
+
+  h4 {
+    font-size: 14px;
+    margin: 10px 0;
+    letter-spacing: .65px;
     font-weight: normal;
   }
 
   .about-info {
-    a {
-      margin: 0 5px;
+    margin: 10px 0;
+    font-size: 12px;
+
+    .about-info-name {
+      color: @color-green;
+      .serif-family();
+      font-size: 49px;
+      margin: 10px 0 0 0;
+    }
+
+    .about-info-link {
+      margin: 0;
       color: @color-link;
       text-decoration: none;
+
       &:hover {
-        color: @color-green;
+        color: @color-pink;
+        cursor: pointer;
       }
     }
   }
 
+  pre, code {
+    .sans-serif-family();
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 18px;
+    letter-spacing: .65px;
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  }
+
+  pre {
+    margin: 30px 10px 60px;
+  }
+
+  .about-resume {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .about-experience {
+    .position {}
+    .position,
+    .company {
+      color: #fff;
+      font-size: 16px;
+      letter-spacing: .8px;
+    }
+    .date {
+      color: @color-green;
+      font-style: italic;
+      letter-spacing: inherit;
+    }
+    .tech {
+      font-size: 12px;
+    }
+
+    .successes {
+      ul {
+        padding: 0 0 0 17px;
+        li {
+          margin: 0 0 5px 0;
+        }
+      }
+    }
+
+    .tech, .successes {
+      color: @color-link;
+    }
+  }
+
+  .about-education {
+    .school {
+      font-weight: bold;
+    }
+  }
+
   .purple-dream-logo {
-    width: 20%;
-    position: absolute;
-    opacity: .5;
+    width: 80px;
+    position: fixed;
+    opacity: .65;
     bottom: 10px;
     right: 10px;
   }
