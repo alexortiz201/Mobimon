@@ -5,9 +5,7 @@ import * as template from './Main.jsx';
 
 export default class Main extends React.Component {
   static propTypes = {
-    messages: PropTypes.array,
     currentUser: PropTypes.string,
-    children: PropTypes.node,
   };
 
   static defaultProps = {
