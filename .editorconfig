@@ -24,7 +24,7 @@ indent_style = tab
 
 # Indentation override for all JS, JSX, JSON,
 # and markdown
-[**.{js,jsx,json,md}]
+[**.{js,jsx,json,less,css,md}]
 indent_style = space
 indent_size = 2
 

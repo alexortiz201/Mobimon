@@ -51,16 +51,18 @@ module.exports = {
         test: /\.less/,
         loader: 'style-loader!css-loader!less-loader'
       },
-      {
-        test: /\.(png|jpg|gif|woff|woff2)$/,
-        loader: 'url-loader?limit=8192'
-      }
-      // ,
+      { test: /\.jpg$/, loader: "file-loader" },
+      { test: /\.png$/, loader: "url-loader?mimetype=image/png" },
+      { test: /\.json$/, loader: "json-loader" },
       // {
-      //   test: /\.svg$/,
-      //   loader: require.resolve('./dangerouslySetInnerHTML.loader'),
-      //   exclude: /node_modules/,
-      // }
+      //   test: /\.(png|jpg|gif|woff|woff2)$/,
+      //   loader: 'url-loader?limit=8192'
+      // },
+      {
+        test: /\.svg$/,
+        loader: require.resolve('./dangerouslySetInnerHTML.loader'),
+        exclude: /node_modules/,
+      }
     ]
   }
 };

@@ -1,0 +1,67 @@
+{
+  "name": "Alexander Ortiz",
+  "social": {
+    "linkedin": "linkedIn.com/in/alexortiz201",
+    "github": "github.com/alexortiz201",
+    "twitter": "@AOrtiz201",
+    "site": "AlexOrtiz201.com"
+  },
+  "jobs": [
+    {
+      "position": "Front End Engineer",
+      "company": "Chartbeat",
+      "date": "July 2015 - April 2016",
+      "tech": ["JS","ES6","Angular","D3","Webpack","Gulp","React","Redux",
+      "Websockets","Google Closure","Git","Django","Less","Sketch","Zepplin"],
+      "successes": [
+        "Delivered Ads; the whole UI/UX for a stack based rule set that would rotate ads on clients’ sites.",
+        "Rewrote Bigboard which was causing a browser crashing memory leak. Bigboard was a  real time concurrents ranked list of publisher articles with real-time analytics.",
+        "Implemented features for HUD, product living on a third party domain. Every byte was charged for due to the number of times the script was loaded, so size mattered.",
+        "Created Yeoman generator; a quick start app development for lessons given during front end lunch & learn."
+      ]
+    },
+    {
+      "position": "Front End Engineer",
+      "company": "Rallyverse",
+      "date": "April 2013 - June 2015",
+      "tech": ["JS","C#","Less","Handlebars","ASP.Net","SQL","Wordpress","Grunt",
+      "Highcharts","D3","Mercurial"],
+      "successes": [
+        "Implemented features such as user registration, click tracking, calendar features, WYSIWYG editing, drag & drop sorting, tutorials; against back-end APIs.",
+        "Set up build processes for Front End; e.g. minification, linting, pre-compiling templates.",
+        "API Integration with Facebook, LinkedIn, Twitter, PostMarkApp.",
+        "Refactored Multiple Page Web Application to a Single Page Application.",
+        "Created Cross client rendering HTML & CSS Emails.",
+        "Integrated into Salesforce as part of the platform using postMessage API.",
+        "Created Chrome Extension to add links into Rallyverse App."
+      ]
+    },
+    {
+      "position": "Front End Engineer",
+      "company": "Manning Automotive Advertising",
+      "date": "July 2011 - April 2013",
+      "tech": ["JS","Wordpress","PHP","MySQL","Apache","CSS"],
+      "successes": [
+        "Created a PHP powered email app, where selected options rendered email on a page allowing the copying of source, with email best practices; responsive, inline scripts, and client specific overrides.",
+        "Created Wordpress plugins such as custom carousels, admin custom functionality, & special forms.",
+        "Created Wordpress themes."
+      ]
+    },
+    {
+      "position": "Front End Engineer",
+      "company": "Purple Dreams - Latest Freelance Project: Artlane",
+      "date": "April 2006 - Present",
+      "tech": ["JS","ES6","React","Redux","Webpack","Less","Git","Cordova",
+      "Photoshop","Illustrator"],
+      "successes": [
+        "Created components such as login, authentication, persistence, localization.",
+        "Integrated with shopify SDK to pull available stock of items from account."
+      ]
+    }
+  ],
+  "education": {
+    "school": "Full Sail University",
+    "location": "Orlando, FL",
+    "degree": "Associates of Science Degree in Digital Media"
+  }
+}
