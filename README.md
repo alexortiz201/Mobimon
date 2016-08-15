@@ -34,8 +34,8 @@ All plugins should be self contained and have the same Public API, this will all
 Testing:
   * Using `tape` for now.
     - mark untested modules:
-      `
-        import helpers from '../../utils/test/test.helpers';
+      ```javascript
+      import helpers from '../../utils/test/test.helpers';
 
-        test('Create tests for Main Page', assert => helpers.createFailingTest(assert));
-      `
+      test('Create tests for Main Page', assert => helpers.createFailingTest(assert));`
+      ```
