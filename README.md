@@ -30,3 +30,12 @@ All plugins should be self contained and have the same Public API, this will all
   * node_modules - Kept top level to prevent repo bloat.
 
   * cartridges - self contained modules that hook into core, where core is then imported as a type of "controller."
+
+Testing:
+  * Using `tape` for now.
+    - mark untested modules:
+      `
+        import helpers from '../../utils/test/test.helpers';
+
+        test('Create tests for Main Page', assert => helpers.createFailingTest(assert));
+      `

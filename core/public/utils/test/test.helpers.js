@@ -1,6 +1,4 @@
 const createFailingTest = (assert) => {
-  console.log('______________________test: createFailingTest');
-
   const expected = true;
   const actual = false;
 
