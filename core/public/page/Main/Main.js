@@ -3,7 +3,7 @@ import 'normalize.css';
 import './Main.less';
 import * as template from './Main.jsx';
 
-export default class Main extends React.Component {
+class Main extends React.Component {
   static propTypes = {
     messages: PropTypes.array,
     currentUser: PropTypes.string,
@@ -26,8 +26,10 @@ export default class Main extends React.Component {
     return (
       template.main({
         children: this.props.children,
-        message: this.renderMessage('Howdy!'),
+        message: this.renderMessage('Mobimon Coming Soon!'),
       })
     );
   }
 }
+
+export default Main;

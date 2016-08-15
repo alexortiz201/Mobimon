@@ -19,4 +19,4 @@ Root.propTypes = {
 };
 
 export default Root;
-/* eslint-enable */
+/* eslint-enable no-unused-vars */
