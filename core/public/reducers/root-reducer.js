@@ -1,17 +1,18 @@
-// import { combineReducers } from 'redux';
+import { combineReducers } from 'redux';
+import login from '../components/Login/Login-reducers';
 
-// Import reducers here
 // import battle from './battle';
 // import battleSession from './battle-session';
 // import pickCharacter from './pick-character';
-// import login from './login.js';
-// const reducers = {
+
+
+const reducers = {
 //   battle,
 //   battleSession,
 //   pickCharacter,
-//   login
-// };
+  login,
+};
 
-const mobimonApp = () => ({});// combineReducers(reducers);
+const mobimonApp = combineReducers(reducers);
 
 export default mobimonApp;

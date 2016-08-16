@@ -1,7 +1,7 @@
 import localforage from 'localforage';
 
 const localforageConfig = {
-  name: Mobimon,
+  name: 'Mobimon',
 };
 
 /**
@@ -17,13 +17,13 @@ localforage.config(localforageConfig);
 
 /**
  * Loads any saved state using localforage
- * @return {object|undefined} state   Saved or undefined.
+ * @return {Promise}
  *
  * NOTE: Objects are truthy, in order for redux to populate
  * state by default, it needs to be falsy.
  */
 const loadState = () => {
-  localforage.getItems()
+  return localforage.getItems()
     .then(state => {
       // return undef if there is no saved state found.
       if (!Object.keys(state).length) {
@@ -32,14 +32,12 @@ const loadState = () => {
 
       return state;
     })
-    .catch(err => {
+    .catch(err => { // eslint-disable-line no-unused-vars
       return undefined;
     });
 };
 
 // TODO
-const saveState = (state) +> {
-  return undefined;
-};
+const saveState = () => return undefined;
 
 export default { loadState, saveState };

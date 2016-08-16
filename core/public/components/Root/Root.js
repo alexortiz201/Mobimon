@@ -3,12 +3,14 @@ import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 import Main from '../../page/Main/Main';
+import Login from '../../components/Login/Login';
 import About from '../../page/About/About';
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Main} />
+      <Route path="/login" component={Login} />
       <Route path="/about" component={About} />
     </Router>
   </Provider>
