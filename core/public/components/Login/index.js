@@ -9,13 +9,21 @@ import './Login.less';
 
 const Login = createLogin(React);
 
+Login.defaultProps = {
+  className: 'login',
+  label: 'Username',
+  buttonText: 'Log In',
+  autoFocus: false,
+};
+
 Login.propTypes = {
-  user: PropTypes.object.isRequired,
+  className: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  autoFocus: PropTypes.bool,
   userLogin: PropTypes.func,
 };
 
-export default connect((state) => ({
-  user: state.login.user,
+export default connect(() => ({
 }), {
   userLogin,
 })(Login);

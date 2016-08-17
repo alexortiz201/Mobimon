@@ -8,4 +8,7 @@ const createFailingTest = (assert) => {
   assert.end();
 };
 
-export default { createFailingTest };
+const makeProps = (defaults, settings) =>
+  Object.assign({}, defaults, settings);
+
+export default { createFailingTest, makeProps };

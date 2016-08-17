@@ -3,9 +3,9 @@ import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 
-import Main from '../../page/Main/index.js';
-import About from '../../page/About/index.js';
-import Login from '../../components/Login/index.js';
+import Main from '../../page/Main/';
+import About from '../../page/About/';
+import Login from '../../components/Login/';
 
 // debugger // eslint-disable-line
 const Root = ({ store }) => (

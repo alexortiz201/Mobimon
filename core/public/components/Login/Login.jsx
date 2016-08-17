@@ -1,21 +1,44 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 
-const labeledInput = ({ autoFocus, label }) =>
-  <label className="login-form-input-label">
-    {label}
+const labeledInput = (setInput, className, label, autoFocus = false) =>
+  <label className={`form-input-label ${className}-form-input-label`}>
+    <span className={`form-input-label-text ${className}-input-label-text`}>
+      {label}
+    </span>
     <input
       type="text"
-      className="login-form-input-field"
-      autoFocus={autoFocus}
-      ref="inputField" />
+      ref={node => setInput(node)}
+      className={`form-input-field ${className}-form-input-field`}
+      autoFocus={autoFocus} />
   </label>;
 
-const loginForm = ({ onSubmit }) =>
-  <form
-    className="login-form"
-    onSubmit={ (e) => onSubmit(e) }>
-    { labeledInput(true, 'Username') }
-    <input className="button" type="submit" value="Log In" />
-  </form>;
+const loginForm = ({ className, label, buttonText = 'Button', autoFocus = false }, onSubmit) => {
+  let input;
 
-export default loginForm;
+  const setInput = (node) => {
+    input = node;
+  };
+
+  return (
+    <form
+      className={`form ${className}-form`}
+      onSubmit={ (e) => {
+        onSubmit(e, input);
+        input.value = '';
+      }}>
+      { labeledInput(setInput, className, label, autoFocus) }
+      <input
+        className={`button ${className}-button`}
+        type="submit"
+        value={buttonText} />
+    </form>
+  );
+};
+
+const login = (props, onSubmit) =>
+  <div
+    className={`${props.className}`}>
+    { loginForm(props, onSubmit) }
+  </div>;
+
+export default login;

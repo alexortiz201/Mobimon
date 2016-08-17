@@ -2,25 +2,21 @@ import template from './Login.jsx';
 
 // eslint-disable-next-line no-unused-vars
 export default React => (props) => {
-  const onSubmit = (e) => {
+  const onSubmit = (e, inputNode) => {
     e.preventDefault();
-    console.log('click');
-    // const userName = props.refs.inputField.value;
+    const name = inputNode.value;
 
-    // if (!userName) {
-    //   return;
-    // }
+    if (!name) {
+      return;
+    }
 
-    // props.userLogin({
-    //   name: userName,
-    // });
+    props.userLogin({
+      name,
+    });
     // this.props.history.replaceState(null, '/pick');
   };
 
-  // template(props)
   return (
-    template({
-      onSubmit,
-    })
+    template(props, onSubmit)
   );
 };
