@@ -39,3 +39,6 @@ Testing:
 
       test('Create tests for Main Page', assert => helpers.createFailingTest(assert));`
       ```
+
+Credits:
+  Artwork done by [Mike Mazur](#)
