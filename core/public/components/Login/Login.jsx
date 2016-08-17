@@ -46,9 +46,10 @@ const login = (props, onSubmit, newInputValue) => {
   const val = newInputValue || props.inputValue;
 
   return (
-    <div
-      className={`${props.className}`}>
-      { loginForm(props, onSubmit, val) }
+    <div className={`${props.className}-wrapper`}>
+      <div className={`${props.className}`}>
+        { loginForm(props, onSubmit, val) }
+      </div>
     </div>
   );
 };
