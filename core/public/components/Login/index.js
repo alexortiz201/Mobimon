@@ -14,16 +14,19 @@ Login.defaultProps = {
   label: 'Username',
   buttonText: 'Log In',
   autoFocus: false,
+  inputValue: 'Alex',
 };
 
 Login.propTypes = {
   className: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   autoFocus: PropTypes.bool,
+  user: PropTypes.object,
   userLogin: PropTypes.func,
 };
 
-export default connect(() => ({
+export default connect((state) => ({
+  user: state.login.user,
 }), {
   userLogin,
 })(Login);

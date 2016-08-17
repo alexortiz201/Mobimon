@@ -2,9 +2,10 @@ import template from './Login.jsx';
 
 // eslint-disable-next-line no-unused-vars
 export default React => (props) => {
+  let name = props.user && props.user.name;
   const onSubmit = (e, inputNode) => {
     e.preventDefault();
-    const name = inputNode.value;
+    name = inputNode.value;
 
     if (!name) {
       return;
@@ -17,6 +18,6 @@ export default React => (props) => {
   };
 
   return (
-    template(props, onSubmit)
+    template(props, onSubmit, name)
   );
 };

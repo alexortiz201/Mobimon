@@ -18,6 +18,7 @@ const defaultProps = {
   label: 'Username',
   buttonText: 'Log In',
   autoFocus: false,
+  inputValue: 'Alex'
 };
 
 test('Login', nest => {
@@ -65,6 +66,36 @@ test('Login', nest => {
     assert.end();
   });
 
+  nest.test('... should render text input with default text', assert => {
+    const msg = 'Login should render text input with default text.';
+    const props = helpers.makeProps(defaultProps);
+
+    const $ = dom.load(render(<Login {...props} />));
+    const output = $(`.${props.className}-form-input-field`).attr('value');
+
+    const actual = output;
+    const expected = props.inputValue;
+
+    assert.equal(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should render text input with user name', assert => {
+    const msg = 'Login should render user name as default text.';
+    const loginState = { user: { name: 'Uncle Bob' }};
+    const props = helpers.makeProps(defaultProps, loginState);
+
+    console.log('__________________', props);
+    const $ = dom.load(render(<Login {...props} />));
+    const output = $(`.${props.className}-form-input-field`).attr('value');
+
+    const actual = output;
+    const expected = loginState.user.name;
+
+    assert.equal(actual, expected, msg);
+    assert.end();
+  });
+
   nest.test('... should render button', assert => {
     const msg = 'Login should render button.';
     const props = helpers.makeProps(defaultProps);
@@ -79,7 +110,7 @@ test('Login', nest => {
     assert.end();
   });
 
-  nest.test('... should render button', assert => {
+  nest.test('... should render button with text', assert => {
     const msg = 'Login should render button with text.';
     const props = helpers.makeProps(defaultProps);
 
