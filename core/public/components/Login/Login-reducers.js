@@ -1,6 +1,7 @@
 import { LOGIN } from './Login-actions';
 
-const login = (state = { user: {} }, action) => {
+const initialState = { user: {} };
+const login = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
       return {
