@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 
-const aboutInfo = ({ name, social }) => (
+const aboutInfo = ({ name, social }) =>
   <div className="about-info">
     <h1 className="about-info-name">{name}</h1>
     <a className="about-info-link"
@@ -18,14 +18,12 @@ const aboutInfo = ({ name, social }) => (
     <a className="about-info-link"
       href={`http://${social.site}`}
       target="_blank">{social.site}</a>
-  </div>
-);
+  </div>;
 
-const successFn = (success, index) => (
-  <li key={`${success}${index}`}>{`${success}\n`}</li>
-);
+const successFn = (success, index) =>
+  <li key={`${success}${index}`}>{`${success}\n`}</li>;
 
-const resumeExperience = ({ position, company, date, tech, successes }) => (
+const resumeExperience = ({ position, company, date, tech, successes }) =>
   <pre key={`${position}-${company}`}>
     <code className="about-experience">
       <span className="position">{`${position} `}</span>
@@ -44,35 +42,31 @@ const resumeExperience = ({ position, company, date, tech, successes }) => (
         </ul>
       </span>
     </code>
-  </pre>
-);
+  </pre>;
 
-const resumeEducation = ({ school, location, degree }) => (
+const resumeEducation = ({ school, location, degree }) =>
   <pre>
     <code className="about-education">
       <span className="school">{`${school}`}</span>
       <span className="location">{` | ${location} | `}</span>
       <span className="degree">{`${degree}`}</span>
     </code>
-  </pre>
-);
+  </pre>;
 
-const aboutResume = ({ experience, education }) => (
+const aboutResume = ({ experience, education }) =>
   <div className="about-resume">
     <h3>Experience</h3>
     {experience.map(xp => resumeExperience(xp))}
 
     <h3>Education</h3>
     {resumeEducation(education)}
-  </div>
-);
+  </div>;
 
-const about = ({ resume, img }) => (
+const about = ({ resume, img }) =>
   <div className="about">
-    { aboutInfo(resume) }
-    { aboutResume(resume) }
-    <img className="purple-dream-logo" src={img} />
-  </div>
-);
+    { resume && aboutInfo(resume) }
+    { resume && aboutResume(resume) }
+    { img && <img className="purple-dream-logo" src={img} />}
+  </div>;
 
 export default about;

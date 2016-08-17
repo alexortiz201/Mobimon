@@ -1,5 +1,6 @@
 module.exports = {
   "root": true,
+  "extends": "airbnb-base",
   "parser": "babel-eslint",
   "plugins": [
     "react"
@@ -13,5 +14,7 @@ module.exports = {
     "jsx": true,
     "modules": true
   },
-  "extends": "airbnb-base"
+  // "globals": {
+  //   "React": true
+  // },
 }

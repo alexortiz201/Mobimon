@@ -1,14 +1,9 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+// eslint-disable-next-line no-unused-vars
+import React from 'react';
 
-const main = ({ children, message }) => (
-  <div className="app-container">
-    {children}
-    {message}
-  </div>
-);
+const main = (props) =>
+<div className="app-container">
+  {props && props.children}
+</div>;
 
-const renderMessage = (message) => (
-  <h3 style={{ textAlign: 'center' }}>{ message }</h3>
-);
-
-export { main, renderMessage };
+export default main;

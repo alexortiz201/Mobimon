@@ -23,7 +23,7 @@ localforage.config(localforageConfig);
  * state by default, it needs to be falsy.
  */
 const loadState = () => {
-  return localforage.getItems()
+  localforage.getItems()
     .then(state => {
       // return undef if there is no saved state found.
       if (!Object.keys(state).length) {
@@ -32,12 +32,10 @@ const loadState = () => {
 
       return state;
     })
-    .catch(err => { // eslint-disable-line no-unused-vars
-      return undefined;
-    });
+    .catch(err => undefined); // eslint-disable-line no-unused-vars
 };
 
 // TODO
-const saveState = () => return undefined;
+// const saveState = () => { return undefined; };
 
-export default { loadState, saveState };
+export default { loadState };

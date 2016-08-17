@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 
-const labeledInput = ({ autoFocus, label }) => (
+const labeledInput = ({ autoFocus, label }) =>
   <label className="login-form-input-label">
     {label}
     <input
@@ -8,16 +8,14 @@ const labeledInput = ({ autoFocus, label }) => (
       className="login-form-input-field"
       autoFocus={autoFocus}
       ref="inputField" />
-  </label>
-);
+  </label>;
 
-const form = ({ onSubmit }) => (
+const loginForm = ({ onSubmit }) =>
   <form
     className="login-form"
     onSubmit={ (e) => onSubmit(e) }>
     { labeledInput(true, 'Username') }
     <input className="button" type="submit" value="Log In" />
-  </form>
-);
+  </form>;
 
-export { form, labeledInput };
+export default loginForm;
