@@ -3,8 +3,11 @@ import React from 'react';
 import { render } from 'react-dom';
 import configureStore from './utils/redux/configureStore';
 import Root from './components/Root/Root';
+import { getItem } from './utils/storage/storage';
 
-const store = configureStore();
+getItem('state').then(savedState => {
+  const store = configureStore(savedState);
 
-render(<Root store={store} />, document.getElementById('app'));
-/* eslint-enable no-unused-vars */
+  render(<Root store={store} />, document.getElementById('app'));
+  /* eslint-enable no-unused-vars */
+});

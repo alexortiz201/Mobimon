@@ -1,4 +1,5 @@
 import localForage from 'localforage';
+// eslint-disable-next-line
 import localforageGetItems from 'localforage-getitems';
 
 const localForageConfig = {
@@ -41,7 +42,7 @@ const loadState = () =>
  */
 const clearState = () =>
   localForage.clear()
-    .catch(err => undefined);
+    .catch(err => undefined); // eslint-disable-line no-unused-vars
 
 /**
  * get single stored item

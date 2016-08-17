@@ -7,7 +7,6 @@ import Main from '../../page/Main/';
 import About from '../../page/About/';
 import Login from '../../components/Login/';
 
-// debugger // eslint-disable-line
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router history={browserHistory}>
