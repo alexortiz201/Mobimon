@@ -85,7 +85,6 @@ test('Login', nest => {
     const loginState = { user: { name: 'Uncle Bob' }};
     const props = helpers.makeProps(defaultProps, loginState);
 
-    console.log('__________________', props);
     const $ = dom.load(render(<Login {...props} />));
     const output = $(`.${props.className}-form-input-field`).attr('value');
 
