@@ -1,7 +1,13 @@
+@import './variables.less';
+
 .sans-serif-family() {
   font-family: 'lato', Helvetica, sans-serif;
 }
 
 .serif-family() {
   font-family: 'Bitter', serif;
+}
+
+.images-folder-file(@folder, @file) {
+  background: url(~"@{image-path}/@{folder}/@{file}") transparent no-repeat top left;
 }
