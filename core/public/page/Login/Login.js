@@ -7,8 +7,7 @@ export default React => (props) => {
   if (name) {
     // if mobimon is picked go to main
     // otherwise allowing picking of mobimon
-    const route = props.user.mobimon ? '/' : '/pick';
-    console.log('Would reroute to: ', route);
+    // const route = props.user.mobimon ? '/' : '/pick';
     // props.history.replaceState(null, '/pick');
   }
 
