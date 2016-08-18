@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 import createLogout from './Logout.js';
@@ -11,6 +12,14 @@ const Logout = createLogout(React);
 Logout.defaultProps = {
   className: 'logout',
   message: 'Good bye... Logging out...',
+  logout: (props, name) => {
+    // if logged in log out
+    if (name) {
+      props.userLogout({});
+    }
+
+    props.router.replace('/login');
+  },
 };
 
 Logout.propTypes = {
@@ -18,8 +27,10 @@ Logout.propTypes = {
   message: PropTypes.string.isRequired,
 };
 
-export default connect((state) => ({
+const connectedLogin = connect((state) => ({
   user: state.user,
 }), {
   userLogout,
 })(Logout);
+
+export default withRouter(connectedLogin);

@@ -6,6 +6,7 @@ import { Router, Route, browserHistory } from 'react-router';
 import Main from '../../page/Main/';
 import About from '../../page/About/';
 import Login from '../../page/Login/';
+import Logout from '../../page/Logout/';
 
 const Root = ({ store }) => (
   <Provider store={store}>
@@ -13,8 +14,8 @@ const Root = ({ store }) => (
       <Route path="/" component={Main} />
       <Route path="/about" component={About} />
       <Route path="/login" component={Login} />
-    {/*
       <Route path="/logout" component={Logout} />
+    {/*
       <Route path="/pick" component={PickCharacter} />
     */}
     </Router>

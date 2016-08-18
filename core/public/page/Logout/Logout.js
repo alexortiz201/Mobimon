@@ -1,14 +1,14 @@
 import template from './Logout.jsx';
 
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable */
 export default React => (props) => {
-  // if logged in log out
-  if (props.user && props.user.name) {
-    props.userLogout();
-    props.history.replaceState(null, '/login');
-  }
+  const timeBeforeReroute = 1000;
+  const name = props.user && props.user.name;
+
+  setTimeout(() => props.logout(props, name), timeBeforeReroute);
 
   return (
-    template(props)
+    template(props, name)
   );
 };
+/* eslint-enable */

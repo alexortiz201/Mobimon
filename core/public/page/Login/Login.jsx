@@ -1,26 +1,25 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 
-const labeledInput = (setInput, className, label, inputValue, autoFocus = false) =>
-  <label className={`form-input-label ${className}-form-input-label`}>
-    <span className={`form-input-label-text ${className}-input-label-text`}>
-      {label}
-    </span>
-    <input
-      type="text"
-      defaultValue={inputValue}
-      ref={node => setInput(node)}
-      className={`form-input-field ${className}-form-input-field`}
-      autoFocus={autoFocus} />
-  </label>;
+const labeledInput = (props, inputValue, setInput) => {
+  const { className, label, autoFocus = false } = props;
 
-const loginForm = ({
-    className,
-    label,
-    buttonText = 'Button',
-    autoFocus = false,
-  },
-  onSubmit,
-  inputValue) => {
+  return (
+    <label className={`form-input-label ${className}-form-input-label`}>
+      <span className={`form-input-label-text ${className}-input-label-text`}>
+        {label}
+      </span>
+      <input
+        type="text"
+        defaultValue={inputValue}
+        ref={node => setInput(node)}
+        className={`form-input-field ${className}-form-input-field`}
+        autoFocus={autoFocus} />
+    </label>
+  );
+};
+
+const loginForm = (props, inputValue) => {
+  const { className, buttonText = 'Button', onSubmit } = props;
   let input;
 
   const setInput = (node) => {
@@ -31,9 +30,9 @@ const loginForm = ({
     <form
       className={`form ${className}-form`}
       onSubmit={ (e) => {
-        onSubmit(e, input);
+        onSubmit(e, props, input);
       }}>
-      { labeledInput(setInput, className, label, inputValue, autoFocus) }
+      { labeledInput(props, inputValue, setInput) }
       <input
         className={`button ${className}-button`}
         type="submit"
@@ -42,13 +41,13 @@ const loginForm = ({
   );
 };
 
-const login = (props, onSubmit, newInputValue) => {
+const login = (props, newInputValue) => {
   const val = newInputValue || props.inputValue;
 
   return (
     <div className={`${props.className}-wrapper`}>
       <div className={`${props.className}`}>
-        { loginForm(props, onSubmit, val) }
+        { loginForm(props, val) }
       </div>
     </div>
   );

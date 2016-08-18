@@ -16,6 +16,8 @@ const defaultProps = {
   buttonText: 'Log In',
   autoFocus: false,
   inputValue: 'Alex',
+  onSubmit: () => {},
+  goToRoute: () => {},
 };
 
 test('Login', nest => {

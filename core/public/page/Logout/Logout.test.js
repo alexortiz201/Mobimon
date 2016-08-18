@@ -13,6 +13,7 @@ const Logout = createLogout(React);
 const defaultProps = {
   className: 'logout',
   message: 'Good bye... Logging out...',
+  logout: () => {},
 };
 
 test('Logout', nest => {
@@ -32,8 +33,25 @@ test('Logout', nest => {
   });
 
   nest.test('... should render message', assert => {
-    const msg = 'Logout should render good bye message.';
+    const msg = 'Logout should render rerouting message.';
     const props = helpers.makeProps(defaultProps);
+
+    const $ = dom.load(render(<Logout {...props} />));
+    const output = $(`.${props.className}`).text();
+
+    const actual = output;
+    const expected = 'Rerouting to Login...';
+
+    assert.equal(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should render message', assert => {
+    const msg = 'Logout should render good bye message.';
+    const props = helpers.makeProps(
+      defaultProps,
+      { user: { name: 'Alex' } },
+    );
 
     const $ = dom.load(render(<Logout {...props} />));
     const output = $(`.${props.className}`).text();
