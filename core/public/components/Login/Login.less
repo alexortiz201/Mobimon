@@ -24,7 +24,7 @@
     margin-top: 8px;
     padding: 8px;
     height: 6ex;
-    background: #63CD7A;
+    background: @color-mobi-green;
     color: #fff;
     border-radius: 4px;
     text-transform: capitalize;
@@ -35,12 +35,24 @@
   text-transform: uppercase;
   background: #ddd;
   border: none;
+
+  &:hover {
+    background: darken(@color-mobi-green, 10%);
+    cursor: pointer;
+  }
+  &:active {
+    background: darken(@color-mobi-green, 20%);
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
 }
 
 .form-input-label {
   flex-grow: 1;
   color: rgba(255, 255, 255, 0.7);
-  background-color: #1D3847;
+  background-color: @form-input-bg;
   padding: 8px;
   font-weight: 200;
 }

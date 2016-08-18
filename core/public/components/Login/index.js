@@ -23,6 +23,7 @@ Login.propTypes = {
   autoFocus: PropTypes.bool,
   user: PropTypes.object,
   userLogin: PropTypes.func,
+  history: PropTypes.object.isRequired,
 };
 
 export default connect((state) => ({

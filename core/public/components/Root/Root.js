@@ -13,6 +13,7 @@ const Root = ({ store }) => (
       <Route path="/" component={Main} />
       <Route path="/about" component={About} />
       <Route path="/login" component={Login} />
+    {/* <Route path="/pick" component={PickCharacter} /> */}
     </Router>
   </Provider>
 );
