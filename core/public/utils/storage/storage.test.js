@@ -1,5 +1,4 @@
 import test from 'tape';
-import helpers from '../../utils/test/test.helpers';
 import {
   loadState,
 } from './storage';
@@ -11,13 +10,13 @@ import {
 test('Storage', nest => {
   nest.test('... should retrieve stored state', assert => {
     const msg = 'Storage retrieved undefined';
+    const expected = undefined;
     let actual;
+
     loadState()
       .then((storedState) => {
         actual = storedState;
       });
-
-    let expected = undefined;
 
     assert.equal(actual, expected, msg);
     assert.end();

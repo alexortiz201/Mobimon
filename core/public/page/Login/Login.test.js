@@ -18,7 +18,7 @@ const defaultProps = {
   label: 'Username',
   buttonText: 'Log In',
   autoFocus: false,
-  inputValue: 'Alex'
+  inputValue: 'Alex',
 };
 
 test('Login', nest => {
@@ -82,7 +82,7 @@ test('Login', nest => {
 
   nest.test('... should render text input with user name', assert => {
     const msg = 'Login should render user name as default text.';
-    const loginState = { user: { name: 'Uncle Bob' }};
+    const loginState = { user: { name: 'Uncle Bob' } };
     const props = helpers.makeProps(defaultProps, loginState);
 
     const $ = dom.load(render(<Login {...props} />));
@@ -134,7 +134,7 @@ test('Login', nest => {
 
     const expected = {
       type: LOGIN,
-      user: { name: 'Alex' }
+      user: { name: 'Alex' },
     };
 
     assert.deepEqual(actual, expected, msg);
@@ -159,13 +159,13 @@ test('Login', nest => {
       type: LOGIN,
       user: {
         name,
-      }
+      },
     });
 
     const expected = {
       user: {
         name,
-      }
+      },
     };
 
     assert.deepEqual(actual, expected, msg);

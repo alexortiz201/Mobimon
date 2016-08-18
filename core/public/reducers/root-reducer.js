@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import login from '../components/Login/Login-reducers';
+import login from '../page/Login/Login-reducers';
 
 // import battle from './battle';
 // import battleSession from './battle-session';
