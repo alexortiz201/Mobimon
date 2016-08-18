@@ -9,16 +9,16 @@ import { userLogin } from '../../redux/user/user-actions';
 
 const Login = createLogin(React);
 
-function onSubmit(e, props, inputNode) {
+const onSubmit = (e, props, inputNode) => {
   e.preventDefault();
   if (inputNode.value) {
     props.userLogin({
       name: inputNode.value,
     });
   }
-}
+};
 
-function goToRoute(props) {
+const goToRoute = (props) => {
   const user = props.user;
   const name = user.name;
   let route = '/pick';
@@ -32,7 +32,7 @@ function goToRoute(props) {
 
     props.router.replace(route);
   }
-}
+};
 
 Login.defaultProps = {
   className: 'login',

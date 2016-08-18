@@ -5,6 +5,7 @@ TODO:
   * Set up project testing - done
   * Migrate old still useful code
   * Come up with a way to hook core and plugins
+  * set up prod built distro
 
 Game Architecture:
   * `core` - Game Platform
@@ -40,6 +41,10 @@ Testing:
       test('Create tests for Main Page', assert => helpers.createFailingTest(assert));`
       ```
 
+Quirks:
+  * props.router.replace('/login') does not rewrite url in dev server.
+  * Using setTimeout workaround to wait on component to finish rendering before
+  rerouting.
 
 ### Credits:
   Monsters' artwork was done by [Mike Mazur](https://dribbble.com/Michaelmazur)!

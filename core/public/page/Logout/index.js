@@ -9,17 +9,19 @@ import { userLogout } from '../../redux/user/user-actions';
 
 const Logout = createLogout(React);
 
+const logout = (props, name) => {
+  // if logged in log out
+  if (name) {
+    props.userLogout({});
+  }
+
+  props.router.replace('/login');
+};
+
 Logout.defaultProps = {
   className: 'logout',
   message: 'Good bye... Logging out...',
-  logout: (props, name) => {
-    // if logged in log out
-    if (name) {
-      props.userLogout({});
-    }
-
-    props.router.replace('/login');
-  },
+  logout,
 };
 
 Logout.propTypes = {
