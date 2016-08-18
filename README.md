@@ -40,5 +40,6 @@ Testing:
       test('Create tests for Main Page', assert => helpers.createFailingTest(assert));`
       ```
 
-Credits:
-  Artwork done by [Mike Mazur](#)
+
+### Credits:
+  Monsters' artwork was done by [Mike Mazur](https://dribbble.com/Michaelmazur)!
