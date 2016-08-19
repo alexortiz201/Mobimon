@@ -1,7 +1,7 @@
 import test from 'tape';
 import {
-  LOGIN,
-  LOGOUT,
+  LOGIN_USER,
+  LOGOUT_USER,
   userLogin,
   userLogout,
 } from './user-actions';
@@ -18,7 +18,7 @@ test('User', nest => {
     });
 
     const expected = {
-      type: LOGIN,
+      type: LOGIN_USER,
       user: {
         name,
       },
@@ -34,7 +34,7 @@ test('User', nest => {
     const actual = userLogout();
 
     const expected = {
-      type: LOGOUT,
+      type: LOGOUT_USER,
       user: undefined,
     };
 
@@ -64,7 +64,7 @@ test('User', nest => {
       name: 'Alex',
     };
     const actual = user(undefined, {
-      type: LOGIN,
+      type: LOGIN_USER,
       user: {
         name: userState.name,
       },
@@ -83,7 +83,7 @@ test('User', nest => {
     const msg = 'user reducer should handle LOGOUT.';
 
     const actual = user(undefined, {
-      type: LOGOUT,
+      type: LOGOUT_USER,
       user: {
         name: 'Alex',
       },

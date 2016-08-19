@@ -16,6 +16,7 @@ const defaultProps = {
   characters: [],
   renderCharacterList: (props) =>
     props.characters.map(() => <div className="character"></div>),
+  onSelectCharacter: () => {},
 };
 
 test('Pick', nest => {

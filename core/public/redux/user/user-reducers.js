@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from './user-actions';
+import { LOGIN_USER, LOGOUT_USER } from './user-actions';
 
 const initialState = {
   loggedIn: false,
@@ -6,12 +6,12 @@ const initialState = {
 };
 const user = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN:
+    case LOGIN_USER:
       return {
         loggedIn: true,
         ...action.user,
       };
-    case LOGOUT:
+    case LOGOUT_USER:
       return initialState;
     default:
       return state;
