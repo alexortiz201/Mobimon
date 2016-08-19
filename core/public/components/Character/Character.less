@@ -1,0 +1,27 @@
+@import '../../utils/less/mixins.less';
+
+.character {
+  overflow: hidden;
+  position: relative;
+
+  .character-inner {
+    width: 100%;
+    height: 100%;
+  }
+
+  .character-inner-bilsner {
+    .images-folder-file('characters', 'bilsner.svg');
+  }
+
+  .character-inner-bird {
+    .images-folder-file('characters', 'bird.svg');
+  }
+
+  .character-inner-peater {
+    .images-folder-file('characters', 'peater.svg');
+  }
+
+  .character-inner-octobruise {
+    .images-folder-file('characters', 'octobruise.svg');
+  }
+}

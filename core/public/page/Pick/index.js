@@ -6,7 +6,7 @@ import createPick from './Pick.js';
 import './Pick.less';
 
 import allChars from '../../../shared/characters.js';
-import createCharacter from '../../components/Character/Character';
+import createCharacter from '../../components/Character/';
 
 const Pick = createPick(React);
 // eslint-disable-next-line no-unused-vars
@@ -17,10 +17,14 @@ const characters = allChars.filter((char) => char.type === 'mobimon');
 
 const renderCharacterList = (props) =>
   props.characters.map((char, index) =>
-    <Character
+    <div
       key={`${char.name}-${index}`}
-      character={char}
-      className={char.name.toLowerCase()} />
+      className="character-container">
+      <Character
+        character={char}
+        className={char.name.toLowerCase()} />
+      <div className="character-name">{char.name}</div>
+    </div>
   );
 
 Pick.defaultProps = {

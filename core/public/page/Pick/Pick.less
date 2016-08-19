@@ -5,5 +5,41 @@
   text-align: center;
 }
 
-// .images-folder-file('characters', 'octobruise.svg');
-//   background-size: contain;
+.pick-character-list {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .character {
+    @character-size: 220px;
+    width: @character-size;
+    height: @character-size;
+    background: @form-input-bg;
+    border-radius: 50%;
+
+    .character-inner {
+      margin: 0 auto;
+      width: 80%;
+      height: 80%;
+      position: relative;
+      top: 10%;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .character-inner {
+        transition: width,height 0.5s ease-out;
+        width: 150%;
+        height: 140%;
+        transform: translateX(-50%);
+        left: 50%;
+      }
+
+      .character-inner-bird {
+        height: 130%;
+      }
+    }
+  }
+}
