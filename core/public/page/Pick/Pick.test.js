@@ -17,6 +17,7 @@ const defaultProps = {
   renderCharacterList: (props) =>
     props.characters.map(() => <div className="character"></div>),
   onSelectCharacter: () => {},
+  goToRoute: () => {},
 };
 
 test('Pick', nest => {

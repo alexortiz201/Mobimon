@@ -18,20 +18,8 @@ const onSubmit = (e, props, inputNode) => {
   }
 };
 
-const goToRoute = (props) => {
-  const user = props.user;
-  const name = user.name;
-  let route = '/pick';
-
-  // if logged in
-  if (name) {
-    // if mobimon is picked go to main
-    if (user.mobimon) {
-      route = '/';
-    }
-
-    props.router.replace(route);
-  }
+const goToRoute = (props, route) => {
+  props.router.replace(route);
 };
 
 Login.defaultProps = {
