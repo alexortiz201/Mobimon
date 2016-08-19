@@ -1,8 +1,9 @@
 var path = require('path');
 
 var port = 8000;
-var srcPath = path.join(__dirname, '/../public');
 
+// root, mobimon
+var srcPath = path.join(__dirname, '../../');
 // The url after http://localhost:8000/
 // that loads app
 var appRenderPathUrl = '';
@@ -11,7 +12,7 @@ module.exports = {
   port: port,
   debug: true,
   output: {
-    path: path.join(__dirname, '/../dist/public'),
+    path: path.join(__dirname, '/../dist/'),
     filename: 'index.js',
     publicPath: appRenderPathUrl
   },
@@ -21,24 +22,29 @@ module.exports = {
     hot: true,
     colors: true,
     port: port,
-    publicPath: appRenderPathUrl,
+    publicPath: '',
     noInfo: false
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
-    alias: {
-      actions: srcPath + '/actions/',
-      components: srcPath + '/components/',
-      sources: srcPath + '/sources/',
-      stores: srcPath + '/stores/',
-      styles: srcPath + '/styles/'
-    }
+    // alias: {
+    //   core: srcPath + '/core',
+    //   coreConfig: srcPath + '/core/config',
+    //   corePublic: srcPath + '/core/public',
+    //   coreServer: srcPath + '/core/server',
+    //   coreShared: srcPath + '/core/shared',
+    //   shared: srcPath + '/shared/',
+    //   catridges: srcPath + '/catridges/'
+    // }
   },
   module: {
     preLoaders: [
       {
         test: /\.(js|jsx)$/,
-        include: path.join(__dirname, '/../public'),
+        include: [
+          path.join(__dirname, '/../public'),
+          path.join(__dirname, '/../shared')
+        ],
         loader: 'eslint-loader'
       }
     ],

@@ -21,7 +21,10 @@ module.exports = function (baseConfig) {
   config.module.loaders.push({
     test: /\.(js|jsx)$/,
     loader: 'react-hot!babel-loader',
-    include: path.join(__dirname, '/../public')
+    include: [
+      path.join(__dirname, '/../public'),
+      path.join(__dirname, '/../shared')
+    ]
   });
 
   return config;

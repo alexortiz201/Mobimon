@@ -3,22 +3,22 @@ const imagePaths = {
   ryu: 'M7.41 7.84l4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z',
   ken: 'M7.41 15.41l4.59-4.58 4.59 4.58 1.41-1.41-6-6-6 6z',
   octobruise: '../../images/octobruise.svg',
-  bilsner: '../../images/bilsner.svg'
+  bilsner: '../../images/bilsner.svg',
 };
 
 const POSSIBLE_MONSTER_STATES = [
   'Attacking',
-  'Vulnerable to'
+  'Vulnerable to',
 ];
 
 const DIRECTIONS = [
   'high',
-  'low'
+  'low',
 ];
 
 const POSSIBLE_PLAYER_ACTIONS = [
   'block',
-  'attack'
+  'attack',
 ];
 
 const COLORS = [

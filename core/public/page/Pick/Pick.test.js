@@ -13,6 +13,9 @@ const Pick = createPick(React);
 
 const defaultProps = {
   user: { name: 'Uncle Bob' },
+  characters: [],
+  renderCharacterList: (props) =>
+    props.characters.map(() => <div className="character"></div>),
 };
 
 test('Pick', nest => {
@@ -39,6 +42,38 @@ test('Pick', nest => {
 
     const actual = output;
     const expected = props.user.name;
+
+    assert.equal(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should render single character', assert => {
+    const msg = 'Pick should render single character.';
+    const props = helpers.makeProps(defaultProps, {
+      characters: [{ name: 'Bilsner' }],
+    });
+
+    const $ = dom.load(render(<Pick {...props} />));
+    const output = $('.character').length;
+
+    const actual = output > 0;
+    const expected = true;
+
+    assert.equal(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should render list of characters', assert => {
+    const msg = 'Pick should render list of characters.';
+    const props = helpers.makeProps(defaultProps, {
+      characters: [{ name: 'Bilsner' }, { name: 'Bird' }],
+    });
+
+    const $ = dom.load(render(<Pick {...props} />));
+    const output = $('.character').length;
+
+    const actual = output > 1;
+    const expected = true;
 
     assert.equal(actual, expected, msg);
     assert.end();

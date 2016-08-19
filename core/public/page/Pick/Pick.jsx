@@ -8,6 +8,10 @@ const pick = (props) => {
       <h3>
         Welcome <span className="user-name">{playerName}</span>, pick your destiny...
       </h3>
+
+      <div className="pick-character-list">
+        {props.renderCharacterList(props)}
+      </div>
     </div>
   );
 };

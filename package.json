@@ -8,7 +8,7 @@
     "start": "node core/server/webpack-dev-server-init.js --env=dev",
     "watch": "watch 'clear && npm run -s test' ",
     "test": "babel-tape-runner \"core/**/**.test.js\" | tap-spec",
-    "lint": "eslint ./core/public",
+    "lint": "eslint ./core/public ./core/shared",
     "update": "updtr && depcheck --ignores='babelify' "
   },
   "repository": "https://github.com/alexortiz201/Mobimon",
