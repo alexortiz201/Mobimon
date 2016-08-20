@@ -14,13 +14,22 @@ const Character = createCharacter(React);
 
 const goToLogin = (props) => props.router.replace('/login');
 
-const renderTopBar = ({ user, character }) =>
-  <div className="top-bar">
-    <Character
-      character={character}
-      className={character.name.toLowerCase()} />
-    <span className="top-bar-name">{`${user.name} : ${character.name}`}</span>
-  </div>;
+const renderTopBar = ({ user = {}, character = {} }) => {
+  const name = character.name && character.name.toLowerCase();
+
+  if (!name) {
+    return (<div />);
+  }
+
+  return (
+    <div className="top-bar">
+      <Character
+        character={character}
+        className={name} />
+      <span className="top-bar-name">{`${user.name} : ${character.name}`}</span>
+    </div>
+  );
+};
 
 Main.defaultProps = {
   user: {},
