@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import createPick from './Pick.js';
 import './Pick.less';
 
-import allChars from '../../../shared/characters.js';
 import createCharacter from '../../components/Character/';
 
 import { selectCharacter } from '../../redux/character/character-actions';
+import allChars from '../../../shared/characters.js';
 
 const Pick = createPick(React);
 // eslint-disable-next-line no-unused-vars

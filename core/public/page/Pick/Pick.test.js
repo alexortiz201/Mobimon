@@ -15,7 +15,9 @@ const defaultProps = {
   user: { name: 'Uncle Bob' },
   characters: [],
   renderCharacterList: (props) =>
-    props.characters.map(() => <div className="character"></div>),
+    props.characters.map((char, index) =>
+      <div key={`${char.name}-${index}`} className="character"></div>
+    ),
   onSelectCharacter: () => {},
   goToRoute: () => {},
 };

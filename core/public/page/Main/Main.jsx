@@ -1,11 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 
-const main = ({ user = {}, character = {} }) =>
+const main = (props) =>
   <div className="app-container">
-    <div className="top-bar">
-      {`${user.name} : ${character.name}`}
-    </div>
+    {props.renderTopBar(props)}
   </div>;
 
 export default main;

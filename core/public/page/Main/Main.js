@@ -7,7 +7,6 @@ export default React => (props) => {
   const charName = props.character && props.character.name;
 
   if (!userName || !charName) {
-    debugger // eslint-disable-line
     setTimeout(() => props.goToLogin(props), timeBeforeReroute);
   }
 

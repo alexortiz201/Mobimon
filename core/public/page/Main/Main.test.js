@@ -15,6 +15,7 @@ const defaultProps = {
   user: {},
   character: {},
   goToLogin: () => {},
+  renderTopBar: () => <div className="top-bar" />,
 };
 
 test('Main', nest => {
@@ -32,14 +33,12 @@ test('Main', nest => {
     assert.end();
   });
 
-  nest.test('... with children', assert => {
-    const msg = 'Main should render children.';
-    const props = helpers.makeProps(defaultProps, {
-      children: <div />,
-    });
+  nest.test('... should render with top bar', assert => {
+    const msg = 'Main should render with top bar.';
+    const props = helpers.makeProps(defaultProps);
 
     const $ = dom.load(render(<Main {...props} />));
-    const output = $('.app-container').children().length;
+    const output = $('.top-bar').length;
 
     const actual = output > 0;
     const expected = true;
@@ -47,20 +46,4 @@ test('Main', nest => {
     assert.equal(actual, expected, msg);
     assert.end();
   });
-
-  // nest.test('... with selected character', assert => {
-  //   const msg = 'Main should render children.';
-  //   const props = {
-  //     children: <div />,
-  //   };
-
-  //   const $ = dom.load(render(<Main {...props} />));
-  //   const output = $('.character').length;
-
-  //   const actual = output > 0;
-  //   const expected = true;
-
-  //   assert.equal(actual, expected, msg);
-  //   assert.end();
-  // });
 });
