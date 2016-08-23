@@ -34,11 +34,11 @@ test('Incubator', nest => {
   nest.test('... should render', assert => {
     const msg = 'Main should render incubator with mobimon.';
     const character = {
-      character: { name: 'Bilsner' }
+      character: { name: 'Bilsner' },
     };
     const props = helpers.makeProps(defaultProps, {
       character,
-      render: () => <div className="character" />
+      render: () => <div className="character" />,
     });
 
 
