@@ -30,4 +30,25 @@ test('Incubator', nest => {
     assert.equal(actual, expected, msg);
     assert.end();
   });
+
+  nest.test('... should render', assert => {
+    const msg = 'Main should render incubator with mobimon.';
+    const character = {
+      character: { name: 'Bilsner' }
+    };
+    const props = helpers.makeProps(defaultProps, {
+      character,
+      render: () => <div className="character" />
+    });
+
+
+    const $ = dom.load(render(<Incubator {...props} />));
+    const output = $('.character').length;
+
+    const actual = output > 0;
+    const expected = true;
+
+    assert.equal(actual, expected, msg);
+    assert.end();
+  });
 });
