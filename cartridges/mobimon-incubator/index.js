@@ -23,7 +23,7 @@ const render = ({ character = {} }) => {
   }
 
   return (
-    <div className="incubator">
+    <div className="incubator day-time">
       <Character
         character={character}
         className={name} />

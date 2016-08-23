@@ -1,0 +1,21 @@
+@import '../../core/public/utils/less/variables.less';
+@import '../../core/public/utils/less/mixins.less';
+
+.incubator-container .incubator {
+  @character-square-size: 200px;
+  padding: 50px 10px;
+
+  &.day-time {
+    background: @form-input-bg;
+  }
+
+  &.night-time {}
+
+  .character {
+    margin: 0 auto;
+    height: @character-square-size;
+    width: @character-square-size;
+
+    .character-inner {}
+  }
+}
