@@ -3,15 +3,14 @@ import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 
-import { loadCartridges } from '../../utils/cartridges/cartridges-utils';
-
 import Main from '../../page/Main/';
 import About from '../../page/About/';
 import Login from '../../page/Login/';
 import Logout from '../../page/Logout/';
 import Pick from '../../page/Pick/';
+import Cartridges from '../../../../cartridges/';
 
-const cartridges = loadCartridges();
+const cartridges = Cartridges.load();
 
 const Routes = {
   childRoutes: [

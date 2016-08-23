@@ -34,7 +34,7 @@ module.exports = {
     //   coreServer: srcPath + '/core/server',
     //   coreShared: srcPath + '/core/shared',
     //   shared: srcPath + '/shared/',
-    //   catridges: srcPath + '/catridges/'
+    //   cartridges: srcPath + '/cartridges/'
     // }
   },
   module: {
@@ -43,7 +43,8 @@ module.exports = {
         test: /\.(js|jsx)$/,
         include: [
           path.join(__dirname, '/../public'),
-          path.join(__dirname, '/../shared')
+          path.join(__dirname, '/../shared'),
+          path.join(__dirname, '/../../cartridges')
         ],
         loader: 'eslint-loader'
       }

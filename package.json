@@ -6,9 +6,17 @@
   "main": "",
   "scripts": {
     "start": "node core/server/webpack-dev-server-init.js --env=dev",
-    "watch": "watch 'clear && npm run -s test' ",
-    "test": "babel-tape-runner \"core/**/**.test.js\" | tap-spec",
-    "lint": "eslint ./core/public ./core/shared",
+    "watch": "watch 'clear && npm run -s test-core' ",
+
+    "test": "npm run test-core",
+    "lint": "npm run lint-core",
+
+    "lint-core": "eslint ./core/public ./core/shared",
+    "lint-cartridges": "eslint ./cartridges",
+
+    "test-core": "babel-tape-runner \"core/**/**.test.js\" | tap-spec",
+    "test-cartridges": "babel-tape-runner \"cartridges/**/**.test.js\" | tap-spec",
+
     "update": "updtr && depcheck --ignores='babelify' "
   },
   "repository": "https://github.com/alexortiz201/Mobimon",

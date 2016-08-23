@@ -23,7 +23,8 @@ module.exports = function (baseConfig) {
     loader: 'react-hot!babel-loader',
     include: [
       path.join(__dirname, '/../public'),
-      path.join(__dirname, '/../shared')
+      path.join(__dirname, '/../shared'),
+      path.join(__dirname, '/../../cartridges')
     ]
   });
 
