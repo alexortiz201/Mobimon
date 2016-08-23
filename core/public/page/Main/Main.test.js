@@ -46,4 +46,18 @@ test('Main', nest => {
     assert.equal(actual, expected, msg);
     assert.end();
   });
+
+  nest.test('... should render with child component', assert => {
+    const msg = 'Main should render with child component.';
+    const props = helpers.makeProps(defaultProps);
+
+    const $ = dom.load(render(<Main {...props}><div className="child-component" /></Main>));
+    const output = $('.child-component').length;
+
+    const actual = output > 0;
+    const expected = true;
+
+    assert.equal(actual, expected, msg);
+    assert.end();
+  });
 });
