@@ -12,7 +12,7 @@ module.exports = {
   port: port,
   debug: true,
   output: {
-    path: path.join(__dirname, '/../dist/'),
+    path: path.join(__dirname, '../../dist/'),
     filename: 'index.js',
     publicPath: appRenderPathUrl
   },
