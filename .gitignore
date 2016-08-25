@@ -10,3 +10,7 @@ node_modules
 # Old Project - remove when done with old assets
 mobimon_old
 mobimon_old.zip
+
+# this is temp while I finished setting up the prod build
+# for webpack
+dist
