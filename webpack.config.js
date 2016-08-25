@@ -21,9 +21,9 @@ if (args._.length > 0 && args._.indexOf('start') !== -1) {
  */
 var configs = {
   base: require(path.join(__dirname, configDirPath + '/webpack-base')),
-  dev: require(path.join(__dirname, configDirPath + '/webpack-dev'))
+  dev: require(path.join(__dirname, configDirPath + '/webpack-dev')),
   dist: require(path.join(__dirname, configDirPath + '/webpack-dist')),
-  //test: require(path.join(__dirname, 'config/webpack-test'))
+  // test: require(path.join(__dirname, 'config/webpack-test'))
 };
 
 /**

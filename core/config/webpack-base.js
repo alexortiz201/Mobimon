@@ -25,18 +25,18 @@ module.exports = {
     publicPath: '',
     noInfo: false
   },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-    // alias: {
-    //   core: srcPath + '/core',
-    //   coreConfig: srcPath + '/core/config',
-    //   corePublic: srcPath + '/core/public',
-    //   coreServer: srcPath + '/core/server',
-    //   coreShared: srcPath + '/core/shared',
-    //   shared: srcPath + '/shared/',
-    //   cartridges: srcPath + '/cartridges/'
-    // }
-  },
+  // resolve: {
+  //   extensions: ['', '.js', '.jsx'],
+  //   alias: {
+  //     core: srcPath + '/core',
+  //     coreConfig: srcPath + '/core/config',
+  //     corePublic: srcPath + '/core/public',
+  //     coreServer: srcPath + '/core/server',
+  //     coreShared: srcPath + '/core/shared',
+  //     shared: srcPath + '/shared/',
+  //     cartridges: srcPath + '/cartridges/'
+  //   }
+  // },
   module: {
     preLoaders: [
       {
