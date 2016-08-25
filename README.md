@@ -43,8 +43,39 @@ Testing:
 
 Quirks:
   * props.router.replace('/login') does not rewrite url in dev server.
-  * Using setTimeout workaround to wait on component to finish rendering before
-  rerouting.
+  * Using setTimeout workaround to wait on component to finish rendering before rerouting.
+
+
+Commands Available:
+```bash
+## Commands
+## [] Square brackets are optional
+## (e.g. start -> start:dist)
+
+# Start server (default is dev environment)
+# or dev server with dist version
+npm start[:dist]
+# Start watch on core or cartridges
+npm run watch[:cartridges]
+
+# Build dist
+npm run build:dist
+
+
+## Utils
+# Run all tests or core or cartridges
+npm run test[:core, :cartridges]
+# Lint all or core/{public, shared} or cartridges
+npm run lint[:core, :cartridges]
+
+# Copy static assets into dist
+npm run copy
+# Clean up the dist directory
+npm run clean
+# update dependencies and check for unused dependencies
+npm run update
+
+```
 
 ### Credits:
   Monsters' artwork was done by [Mike Mazur](https://dribbble.com/Michaelmazur)!

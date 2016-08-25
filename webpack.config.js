@@ -5,7 +5,7 @@ var args = require('minimist')(process.argv.slice(2));
 var configDirPath = '/core/config';
 
 // List of allowed environments
-var allowedEnvs = ['dev', 'dist', 'test'];
+var allowedEnvs = ['dev', 'dist']; // , 'test'
 
 // Set the correct environment
 var env = 'dev';
@@ -22,7 +22,7 @@ if (args._.length > 0 && args._.indexOf('start') !== -1) {
 var configs = {
   base: require(path.join(__dirname, configDirPath + '/webpack-base')),
   dev: require(path.join(__dirname, configDirPath + '/webpack-dev'))
-  //dist: require(path.join(__dirname, 'config/webpack-dist')),
+  dist: require(path.join(__dirname, configDirPath + '/webpack-dist')),
   //test: require(path.join(__dirname, 'config/webpack-test'))
 };
 

@@ -1,9 +1,17 @@
-module.exports = function(content) {
-  return (
-    'module.exports = require("react").createElement("span", {' +
-      'dangerouslySetInnerHTML: {' +
-        '__html: ' + JSON.stringify(content) +
-      '}' +
-    '});'
-  );
-};
+// module.exports = function(content) {
+//   return (
+//     'module.exports = require("react").createElement("span", {' +
+//       'dangerouslySetInnerHTML: {' +
+//         '__html: ' + JSON.stringify(content) +
+//       '}' +
+//     '});'
+//   );
+// };
+
+module.exports = (content) => (
+  `module.exports = require("react").createElement("span", {
+    dangerouslySetInnerHTML: {
+      __html: ${JSON.stringify(content)}
+    }
+  });`
+);
