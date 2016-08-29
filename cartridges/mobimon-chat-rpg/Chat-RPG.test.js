@@ -12,6 +12,7 @@ const render = reactDom.renderToStaticMarkup;
 const ChatRPG = createChatRPG(React);
 
 const defaultProps = {
+  userName: {},
   userCharacter: {},
   render: () => {},
 };

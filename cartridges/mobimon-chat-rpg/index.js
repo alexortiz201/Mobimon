@@ -13,7 +13,7 @@ const path = '/chat-rpg';
 
 const ChatRPG = createChatRPG(React);
 
-const render = ({ userCharacter = {} }) => {
+const render = ({ userName = '', userCharacter = {} }) => {
   const name = userCharacter.name && userCharacter.name.toLowerCase();
 
   if (!name) {
@@ -21,27 +21,33 @@ const render = ({ userCharacter = {} }) => {
   }
 
   return (
-    <div className="chat-rpg">{name}</div>
+    <div className="chat-rpg">
+      {userName} : {name}
+    </div>
   );
 };
 
 ChatRPG.defaultProps = {
+  userName: '',
   userCharacter: {},
   render,
 };
 
 ChatRPG.propTypes = {
+  userName: PropTypes.string.isRequired,
   userCharacter: PropTypes.object.isRequired,
   render: PropTypes.func.isRequired,
 };
 
 const connectedChatRPG = withRouter(connect((state) => ({
+  userName: state.user.name,
   userCharacter: state.character,
 }), {})(ChatRPG));
 
 const Route = {
   path,
   component: connectedChatRPG,
+  childRoutes: [],
 };
 
 export default Route;
