@@ -1,43 +1,24 @@
+// eslint-disable-next-line no-unused-vars
 import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
-import createChatRPG from './Chat-RPG.js';
-import './Chat-RPG.less';
+// eslint-disable-next-line no-unused-vars
+import ChatRoom from './components/ChatRoom/';
 
 // import createCharacter from '../../core/public/components/Character/';
 
 const path = '/chat-rpg';
 // const deps = [React];
 
+const ChatRPG = (props) =>
+  <div className="chat-rpg">
+    <ChatRoom {...props} />
+  </div>;
 
-const ChatRPG = createChatRPG(React);
+// ChatRPG.defaultProps = {};
 
-const render = ({ userName = '', userCharacter = {} }) => {
-  const name = userCharacter.name && userCharacter.name.toLowerCase();
-
-  if (!name) {
-    return (<div />);
-  }
-
-  return (
-    <div className="chat-rpg">
-      {userName} : {name}
-    </div>
-  );
-};
-
-ChatRPG.defaultProps = {
-  userName: '',
-  userCharacter: {},
-  render,
-};
-
-ChatRPG.propTypes = {
-  userName: PropTypes.string.isRequired,
-  userCharacter: PropTypes.object.isRequired,
-  render: PropTypes.func.isRequired,
-};
+// ChatRPG.propTypes = {};
 
 const connectedChatRPG = withRouter(connect((state) => ({
   userName: state.user.name,

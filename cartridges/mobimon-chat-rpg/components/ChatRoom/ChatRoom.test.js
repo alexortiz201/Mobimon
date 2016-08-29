@@ -3,27 +3,30 @@ import test from 'tape';
 import dom from 'cheerio';
 
 import reactDom from 'react-dom/server';
-import createChatRPG from './Chat-RPG';
+import createChatRoom from './ChatRoom.js';
 
-import helpers from '../../core/public/utils/test/test.helpers';
+import helpers from '../../../../core/public/utils/test/test.helpers';
 
 const render = reactDom.renderToStaticMarkup;
 // eslint-disable-next-line no-unused-vars
-const ChatRPG = createChatRPG(React);
+const ChatRoom = createChatRoom(React);
 
 const defaultProps = {
-  userName: {},
+  connect: () => {},
+  renderMessage: (message) => <div>{message}</div>,
+  sendMessage: (message) => <div>{message}</div>,
+  userName: '',
   userCharacter: {},
-  render: () => {},
+  otherUsers: [],
 };
 
-test('Chat RPG', nest => {
+test('ChatRoom', nest => {
   nest.test('... should render', assert => {
-    const msg = '... should render.';
+    const msg = '... should render ChatRoom.';
     const props = helpers.makeProps(defaultProps);
 
-    const $ = dom.load(render(<ChatRPG {...props} />));
-    const output = $('.chat-rpg-container').length;
+    const $ = dom.load(render(<ChatRoom {...props} />));
+    const output = $('.chat-room').length;
 
     const actual = output > 0;
     const expected = true;
