@@ -1,0 +1,31 @@
+@import '../../../../core/public/utils/less/variables.less';
+@import '../../../../core/public/utils/less/mixins.less';
+
+.speech-bubble {
+  @speech-bubble-square-size: 40px;
+
+  padding: 15px 10px 15px;
+  border-bottom: 2px solid @color-mobi-green;
+
+  .character {
+    height: @speech-bubble-square-size;
+    width: @speech-bubble-square-size;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid @color-mobi-green;
+    float: left;
+
+    .character-inner {
+      height: @speech-bubble-square-size + 20px;
+      width: @speech-bubble-square-size + 20px;
+      transform: translateX(-18%);
+    }
+  }
+
+  .speech-bubble-message {
+    @speech-bubble-name-padding: 12px;
+    padding: @speech-bubble-name-padding 0 0 5px;
+    height: @speech-bubble-square-size - @speech-bubble-name-padding;
+    display: inline-block;
+  }
+}
