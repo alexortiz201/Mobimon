@@ -21,7 +21,9 @@
     "update": "updtr && depcheck --ignores='babelify' ",
     "clean": "rimraf dist/*",
     "copy": "mkdir -p ./dist && copyfiles -f ./core/public/index.html ./dist ",
-    "build:dist": "npm run clean && npm run copy & NODE_ENV=production webpack --env=dist"
+    "build:dist": "npm run clean && npm run copy & NODE_ENV=production webpack --env=dist",
+
+    "setup": "mkdir -p ./$1 && touch $1.js $1.jsx $1.less $1.test.js index.js"
   },
   "repository": "https://github.com/alexortiz201/Mobimon",
   "keywords": [],
