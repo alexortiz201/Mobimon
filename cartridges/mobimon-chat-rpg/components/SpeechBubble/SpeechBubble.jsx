@@ -3,12 +3,16 @@ import React from 'react';
 
 const speechBubble = ({
   userName = '',
+  character = '',
   message = '',
   renderCharacter = () => {},
 }) =>
   <div className="speech-bubble">
-    {renderCharacter()}
-    <span className="speech-bubble-message">{userName} : {message}</span>
+    {renderCharacter(character)}
+    <span className="speech-bubble-message">
+      <span className="message-speaker">{userName}:</span>
+      <span className="message-spoken"> {message}</span>
+    </span>
   </div>;
 
 export default speechBubble;

@@ -12,13 +12,14 @@ const render = reactDom.renderToStaticMarkup;
 const SpeechBubble = createSpeechBubble(React);
 
 const defaultProps = {
+  character: {},
   userName: '',
   message: '',
   renderCharacter: () => <div />,
 };
 
 test('Speech Bubble', nest => {
-  nest.test('... should render', assert => {
+  nest.test('... should render component', assert => {
     const msg = '... should render Speech Bubble.';
     const props = helpers.makeProps(defaultProps);
 
@@ -32,10 +33,9 @@ test('Speech Bubble', nest => {
     assert.end();
   });
 
-  nest.test('... should render', assert => {
+  nest.test('... should render anonamouse', assert => {
     const msg = '... should render anonamouse character div.';
-    const props = helpers.makeProps(defaultProps,
-    {
+    const props = helpers.makeProps(defaultProps, {
       renderCharacter: () => <div className='anonamouse' />,
     });
 
@@ -44,6 +44,23 @@ test('Speech Bubble', nest => {
 
     const actual = output > 0;
     const expected = true;
+
+    assert.equal(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should user and message', assert => {
+    const msg = '... should render user and message.';
+    const props = helpers.makeProps(defaultProps, {
+      userName: 'Frodo',
+      message: 'Precioussssssss.....',
+    });
+
+    const $ = dom.load(render(<SpeechBubble {...props} />));
+    const output = $('.speech-bubble-message').text();
+
+    const actual = output;
+    const expected = 'Frodo: Precioussssssss.....';
 
     assert.equal(actual, expected, msg);
     assert.end();

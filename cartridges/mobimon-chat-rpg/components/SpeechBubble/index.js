@@ -1,24 +1,30 @@
 import React, { PropTypes } from 'react';
+import createCharacter from '../../../../core/public/components/Character/';
 import createSpeechBubble from './SpeechBubble.js';
 import './SpeechBubble.less';
 
 const SpeechBubble = createSpeechBubble(React);
 
-const renderCharacter = (character = {
-  name: 'Anonamouse',
-}) => <Character character={character} />;
+// eslint-disable-next-line no-unused-vars
+const Character = createCharacter(React);
+
+const renderCharacter = (character) =>
+  <Character character={character} />;
 
 SpeechBubble.defaultProps = {
+  character: {
+    name: 'Anonamouse',
+  },
   userName: '',
-  message: '',
+  message: 'Testing...',
   renderCharacter,
 };
 
 SpeechBubble.propTypes = {
-  userName: PropTypes.string.isRequired,
-  renderCharacter: PropTypes.func.isRequired,
   character: PropTypes.object.isRequired,
-  message: PropTypes.string,
+  userName: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
+  renderCharacter: PropTypes.func.isRequired,
 };
 
 export default SpeechBubble;

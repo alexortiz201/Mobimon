@@ -3,17 +3,20 @@ import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 import ChatRoom from './components/ChatRoom/';
-
-// import createCharacter from '../../core/public/components/Character/';
+import SpeechBubble from './components/SpeechBubble/';
+/* eslint-enable no-unused-vars */
 
 const path = '/chat-rpg';
-// const deps = [React];
 
 const ChatRPG = (props) =>
   <div className="chat-rpg">
-    <ChatRoom {...props} />
+    <ChatRoom {...props}>
+      <div className="chat-rpg-messages">
+        <SpeechBubble {...props} />
+      </div>
+    </ChatRoom>
   </div>;
 
 // ChatRPG.defaultProps = {};

@@ -5,7 +5,6 @@
   @speech-bubble-square-size: 40px;
 
   padding: 15px 10px 15px;
-  border-bottom: 2px solid @color-mobi-green;
 
   .character {
     height: @speech-bubble-square-size;
@@ -23,9 +22,12 @@
   }
 
   .speech-bubble-message {
-    @speech-bubble-name-padding: 12px;
-    padding: @speech-bubble-name-padding 0 0 5px;
-    height: @speech-bubble-square-size - @speech-bubble-name-padding;
+    @speech-bubble-name-padding: 10px;
+
+    background: @color-mobi-green;
+    margin: 0 10px;
+    padding: @speech-bubble-name-padding;
+    border-radius: 10px;
     display: inline-block;
   }
 }

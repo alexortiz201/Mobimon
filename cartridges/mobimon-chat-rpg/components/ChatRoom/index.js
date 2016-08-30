@@ -4,9 +4,6 @@ import { connect } from 'react-redux';
 import createChatRoom from './ChatRoom';
 import './ChatRoom.less';
 
-// const deps = [React];
-
-
 const ChatRoom = createChatRoom(React);
 
 ChatRoom.defaultProps = {
@@ -17,7 +14,6 @@ ChatRoom.defaultProps = {
 ChatRoom.propTypes = {
   userName: PropTypes.string.isRequired,
   userCharacter: PropTypes.object.isRequired,
-  render: PropTypes.func.isRequired,
 };
 
 const connectedChatRoom = connect((state) => ({
