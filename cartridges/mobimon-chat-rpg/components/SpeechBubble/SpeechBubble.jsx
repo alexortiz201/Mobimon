@@ -10,8 +10,12 @@ const speechBubble = ({
   <div className="speech-bubble">
     {renderCharacter(character)}
     <span className="speech-bubble-message">
-      <span className="message-speaker">{userName}:</span>
-      <span className="message-spoken"> {message}</span>
+      <span className="message-speaker">
+        {userName && `${userName}: `}
+      </span>
+      <span className="message-spoken">
+        {message}
+      </span>
     </span>
   </div>;
 

@@ -5,23 +5,35 @@ import { connect } from 'react-redux';
 
 /* eslint-disable no-unused-vars */
 import ChatRoom from './components/ChatRoom/';
-import SpeechBubble from './components/SpeechBubble/';
+import ChatMessages from './components/ChatMessages/';
 /* eslint-enable no-unused-vars */
 
 const path = '/chat-rpg';
+const chatRPGGreeting = 'Welcome to your Doom!';
 
 const ChatRPG = (props) =>
   <div className="chat-rpg">
     <ChatRoom {...props}>
-      <div className="chat-rpg-messages">
-        <SpeechBubble {...props} />
-      </div>
+      <ChatMessages
+        messages={props.messages}
+        greeting={chatRPGGreeting} />
     </ChatRoom>
   </div>;
 
-// ChatRPG.defaultProps = {};
+const greetingMessage = {
+  message: 'Welcome to your Doom!',
+  character: {
+    name: 'octobruise',
+  },
+};
 
-// ChatRPG.propTypes = {};
+ChatRPG.defaultProps = {
+  messages: [greetingMessage],
+};
+
+ChatRPG.propTypes = {
+  messages: PropTypes.array,
+};
 
 const connectedChatRPG = withRouter(connect((state) => ({
   userName: state.user.name,
