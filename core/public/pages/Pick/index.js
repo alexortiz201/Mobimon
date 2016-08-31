@@ -37,11 +37,7 @@ const onSelectCharacter = (props, character) => {
 
   // dispatch Char selected
   props.selectCharacter(character);
-  props.goToRoute(props, '/');
-};
-
-const goToRoute = (props, route) => {
-  props.router.replace(route);
+  props.router.replace('/');
 };
 
 Pick.defaultProps = {
@@ -50,7 +46,6 @@ Pick.defaultProps = {
   renderCharacterList,
   characters,
   onSelectCharacter,
-  goToRoute,
 };
 
 Pick.PropTypes = {
@@ -58,7 +53,6 @@ Pick.PropTypes = {
   renderCharacterList: PropTypes.func.isRequired,
   characters: PropTypes.array.isRequired,
   onSelectCharacter: PropTypes.func.isRequired,
-  goToRoute: PropTypes.func.isRequired,
 };
 
 const connectedPick = connect((state) => ({

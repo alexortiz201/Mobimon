@@ -15,11 +15,9 @@ const onSubmit = (e, props, inputNode) => {
     props.userLogin({
       name: inputNode.value,
     });
-  }
-};
 
-const goToRoute = (props, route) => {
-  props.router.replace(route);
+    props.router.replace('/pick');
+  }
 };
 
 Login.defaultProps = {
@@ -29,7 +27,6 @@ Login.defaultProps = {
   autoFocus: false,
   inputValue: 'Alex',
   onSubmit,
-  goToRoute,
 };
 
 Login.propTypes = {
@@ -40,7 +37,6 @@ Login.propTypes = {
   userLogin: PropTypes.func,
   history: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  goToRoute: PropTypes.func.isRequired,
 };
 
 const connectedLogin = connect((state) => ({
