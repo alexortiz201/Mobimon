@@ -4,46 +4,28 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 /* eslint-disable no-unused-vars */
-import ChatRoom from './components/ChatRoom/';
-import ChatMessages from './components/ChatMessages/';
+import ChatBattle from './pages/ChatBattle/';
 /* eslint-enable no-unused-vars */
 
-const path = '/chat-rpg';
-const chatRPGGreeting = 'Welcome to your Doom!';
+const path = 'chat-rpg';
 
 const ChatRPG = (props) =>
   <div className="chat-rpg">
-    <ChatRoom {...props}>
-      <ChatMessages
-        messages={props.messages}
-        greeting={chatRPGGreeting} />
-    </ChatRoom>
+    {props.children}
   </div>;
 
-const greetingMessage = {
-  message: 'Welcome to your Doom!',
-  character: {
-    name: 'octobruise',
-  },
-};
+ChatRPG.defaultProps = {};
 
-ChatRPG.defaultProps = {
-  messages: [greetingMessage],
-};
-
-ChatRPG.propTypes = {
-  messages: PropTypes.array,
-};
+ChatRPG.propTypes = {};
 
 const connectedChatRPG = withRouter(connect((state) => ({
   userName: state.user.name,
   userCharacter: state.character,
 }), {})(ChatRPG));
 
-const Route = {
-  path,
-  component: connectedChatRPG,
-  childRoutes: [],
-};
+const Route = () =>
+  <Route key={path} path={path} component={connectedChatRPG}>
+    <Route path="battle" component={ChatBattle} />
+  </Route>;
 
 export default Route;

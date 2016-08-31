@@ -7,10 +7,7 @@ import './Incubator.less';
 
 import createCharacter from '../../core/public/components/Character/';
 
-const path = '/incubator';
-// const deps = [React];
-
-
+const path = 'incubator';
 const Incubator = createIncubator(React);
 // eslint-disable-next-line no-unused-vars
 const Character = createCharacter(React);
@@ -45,9 +42,7 @@ const connectedIncubator = withRouter(connect((state) => ({
   character: state.character,
 }), {})(Incubator));
 
-const Route = {
-  path,
-  component: connectedIncubator,
-};
+const Route = () =>
+  <Route key={path} path={path} component={connectedIncubator} />;
 
 export default Route;

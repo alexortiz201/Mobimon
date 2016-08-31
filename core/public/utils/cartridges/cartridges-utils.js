@@ -19,7 +19,7 @@ export const clearAllCartridges = () => {
  * @return {NoOp}
  */
 export const registerCartridge = (cartridge) => {
-  if (!cartridge || !cartridge.path || !cartridge.component) {
+  if (!cartridge) {
     return;
   }
 
