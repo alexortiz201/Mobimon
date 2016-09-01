@@ -13,27 +13,16 @@ import Pick from '../../pages/Pick/';
 import Cartridges from '../../../../cartridges/';
 
 const cartridges = Cartridges.load();
-const cartridgesRoutes = cartridges.map((c) => c());
-
-const loggedInEval = (state, replace) => {
-  const loggedIn = state.user && state.user.loggedIn;
-
-  if (!loggedIn) {
-    replace('/login');
-  }
-};
-
-const characterChoosenEval = (state, replace) => {
-  const charChosen = state.character && state.character.name;
-
-  if (!charChosen) {
-    replace('/pick');
-  }
-};
+const {
+  createRequire,
+  loggedInEval,
+  characterChoosenEval,
+} = routeHelpers;
 
 const Root = ({ store }) => {
-  const requireLogin = routeHelpers.createRequire(store, loggedInEval);
-  const requireCharacter = routeHelpers.createRequire(store, characterChoosenEval);
+  const cartridgesRoutes = cartridges.map((c) => c(store));
+  const requireLogin = createRequire(store, loggedInEval);
+  const requireCharacter = createRequire(store, characterChoosenEval);
 
   return (
     <Provider store={store}>

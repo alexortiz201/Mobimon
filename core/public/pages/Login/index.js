@@ -25,7 +25,7 @@ Login.defaultProps = {
   label: 'Username',
   buttonText: 'Log In',
   autoFocus: false,
-  inputValue: 'Alex',
+  inputValue: '',
   onSubmit,
 };
 

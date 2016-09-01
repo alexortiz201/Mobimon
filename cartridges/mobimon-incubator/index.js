@@ -7,7 +7,7 @@ import './Incubator.less';
 
 import createCharacter from '../../core/public/components/Character/';
 
-const path = 'incubator';
+const path = '/incubator';
 const Incubator = createIncubator(React);
 // eslint-disable-next-line no-unused-vars
 const Character = createCharacter(React);
@@ -38,7 +38,7 @@ Incubator.propTypes = {
   render: PropTypes.func.isRequired,
 };
 
-const connectedIncubator = withRouter(connect((state) => ({
+export const connectedIncubator = withRouter(connect((state) => ({
   character: state.character,
 }), {})(Incubator));
 
