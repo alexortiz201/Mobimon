@@ -8,6 +8,7 @@ npm-debug.log
 node_modules
 e2e/lib
 e2e/bin
+e2e/reports
 
 # Old Project - remove when done with old assets
 mobimon_old
