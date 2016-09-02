@@ -6,6 +6,8 @@ npm-debug.log
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
+e2e/lib
+e2e/bin
 
 # Old Project - remove when done with old assets
 mobimon_old

@@ -9,20 +9,17 @@
     "start:dist": "node core/server/webpack-dev-server-init.js --env=dist",
     "watch": "watch 'clear && npm run -s test:core' ",
     "watch:cartridges": "watch 'clear && npm run -s test:cartridges' ",
-
     "test": "npm run test:core && npm run test:cartridges",
     "test:core": "babel-tape-runner \"core/**/**.test.js\" | tap-spec",
     "test:cartridges": "babel-tape-runner \"cartridges/**/**.test.js\" | tap-spec",
-
+    "test:e2e": "./node_modules/.bin/nightwatch ./e2e/tests",
     "lint": "npm run lint:core && npm run lint:cartridges",
     "lint:core": "eslint ./core/public ./core/shared",
     "lint:cartridges": "eslint ./cartridges",
-
     "update": "updtr && depcheck --ignores='babelify' ",
     "clean": "rimraf dist/*",
     "copy": "mkdir -p ./dist && copyfiles -f ./core/public/index.html ./dist ",
     "build:dist": "npm run clean && npm run copy & NODE_ENV=production webpack --env=dist",
-
     "setup": "mkdir -p ./$1 && touch $1.js $1.jsx $1.less $1.test.js index.js"
   },
   "repository": "https://github.com/alexortiz201/Mobimon",
@@ -53,6 +50,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "minimist": "^1.2.0",
+    "nightwatch": "^0.9.8",
     "open": "0.0.5",
     "react-addons-test-utils": "^15.3.0",
     "react-hot-loader": "^1.3.0",
