@@ -13,6 +13,7 @@
     "test:core": "babel-tape-runner \"core/**/**.test.js\" | tap-spec",
     "test:cartridges": "babel-tape-runner \"cartridges/**/**.test.js\" | tap-spec",
     "test:e2e": "./node_modules/.bin/nightwatch ./e2e/tests/**/*.test.js",
+    "test:e2e:chrome": "./node_modules/.bin/nightwatch ./e2e/tests/**/*.test.js --env chrome",
     "lint": "npm run lint:core && npm run lint:cartridges",
     "lint:core": "eslint ./core/public ./core/shared",
     "lint:cartridges": "eslint ./cartridges",
