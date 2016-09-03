@@ -35,18 +35,19 @@ All plugins should be self contained and have the same Public API, this will all
 Testing:
   * Using `tape` for now.
     - mark untested modules:
-      ```javascript
-      import helpers from '../../utils/test/test.helpers';
 
-      test('Create tests for Main Page', assert => helpers.createFailingTest(assert));`
-      ```
+  ```javascript
+    import helpers from '../../utils/test/test.helpers';
+
+    test('Create tests for Main Page', assert => helpers.createFailingTest(assert));
+  ```
 
 Quirks:
   * props.router.replace('/login') does not rewrite url in dev server.
-  * Using setTimeout workaround to wait on component to finish rendering before rerouting.
 
 
 Commands Available:
+
 ```bash
 ## Commands
 ## [] Square brackets are optional
@@ -63,8 +64,8 @@ npm run build:dist
 
 
 ## Utils
-# Run all tests or core or cartridges
-npm run test[:core, :cartridges]
+# Run all tests or core or cartridges or e2e (safari)
+npm run test[:core, :cartridges, :e2e]
 # Lint all or core/{public, shared} or cartridges
 npm run lint[:core, :cartridges]
 
@@ -74,7 +75,6 @@ npm run copy
 npm run clean
 # update dependencies and check for unused dependencies
 npm run update
-
 ```
 
 ### Credits:

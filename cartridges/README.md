@@ -2,7 +2,7 @@
 
   ```javascript
     const Route = {
-      path: '/expample',
+      path: '/example',
       component: Example,
     };
   ```
