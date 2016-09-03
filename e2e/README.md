@@ -5,3 +5,6 @@
   * Nightwatch is being used to run automated tests.
   * selenium-server-standalone-2.*.*.jar has been installed in lib folder.
   * different browser binaries live in bin, download those as well.
+
+# When testing locally
+  * Remember to start webpack's dev server before running e2e tests.
