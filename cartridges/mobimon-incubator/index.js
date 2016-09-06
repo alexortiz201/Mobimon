@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -7,6 +8,7 @@ import './Incubator.less';
 
 import createCharacter from '../../core/public/components/Character/';
 
+const reducers = [];
 const path = '/incubator';
 const Incubator = createIncubator(React);
 // eslint-disable-next-line no-unused-vars
@@ -42,7 +44,7 @@ export const connectedIncubator = withRouter(connect((state) => ({
   character: state.character,
 }), {})(Incubator));
 
-const Route = () =>
+export const Route = () =>
   <Route key={path} path={path} component={connectedIncubator} />;
 
-export default Route;
+export default { Route, reducers };

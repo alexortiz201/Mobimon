@@ -10,9 +10,9 @@ import About from '../../pages/About/';
 import Login from '../../pages/Login/';
 import Logout from '../../pages/Logout/';
 import Pick from '../../pages/Pick/';
-import Cartridges from '../../../../cartridges/';
+import { load } from '../../../../cartridges/';
 
-const cartridges = Cartridges.load();
+const cartridges = load();
 const {
   createRequire,
   loggedInEval,
@@ -20,7 +20,9 @@ const {
 } = routeHelpers;
 
 const Root = ({ store }) => {
-  const cartridgesRoutes = cartridges.map((c) => c(store));
+  // Route is a React object needs to be capitalized
+  // eslint-disable-next-line new-cap
+  const cartridgesRoutes = cartridges.map(c => c.Route(store));
   const requireLogin = createRequire(store, loggedInEval);
   const requireCharacter = createRequire(store, characterChoosenEval);
 

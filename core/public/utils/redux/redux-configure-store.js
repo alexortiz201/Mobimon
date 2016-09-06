@@ -1,21 +1,23 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import throttle from 'lodash/throttle';
-import mobimonApp from '../../redux/root-reducer';
+import app from '../../redux/root-reducer';
 import { setItem } from '../storage/storage';
 
 const loggerMiddleware = createLogger();
 
-const mergeStores = (savedState) => {
-  const newCreateStore = applyMiddleware(
-    thunkMiddleware,
-    loggerMiddleware,
-  )(createStore);
+const middlewareArray = [thunkMiddleware, loggerMiddleware];
 
-  const store = newCreateStore(
-    mobimonApp,
+const mergeStores = (savedState) => {
+  const store = createStore(
+    app,
     savedState,
+    compose(
+      applyMiddleware(
+        ...middlewareArray
+      ),
+    ),
   );
 
   // persist store updates
@@ -26,11 +28,6 @@ const mergeStores = (savedState) => {
   return store;
 };
 
-// const checkPersistedStore = () => getItem('state');
-
-const configureStore = (savedState) => {
-  const configedStore = mergeStores(savedState);
-  return configedStore;
-};
+const configureStore = (savedState) => mergeStores(savedState);
 
 export default configureStore;

@@ -10,6 +10,11 @@ import ChatJoin from './pages/ChatJoin/';
 import { createRequire } from '../../core/public/utils/routes/routes-utils';
 /* eslint-enable no-unused-vars */
 
+/**
+ * array of reducers to be combined into root
+ * from cartridges
+ */
+const reducers = [];
 const path = '/chat-rpg';
 
 const ChatRPG = (props) =>
@@ -21,18 +26,18 @@ ChatRPG.defaultProps = {};
 
 ChatRPG.propTypes = {};
 
-const hasBattleKeyEval = (state, replace) => {
+export const hasBattleKeyEval = (state, replace) => {
   const battleKey = state.chatRPG && state.chatRPG.battleKey;
   const route = battleKey ? `${path}/battle/${battleKey}` : `${path}/join`;
   replace(route);
 };
 
-const connectedChatRPG = withRouter(connect((state) => ({
+export const connectedChatRPG = withRouter(connect((state) => ({
   userName: state.user.name,
   userCharacter: state.character,
 }), {})(ChatRPG));
 
-const Route = (store) =>
+export const Route = (store) =>
   <Route key={path} path={path} component={connectedChatRPG}>
     <IndexRoute onEnter={createRequire(store, hasBattleKeyEval)} />
     <Route path="join" component={ChatJoin} />
@@ -41,4 +46,4 @@ const Route = (store) =>
     <Route path="battle/:battleKey" component={ChatBattle} />
   </Route>;
 
-export default Route;
+export default { Route, reducers };

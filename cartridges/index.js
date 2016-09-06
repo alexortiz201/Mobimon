@@ -7,11 +7,12 @@ import {
   loadCartridges,
   registerCartridge,
 } from '../core/public/utils/cartridges/cartridges-utils';
-import incubatorRoute, { connectedIncubator } from './mobimon-incubator/';
-import chatRPGRoute from './mobimon-chat-rpg/';
+import incubator, { connectedIncubator } from './mobimon-incubator/';
+import chatRPG from './mobimon-chat-rpg/';
 
-const defaultCartridge = () =>
-  <IndexRoute key="defaultCartridge" component={connectedIncubator} />;
+const defaultCartridge = {
+  Route: () => <IndexRoute key="defaultCartridge" component={connectedIncubator} />,
+};
 
 /**
  * Registers routes, this should just import
@@ -20,16 +21,16 @@ const defaultCartridge = () =>
  */
 const allCartridges = [
   defaultCartridge,
-  incubatorRoute,
-  chatRPGRoute,
+  incubator,
+  chatRPG,
 ];
 
 const globFoldersForCartridges = () => allCartridges;
 
-globFoldersForCartridges().forEach((route) => {
-  registerCartridge(route);
+globFoldersForCartridges().forEach((c) => {
+  registerCartridge(c);
 });
 
-const load = () => loadCartridges();
+export const load = () => loadCartridges();
 
 export default { load };

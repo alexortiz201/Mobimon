@@ -2,17 +2,15 @@ import { combineReducers } from 'redux';
 import user from './user/user-reducers';
 import character from './character/character-reducers';
 
-// import battle from './battle';
-// import battleSession from './battle-session';
+import { load } from '../../../cartridges/';
 
-
+const cartridgeReducers = load().map(c => c.reducers);
 const reducers = {
-//   battle,
-//   battleSession,
   user,
   character,
+  ...cartridgeReducers,
 };
 
-const mobimonApp = combineReducers(reducers);
+const core = combineReducers(reducers);
 
-export default mobimonApp;
+export default core;
