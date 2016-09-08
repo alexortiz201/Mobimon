@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import { apiMiddleware } from 'redux-api-middleware';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import throttle from 'lodash/throttle';
@@ -7,7 +8,7 @@ import { setItem } from '../storage/storage';
 
 const loggerMiddleware = createLogger();
 
-const middlewareArray = [thunkMiddleware, loggerMiddleware];
+const middlewareArray = [apiMiddleware, thunkMiddleware, loggerMiddleware];
 
 const mergeStores = (savedState) => {
   const store = createStore(
