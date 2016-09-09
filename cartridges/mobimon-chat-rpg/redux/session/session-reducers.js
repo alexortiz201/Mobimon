@@ -22,7 +22,7 @@ export function room(state = initialState, action) {
     case SELECT_ROOM:
       return {
         ...state,
-        ...action.payload,
+        ...action.selected,
       };
     case 'LOADING_START':
       return loop(
