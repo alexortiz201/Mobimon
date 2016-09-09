@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import ChatBattle from './pages/ChatBattle/';
 import ChatJoin from './pages/ChatJoin/';
 import { createRequire } from '../../core/public/utils/routes/routes-utils';
-import sessionReducers from './redux/session/session-reducers';
+import allReducers from './redux/';
 /* eslint-enable no-unused-vars */
 
 /**
@@ -47,6 +47,6 @@ export const Route = (store) =>
 
 export default {
   Route,
-  reducers: sessionReducers,
+  reducers: allReducers,
   name: 'chatRPG',
 };
