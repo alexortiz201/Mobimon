@@ -10,6 +10,7 @@ e2e/lib
 e2e/bin
 e2e/reports
 artwork
+private-configs.js
 
 # Old Project - remove when done with old assets
 mobimon_old

@@ -8,15 +8,14 @@ import { connect } from 'react-redux';
 import ChatBattle from './pages/ChatBattle/';
 import ChatJoin from './pages/ChatJoin/';
 import { createRequire } from '../../core/public/utils/routes/routes-utils';
+import sessionReducers from './redux/session/session-reducers';
 /* eslint-enable no-unused-vars */
 
 /**
  * array of reducers to be combined into root
  * from cartridges
  */
-const reducers = [];
 const path = '/chat-rpg';
-
 const ChatRPG = (props) =>
   <div className="chat-rpg">
     {props.children}
@@ -46,4 +45,8 @@ export const Route = (store) =>
     <Route path="battle/:battleKey" component={ChatBattle} />
   </Route>;
 
-export default { Route, reducers };
+export default {
+  Route,
+  reducers: sessionReducers,
+  name: 'chatRPG',
+};

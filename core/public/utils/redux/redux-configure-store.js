@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { apiMiddleware } from 'redux-api-middleware';
-import thunkMiddleware from 'redux-thunk';
+import { install } from 'redux-loop';
+// import { apiMiddleware } from 'redux-api-middleware';
+// import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import throttle from 'lodash/throttle';
 import app from '../../redux/root-reducer';
@@ -8,17 +9,18 @@ import { setItem } from '../storage/storage';
 
 const loggerMiddleware = createLogger();
 
-const middlewareArray = [apiMiddleware, thunkMiddleware, loggerMiddleware];
+// apiMiddleware, thunkMiddleware,
+const middlewareArray = [loggerMiddleware];
+const enhancer = compose(
+  applyMiddleware(...middlewareArray),
+  install(),
+);
 
 const mergeStores = (savedState) => {
   const store = createStore(
     app,
     savedState,
-    compose(
-      applyMiddleware(
-        ...middlewareArray
-      ),
-    ),
+    enhancer,
   );
 
   // persist store updates

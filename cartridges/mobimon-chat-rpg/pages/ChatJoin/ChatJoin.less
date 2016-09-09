@@ -1,3 +1,79 @@
 .chat-join {
   height: 100%;
 }
+
+@import '../../../../core/public/utils/less/variables.less';
+@import '../../../../core/public/utils/less/mixins.less';
+
+.chat-rpg-login-wrapper {
+  height: 100%;
+  padding: 0 20px;
+  margin: 20px 0;
+  // .images-folder-file('characters', 'octobruise.svg');
+  background-size: 110%;
+  background-position: top center;
+}
+
+.chat-rpg-login {
+  padding: 5%;
+  color: #555;
+  padding-top: 50%;
+
+  .form {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .button {
+    flex-grow: 1;
+    margin-top: 8px;
+    padding: 8px;
+    height: 6ex;
+    background: @color-mobi-green;
+    color: #fff;
+    border-radius: 4px;
+    text-transform: capitalize;
+  }
+}
+
+.button {
+  text-transform: uppercase;
+  background: #ddd;
+  border: none;
+
+  &:hover {
+    background: darken(@color-mobi-green, 10%);
+    cursor: pointer;
+  }
+  &:active {
+    background: darken(@color-mobi-green, 20%);
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.form-input-label {
+  flex-grow: 1;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: @form-input-bg;
+  padding: 8px;
+  font-weight: 200;
+}
+
+.form-input-label-text {
+  flex-grow: 1;
+}
+
+.form-input-field:focus,
+.form-input-field {
+  flex-grow: 2;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  padding: 8px;
+  color: #fff;
+}
+

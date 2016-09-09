@@ -14,7 +14,7 @@ module.exports = {
     "jsx": true,
     "modules": true
   },
-  // "globals": {
-  //   "React": true
-  // },
+  "globals": {
+    "firebase": true
+  },
 }
