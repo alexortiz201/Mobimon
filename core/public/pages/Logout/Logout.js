@@ -3,12 +3,10 @@ import template from './Logout.jsx';
 /* eslint-disable */
 export default React => (props) => {
   const timeBeforeReroute = 1000;
-  const name = props.user && props.user.name;
-
-  setTimeout(() => props.logout(props, name), timeBeforeReroute);
+  setTimeout(() => props.logout(props), timeBeforeReroute);
 
   return (
-    template(props, name)
+    template(props)
   );
 };
 /* eslint-enable */

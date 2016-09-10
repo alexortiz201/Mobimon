@@ -2,14 +2,10 @@
 import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { createSocketConnection } from '../../services/firebase/firebase.service';
 import './ChatJoin.less';
 
 import createLogin from '../../../../core/public/pages/Login/Login.js';
-import { selectRoom, getRooms, setRooms } from '../../redux/session/session-actions';
-
-// eslint-disable-next-line
-let connectionRef;
+import { selectRoom } from '../../redux/session/session-actions';
 
 // eslint-disable-next-line no-unused-vars
 const Login = createLogin(React);
@@ -44,25 +40,23 @@ const renderRoomListItem = (props, { name }) =>
     {name}
   </button>;
 
-const renderRoomListContainer = (props) =>
-  <div className="game-list-container">
-    <h3 className="game-list-header">Or Select a Battle to Join</h3>
-    { props.rooms.map(room => renderRoomListItem(props, room)) }
-  </div>;
-
-const ChatJoin = (props) => {
-  connectionRef = createSocketConnection('games');
-  connectionRef
-    .once('value')
-    .then((snapshot) => props.setRooms(snapshot.val()));
-
+const renderRoomListContainer = (props) => {
+  if (!props.rooms.length) {
+    return null;
+  }
   return (
-    <div className="chat-join">
-      <Login {...props} />
-      { props.rooms.length && renderRoomListContainer(props) }
+    <div className="game-list-container">
+      <h3 className="game-list-header">Or Select a Battle to Join</h3>
+      { props.rooms.map(room => renderRoomListItem(props, room)) }
     </div>
   );
 };
+
+const ChatJoin = (props) =>
+  <div className="chat-join">
+    <Login {...props} />
+    { renderRoomListContainer(props) }
+  </div>;
 
 ChatJoin.defaultProps = {
   className: 'chat-rpg-login',
@@ -88,11 +82,9 @@ ChatJoin.propTypes = {
 const connectedChatJoin = withRouter(connect((state) => ({
   userName: state.user.name,
   userCharacter: state.character,
-  rooms: state.chatRPG.availableRooms,
+  rooms: state.chatRPG.availableRooms.rooms,
 }), {
   selectRoom,
-  getRooms,
-  setRooms,
 })(ChatJoin));
 
 export default connectedChatJoin;

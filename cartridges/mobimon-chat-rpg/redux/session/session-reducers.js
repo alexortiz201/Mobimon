@@ -1,7 +1,12 @@
 import { Effects, loop } from 'redux-loop';
+import { createDatabaseRef } from '../../services/firebase/firebase.service';
 import {
   SELECT_ROOM,
-  SET_ROOMS,
+  GET_ROOMS,
+  GET_ROOMS_SUCCESS,
+  GET_ROOMS_FAILURE,
+  getRoomsSuccess,
+  getRoomsFailure,
 } from './session-actions';
 
 export function fetchDetails() {
@@ -46,10 +51,38 @@ export function room(state = {
   }
 }
 
-export function availableRooms(state = [], action) {
+export function fetchFromFirebase(resource) {
+  return createDatabaseRef(resource)
+    .once('value')
+    .then((FirebaseObject) => FirebaseObject.val())
+    .then(getRoomsSuccess)
+    .catch(getRoomsFailure);
+}
+
+export function availableRooms(state = {
+  loading: false,
+  rooms: [],
+}, action) {
   switch (action.type) {
-    case SET_ROOMS:
-      return [...action.availableRooms];
+    case GET_ROOMS:
+      return loop(
+        { ...state, loading: true },
+        Effects.promise(fetchFromFirebase, action.resource),
+      );
+
+    case GET_ROOMS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        rooms: [...action.availableRooms],
+      };
+
+    case GET_ROOMS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
 
     default:
       return state;

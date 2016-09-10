@@ -1,9 +1,11 @@
 import test from 'tape';
 import {
   SELECT_ROOM,
-  SET_ROOMS,
   selectRoom,
-  setRooms,
+  GET_ROOMS,
+  getRooms,
+  GET_ROOMS_SUCCESS,
+  getRoomsSuccess,
 } from './session-actions';
 import { room, availableRooms } from './session-reducers';
 
@@ -12,7 +14,10 @@ const initialRoomState = {
   roomName: '',
 };
 
-const initialAvailableRoomsState = [];
+const initialAvailableRoomsState = {
+  loading: false,
+  rooms: [],
+};
 
 test('Session', nest => {
   // Actions
@@ -37,15 +42,15 @@ test('Session', nest => {
     assert.end();
   });
 
-  nest.test('... should create a SET_ROOMS action', assert => {
-    const msg = 'session action creator should create a SET_ROOMS action.';
+  nest.test('... should create a GET_ROOMS_SUCCESS action', assert => {
+    const msg = 'session action creator should create a GET_ROOMS_SUCCESS action.';
     const roomsState = [{ name: '123' }];
 
-    const actual = setRooms(roomsState);
+    const actual = getRoomsSuccess(roomsState);
 
     const expected = {
-      type: SET_ROOMS,
-      availableRooms: [{ name: '123' }],
+      type: GET_ROOMS_SUCCESS,
+      rooms: [{ name: '123' }],
     };
 
     assert.deepEqual(actual, expected, msg);
@@ -85,12 +90,15 @@ test('Session', nest => {
     assert.end();
   });
 
-  nest.test('... reducer should handle SET_ROOMS.', assert => {
-    const msg = 'availableRooms reducer should SET_ROOMS.';
-    const aRoomsState = [{ name: '123' }];
+  nest.test('... reducer should handle GET_ROOMS_SUCCESS.', assert => {
+    const msg = 'availableRooms reducer should GET_ROOMS_SUCCESS.';
+    const aRoomsState = {
+      loading: false,
+      rooms: [{ name: '123' }],
+    };
     const actual = availableRooms(undefined, {
-      type: SET_ROOMS,
-      availableRooms: aRoomsState,
+      type: GET_ROOMS_SUCCESS,
+      availableRooms: [{ name: '123' }],
     });
 
     const expected = aRoomsState;

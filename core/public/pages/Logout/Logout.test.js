@@ -12,7 +12,7 @@ const render = reactDom.renderToStaticMarkup;
 const Logout = createLogout(React);
 const defaultProps = {
   className: 'logout',
-  message: 'Good bye... Logging out...',
+  message: '',
   logout: () => {},
 };
 
@@ -50,7 +50,7 @@ test('Logout', nest => {
     const msg = 'Logout should render good bye message.';
     const props = helpers.makeProps(
       defaultProps,
-      { user: { name: 'Alex' } },
+      { message: 'Good bye... Logging out...', },
     );
 
     const $ = dom.load(render(<Logout {...props} />));

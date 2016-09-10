@@ -13,7 +13,6 @@ cartridges.forEach(({ name, reducers }) => {
   }
 });
 
-// debugger // eslint-disable-line
 const reducers = {
   user,
   character,
@@ -22,4 +21,20 @@ const reducers = {
 
 const core = combineReducers(reducers);
 
-export default core;
+/**
+ * workaround for hijacking logout,
+ * reset all state.
+ * @param  {Object} state
+ * @param  {Object} action
+ * @return {function} core  rootReducer
+ */
+const rootReducer = (state, action) => {
+  if (action.type === 'LOGOUT_USER') {
+    // eslint-disable-next-line
+    state = undefined;
+  }
+
+  return core(state, action);
+};
+
+export default rootReducer;

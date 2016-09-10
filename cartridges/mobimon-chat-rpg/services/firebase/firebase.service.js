@@ -27,20 +27,24 @@ export const init = () => {
   firebase.initializeApp(config);
 };
 
-export const load = () => {
+export const load = (cb) => {
   if (loaded) {
     return;
   }
 
   loaded = true;
-  loadScript(firebaseAppUrl, loadScript(firebaseDatabaseUrl, init));
+  loadScript(firebaseAppUrl);
+  loadScript(firebaseDatabaseUrl, () => {
+    init();
+    cb();
+  });
 };
 
 /**
  * Create a reference to the Firebase url
  * @return {Object} websocket reference
  */
-export const createSocketConnection = (infoPath) => {
+export const createDatabaseRef = (infoPath) => {
   if (!connections[infoPath]) {
     connections[infoPath] = firebase.database().ref(infoPath);
   }
@@ -48,13 +52,13 @@ export const createSocketConnection = (infoPath) => {
   return connections[infoPath];
 };
 
-export const getSocketConnection = (infoPath) => connections[infoPath];
+export const getDatabaseRef = (infoPath) => connections[infoPath];
 
 export default {
   getDBUrl,
   getApiKey,
   init,
   load,
-  createSocketConnection,
-  getSocketConnection,
+  createDatabaseRef,
+  getDatabaseRef,
 };

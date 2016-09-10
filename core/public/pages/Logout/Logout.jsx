@@ -1,9 +1,9 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 
-const logout = (props, name) =>
+const logout = (props) =>
   <div className={`${props.className}-wrapper`}>
     <div className={`${props.className}`}>
-      { name ?
+      { props.message ?
         <h4>{props.message}</h4> :
         'Rerouting to Login...'
       }

@@ -138,11 +138,27 @@ export function selectRoom(room) {
   };
 }
 
-export const SET_ROOMS = 'SET_ROOMS';
-export function setRooms(availableRooms) {
+export const GET_ROOMS = 'GET_ROOMS';
+export function getRooms() {
   return {
-    type: SET_ROOMS,
-    availableRooms,
+    type: GET_ROOMS,
+    resource: 'games',
+  };
+}
+
+export const GET_ROOMS_SUCCESS = 'GET_ROOMS_SUCCESS';
+export function getRoomsSuccess(availableRooms) {
+  return {
+    type: GET_ROOMS_SUCCESS,
+    rooms: availableRooms,
+  };
+}
+
+export const GET_ROOMS_FAILURE = 'GET_ROOMS_FAILURE';
+export function getRoomsFailure(error) {
+  return {
+    type: GET_ROOMS_FAILURE,
+    error,
   };
 }
 

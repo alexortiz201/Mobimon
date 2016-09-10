@@ -6,18 +6,12 @@ import createLogout from './Logout.js';
 import './Logout.less';
 
 import { userLogout } from '../../redux/user/user-actions';
-import { selectCharacter } from '../../redux/character/character-actions';
+import { clearState } from '../../utils/storage/storage';
 
 const Logout = createLogout(React);
-
-const logout = (props, name) => {
-  // if logged in log out
-  if (name) {
-    props.userLogout({});
-    // clearing mobimon for now as well
-    props.selectCharacter({});
-  }
-
+const logout = (props) => {
+  clearState();
+  props.userLogout();
   props.router.replace('/login');
 };
 
@@ -32,12 +26,9 @@ Logout.propTypes = {
   message: PropTypes.string.isRequired,
 };
 
-const connectedLogin = connect((state) => ({
-  user: state.user,
-  character: state.character,
+const connectedLogin = connect(() => ({
 }), {
   userLogout,
-  selectCharacter,
 })(Logout);
 
 export default withRouter(connectedLogin);
