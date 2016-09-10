@@ -89,29 +89,29 @@
 
 // // Add the user to the list of attendees on the
 // // game info.
-export const JOIN_BATTLE = 'JOIN_BATTLE';
+// export const JOIN_BATTLE = 'JOIN_BATTLE';
 
-export function joinBattle(battleKey) {
-  return function (dispatch, getState) {
-    dispatch(addingBattle());
+// export function joinBattle(battleKey) {
+//   return function (dispatch, getState) {
+//     dispatch(addingBattle());
 
-    let battleRef = getGamesRef().child(`${battleKey}`),
-      currentUserName = getState().login.userName;
+//     let battleRef = getGamesRef().child(`${battleKey}`),
+//       currentUserName = getState().login.userName;
 
-    // Add the current user to the list of attendees on the game in Firebase.
-    battleRef.child('attendees').update({
-      [currentUserName]: {
-        color: COLORS[Math.floor(Math.random() * 4)]
-      }
-    });
-    battleRef.on('value', (battle) => {
-      if(battle.val()) {
-        // Once we have the value, send the battlekey and the battle objectA
-        dispatch(joinSuccessful(battleKey, battle.val()));
-      }
-    });
-  };
-}
+//     // Add the current user to the list of attendees on the game in Firebase.
+//     battleRef.child('attendees').update({
+//       [currentUserName]: {
+//         color: COLORS[Math.floor(Math.random() * 4)]
+//       }
+//     });
+//     battleRef.on('value', (battle) => {
+//       if(battle.val()) {
+//         // Once we have the value, send the battlekey and the battle objectA
+//         dispatch(joinSuccessful(battleKey, battle.val()));
+//       }
+//     });
+//   };
+// }
 // export const FETCH_BATTLES = 'FETCH_BATTLES';
 
 // // Thunk for atually fetching battles
@@ -154,12 +154,12 @@ export function getRoomsFailure(error) {
 }
 
 
-
 export const SELECT_ROOM = 'SELECT_ROOM';
-export function selectRoom(room) {
+export function selectRoom(room, updateObj) {
   return {
     type: SELECT_ROOM,
     room,
+    updateObj,
   };
 }
 

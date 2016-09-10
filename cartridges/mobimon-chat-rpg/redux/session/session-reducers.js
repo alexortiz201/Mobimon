@@ -17,10 +17,9 @@ export function fetchFromFirebase(resource) {
     .catch(getRoomsFailure);
 }
 
-export function updateFirebase(resource) {
-  let user = {};
+export function updateFirebase(resource, updateObj) {
   return createDatabaseRef(resource)
-    .update()
+    .update(updateObj)
     .then((r) => r.val())
     .then(() => {})
     .catch(() => {});
@@ -29,6 +28,7 @@ export function updateFirebase(resource) {
 export function room(state = {
   roomKey: '',
   roomName: '',
+  attendees: [],
 }, action) {
   switch (action.type) {
     case SELECT_ROOM:
@@ -39,12 +39,12 @@ export function room(state = {
           loading: true,
         },
         Effects.promise(updateFirebase,
-          `chatrpg/games/${action.room.index}/attendees`),
+          `chatrpg/games/${action.room.index}/attendees`, action.updateObj),
       );
     case 'LOADING_START':
       return loop(
         { ...state, loading: true },
-        Effects.promise(joinRoom, action.payload),
+        Effects.promise(updateFirebase, action.payload),
       );
 
     case 'LOADING_SUCCESS':

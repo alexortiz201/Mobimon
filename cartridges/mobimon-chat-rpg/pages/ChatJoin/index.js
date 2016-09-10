@@ -8,23 +8,31 @@ import { load } from '../../services/firebase/firebase.service';
 import createLogin from '../../../../core/public/pages/Login/Login.js';
 import { selectRoom, getRooms } from '../../redux/session/session-actions';
 
+import { COLORS } from '../../../../core/shared/other';
+
 // eslint-disable-next-line no-unused-vars
 const Login = createLogin(React);
 
 const handleSelection = (props, value, index) => {
   const roomName = value;
   const roomKey = roomName.toLowerCase().replace(/[^a-z0-9_]/g, '');
+  const update = {};
 
   if (!roomKey) {
     return;
   }
+
+  update[props.userName] = {
+    color: COLORS[Math.floor(Math.random() * 4)],
+  };
 
   // addBattle
   props.selectRoom({
     index,
     roomKey,
     roomName,
-  });
+  },
+  update);
 
   props.router.replace(`/chat-rpg/battle/${roomKey}`);
 };

@@ -1,9 +1,10 @@
 import test from 'tape';
+import { Effects, loop } from 'redux-loop';
 import {
   SELECT_ROOM,
   selectRoom,
   GET_ROOMS,
-  getRooms,
+  // getRooms,
   GET_ROOMS_SUCCESS,
   getRoomsSuccess,
 } from './session-actions';
@@ -12,11 +13,11 @@ import {
   availableRooms,
   fetchFromFirebase,
   updateFirebase } from './session-reducers';
-import { Effects, loop } from 'redux-loop';
 
 const initialRoomState = {
   roomKey: '',
   roomName: '',
+  attendees: [],
 };
 
 const initialAvailableRoomsState = {
@@ -34,7 +35,7 @@ test('Session', nest => {
       roomName: '123',
     };
 
-    const actual = selectRoom(roomState);
+    const actual = selectRoom(roomState, {});
 
     const expected = {
       type: SELECT_ROOM,
@@ -43,6 +44,7 @@ test('Session', nest => {
         roomKey: '123',
         roomName: '123',
       },
+      updateObj: {},
     };
 
     assert.deepEqual(actual, expected, msg);
@@ -76,16 +78,23 @@ test('Session', nest => {
 
   nest.test('... reducer should handle SELECT_ROOM.', assert => {
     const msg = 'room reducer should SELECT_ROOM.';
-    const roomState = { index: '1', roomKey: '123', roomName: '123' };
+    const updateObj = {};
+    const roomState = {
+      index: '1',
+      roomKey: '123',
+      roomName: '123',
+      attendees: [],
+    };
     const actual = room(undefined, {
       type: SELECT_ROOM,
       room: roomState,
+      updateObj,
     });
 
     const expected = loop(
-      { loading: true, roomKey: '', roomName: '' },
+      { loading: true, roomKey: '', roomName: '', attendees: [] },
       Effects.promise(updateFirebase,
-        `chatrpg/games/${roomState.index}/attendees`),
+        `chatrpg/games/${roomState.index}/attendees`, updateObj),
     );
 
     assert.deepEqual(actual, expected, msg);
@@ -103,7 +112,6 @@ test('Session', nest => {
 
   nest.test('... reducer should handle GET_ROOMS.', assert => {
     const msg = 'availableRooms reducer should GET_ROOMS.';
-    const roomState = { index: '1', roomKey: '123', roomName: '123' };
     const actual = availableRooms(undefined, {
       type: GET_ROOMS,
     });
