@@ -1,23 +1,20 @@
 import { Effects, loop } from 'redux-loop';
-import { getDBUrl } from '../../services/firebase/firebase.service';
 import {
   SELECT_ROOM,
-} from './session-actions'; // loadingStart, loadingSuccess, loadingFailure
-
+  SET_ROOMS,
+} from './session-actions';
 
 export function fetchDetails() {
-  return fetch(getDBUrl())
+  return fetch()
     .then((r) => r.json())
     .then(() => {})
     .catch(() => {});
 }
 
-const initialState = {
+export function room(state = {
   roomKey: '',
   roomName: '',
-};
-
-export function room(state = initialState, action) {
+}, action) {
   switch (action.type) {
     case SELECT_ROOM:
       return {
@@ -27,7 +24,7 @@ export function room(state = initialState, action) {
     case 'LOADING_START':
       return loop(
         { ...state, loading: true },
-        Effects.promise(fetchDetails, action.payload.id),
+        Effects.promise(fetchDetails, action.payload),
       );
 
     case 'LOADING_SUCCESS':
@@ -43,6 +40,16 @@ export function room(state = initialState, action) {
         loading: false,
         error: action.payload.message,
       };
+
+    default:
+      return state;
+  }
+}
+
+export function availableRooms(state = [], action) {
+  switch (action.type) {
+    case SET_ROOMS:
+      return [...action.availableRooms];
 
     default:
       return state;
@@ -106,4 +113,5 @@ export function room(state = initialState, action) {
 
 export default {
   room,
+  availableRooms,
 };

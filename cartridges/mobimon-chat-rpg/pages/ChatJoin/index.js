@@ -2,45 +2,67 @@
 import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { load } from '../../services/firebase/firebase.service';
+import { createSocketConnection } from '../../services/firebase/firebase.service';
 import './ChatJoin.less';
 
 import createLogin from '../../../../core/public/pages/Login/Login.js';
-import { selectRoom } from '../../redux/session/session-actions';
+import { selectRoom, getRooms, setRooms } from '../../redux/session/session-actions';
 
-load();
+// eslint-disable-next-line
+let connectionRef;
 
-const ChatJoin = createLogin(React);
+// eslint-disable-next-line no-unused-vars
+const Login = createLogin(React);
+
+const handleSelection = (props, value) => {
+  const roomName = value;
+  const roomKey = roomName.toLowerCase().replace(/[^a-z0-9_]/g, '');
+
+  if (!roomKey) {
+    return;
+  }
+
+  // addBattle
+  props.selectRoom({
+    roomKey,
+    roomName,
+  });
+
+  props.router.replace(`/chat-rpg/battle/${roomKey}`);
+};
 
 const onSubmit = (e, props, inputNode) => {
   e.preventDefault();
-  const roomName = inputNode.value;
-  const roomKey = roomName.toLowerCase().replace(/[^a-z0-9_]/g, '');
-
-  if (roomKey) {
-    // addBattle
-    props.selectRoom({
-      roomKey,
-      roomName,
-    });
-
-    props.router.replace(`/chat-rpg/battle/${roomKey}`);
-  }
+  handleSelection(props, inputNode.value);
 };
 
-// const ChatJoin = (props) =>
-//   <div className="chat-join">
-//     <form className="formJoinBattle" onSubmit={() => {}}>
-//     <LabeledInput label="Enter a New Battle" ref="battleNameInput"/>
-//     <input className="button" type="submit" value="Join" />
-//     </form>
-//     <div className="header-container">
-//     <h3>Or Select a Battle to Join </h3>
-//     </div>
-//     <div className="collection">
-//     {/*this._getBattleList()*/}
-//     </div>
-//   </div>;
+const renderRoomListItem = (props, { name }) =>
+  <button
+    key={name}
+    className={`button ${name}`}
+    onClick={() => handleSelection(props, name)}>
+    {name}
+  </button>;
+
+const renderRoomListContainer = (props) =>
+  <div className="game-list-container">
+    <h3 className="game-list-header">Or Select a Battle to Join</h3>
+    { props.rooms.map(room => renderRoomListItem(props, room)) }
+  </div>;
+
+const ChatJoin = (props) => {
+  connectionRef = createSocketConnection('games');
+  connectionRef
+    .once('value')
+    .then((snapshot) => props.setRooms(snapshot.val()));
+
+  return (
+    <div className="chat-join">
+      <Login {...props} />
+      { props.rooms.length && renderRoomListContainer(props) }
+    </div>
+  );
+};
 
 ChatJoin.defaultProps = {
   className: 'chat-rpg-login',
@@ -48,7 +70,7 @@ ChatJoin.defaultProps = {
   buttonText: 'Log Into Room',
   autoFocus: false,
   inputValue: '',
-  games: [],
+  rooms: [],
   onSubmit,
 };
 
@@ -60,15 +82,17 @@ ChatJoin.propTypes = {
   userLogin: PropTypes.func,
   history: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  games: PropTypes.array,
+  rooms: PropTypes.array,
 };
 
 const connectedChatJoin = withRouter(connect((state) => ({
   userName: state.user.name,
   userCharacter: state.character,
-  // games: state.chatRPG.games,
+  rooms: state.chatRPG.availableRooms,
 }), {
   selectRoom,
+  getRooms,
+  setRooms,
 })(ChatJoin));
 
 export default connectedChatJoin;

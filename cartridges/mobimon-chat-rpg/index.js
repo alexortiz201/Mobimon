@@ -4,13 +4,16 @@ import React, { PropTypes } from 'react';
 import { withRouter, IndexRoute } from 'react-router';
 import { connect } from 'react-redux';
 
+
 /* eslint-disable no-unused-vars */
 import ChatBattle from './pages/ChatBattle/';
 import ChatJoin from './pages/ChatJoin/';
+import { load } from './services/firebase/firebase.service';
 import { createRequire } from '../../core/public/utils/routes/routes-utils';
 import allReducers from './redux/';
 /* eslint-enable no-unused-vars */
 
+load();
 /**
  * array of reducers to be combined into root
  * from cartridges

@@ -1,4 +1,3 @@
-// import { createSocketConnection } from '../../services/firebase/firebase.service';
 // import {
 //   COLORS,
 // } from '../utils/constants';
@@ -44,14 +43,6 @@
 //     });
 //   };
 // }
-
-export const SELECT_ROOM = 'SELECT_ROOM';
-export function selectRoom(room) {
-  return {
-    type: SELECT_ROOM,
-    selected: room,
-  };
-}
 
 // export const REQUEST_BATTLES = 'REQUEST_BATTLES';
 
@@ -138,3 +129,20 @@ export function selectRoom(room) {
 //     });
 //   };
 // }
+
+export const SELECT_ROOM = 'SELECT_ROOM';
+export function selectRoom(room) {
+  return {
+    type: SELECT_ROOM,
+    selected: room,
+  };
+}
+
+export const SET_ROOMS = 'SET_ROOMS';
+export function setRooms(availableRooms) {
+  return {
+    type: SET_ROOMS,
+    availableRooms,
+  };
+}
+
