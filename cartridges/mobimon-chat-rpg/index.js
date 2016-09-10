@@ -10,9 +10,6 @@ import ChatBattle from './pages/ChatBattle/';
 import ChatJoin from './pages/ChatJoin/';
 import { createRequire } from '../../core/public/utils/routes/routes-utils';
 import allReducers from './redux/';
-
-import { load } from './services/firebase/firebase.service';
-import { getRooms } from './redux/session/session-actions';
 /* eslint-enable no-unused-vars */
 
 /**
@@ -26,19 +23,7 @@ const ChatRPG = (props) =>
   </div>;
 
 ChatRPG.defaultProps = {};
-
 ChatRPG.propTypes = {};
-
-/**
- * a way to have getRooms wait on the
- * loading of the scripts
- * @return {NoOp}
- */
-const prePrep = ({ dispatch }) => {
-  load(() => {
-    dispatch(getRooms());
-  });
-};
 
 export const hasBattleKeyEval = (state, replace) => {
   const battleKey = state.chatRPG && state.chatRPG.battleKey;
@@ -55,8 +40,7 @@ export const Route = (store) =>
   <Route
     key={path}
     path={path}
-    component={connectedChatRPG}
-    onEnter={prePrep(store)}>
+    component={connectedChatRPG}>
     <IndexRoute onEnter={createRequire(store, hasBattleKeyEval)} />
     <Route path="join" component={ChatJoin} />
 

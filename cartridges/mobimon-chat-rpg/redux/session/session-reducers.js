@@ -74,7 +74,7 @@ export function availableRooms(state = {
       return {
         ...state,
         loading: false,
-        rooms: [...action.availableRooms],
+        rooms: [...action.rooms],
       };
 
     case GET_ROOMS_FAILURE:

@@ -4,8 +4,9 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import './ChatJoin.less';
 
+import { load } from '../../services/firebase/firebase.service';
 import createLogin from '../../../../core/public/pages/Login/Login.js';
-import { selectRoom } from '../../redux/session/session-actions';
+import { selectRoom, getRooms } from '../../redux/session/session-actions';
 
 // eslint-disable-next-line no-unused-vars
 const Login = createLogin(React);
@@ -32,6 +33,10 @@ const onSubmit = (e, props, inputNode) => {
   handleSelection(props, inputNode.value);
 };
 
+const setUpFireBaseScripts = (onLoadFn) => {
+  load(() => onLoadFn());
+};
+
 const renderRoomListItem = (props, { name }) =>
   <button
     key={name}
@@ -42,6 +47,7 @@ const renderRoomListItem = (props, { name }) =>
 
 const renderRoomListContainer = (props) => {
   if (!props.rooms.length) {
+    setUpFireBaseScripts(props.getRooms);
     return null;
   }
   return (
@@ -85,6 +91,7 @@ const connectedChatJoin = withRouter(connect((state) => ({
   rooms: state.chatRPG.availableRooms.rooms,
 }), {
   selectRoom,
+  getRooms,
 })(ChatJoin));
 
 export default connectedChatJoin;

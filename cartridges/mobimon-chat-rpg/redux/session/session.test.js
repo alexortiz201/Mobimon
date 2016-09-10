@@ -98,7 +98,7 @@ test('Session', nest => {
     };
     const actual = availableRooms(undefined, {
       type: GET_ROOMS_SUCCESS,
-      availableRooms: [{ name: '123' }],
+      rooms: [{ name: '123' }],
     });
 
     const expected = aRoomsState;
