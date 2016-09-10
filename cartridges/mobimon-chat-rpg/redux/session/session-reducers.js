@@ -1,17 +1,27 @@
 import { Effects, loop } from 'redux-loop';
 import { createDatabaseRef } from '../../services/firebase/firebase.service';
 import {
-  SELECT_ROOM,
   GET_ROOMS,
   GET_ROOMS_SUCCESS,
   GET_ROOMS_FAILURE,
   getRoomsSuccess,
   getRoomsFailure,
+  SELECT_ROOM,
 } from './session-actions';
 
-export function fetchDetails() {
-  return fetch()
-    .then((r) => r.json())
+export function fetchFromFirebase(resource) {
+  return createDatabaseRef(resource)
+    .once('value')
+    .then((FirebaseObject) => FirebaseObject.val())
+    .then(getRoomsSuccess)
+    .catch(getRoomsFailure);
+}
+
+export function updateFirebase(resource) {
+  let user = {};
+  return createDatabaseRef(resource)
+    .update()
+    .then((r) => r.val())
     .then(() => {})
     .catch(() => {});
 }
@@ -22,14 +32,19 @@ export function room(state = {
 }, action) {
   switch (action.type) {
     case SELECT_ROOM:
-      return {
-        ...state,
-        ...action.selected,
-      };
+      return loop(
+        {
+          ...state,
+          ...action.selected,
+          loading: true,
+        },
+        Effects.promise(updateFirebase,
+          `chatrpg/games/${action.room.index}/attendees`),
+      );
     case 'LOADING_START':
       return loop(
         { ...state, loading: true },
-        Effects.promise(fetchDetails, action.payload),
+        Effects.promise(joinRoom, action.payload),
       );
 
     case 'LOADING_SUCCESS':
@@ -51,14 +66,6 @@ export function room(state = {
   }
 }
 
-export function fetchFromFirebase(resource) {
-  return createDatabaseRef(resource)
-    .once('value')
-    .then((FirebaseObject) => FirebaseObject.val())
-    .then(getRoomsSuccess)
-    .catch(getRoomsFailure);
-}
-
 export function availableRooms(state = {
   loading: false,
   rooms: [],
@@ -67,7 +74,7 @@ export function availableRooms(state = {
     case GET_ROOMS:
       return loop(
         { ...state, loading: true },
-        Effects.promise(fetchFromFirebase, action.resource),
+        Effects.promise(fetchFromFirebase, 'chatrpg/games'),
       );
 
     case GET_ROOMS_SUCCESS:

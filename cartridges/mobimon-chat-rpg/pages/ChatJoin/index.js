@@ -11,7 +11,7 @@ import { selectRoom, getRooms } from '../../redux/session/session-actions';
 // eslint-disable-next-line no-unused-vars
 const Login = createLogin(React);
 
-const handleSelection = (props, value) => {
+const handleSelection = (props, value, index) => {
   const roomName = value;
   const roomKey = roomName.toLowerCase().replace(/[^a-z0-9_]/g, '');
 
@@ -21,6 +21,7 @@ const handleSelection = (props, value) => {
 
   // addBattle
   props.selectRoom({
+    index,
     roomKey,
     roomName,
   });
@@ -37,11 +38,11 @@ const setUpFireBaseScripts = (onLoadFn) => {
   load(() => onLoadFn());
 };
 
-const renderRoomListItem = (props, { name }) =>
+const renderRoomListItem = (props, { name }, index) =>
   <button
-    key={name}
+    key={`${name}-${index}`}
     className={`button ${name}`}
-    onClick={() => handleSelection(props, name)}>
+    onClick={() => handleSelection(props, name, index)}>
     {name}
   </button>;
 
@@ -53,7 +54,7 @@ const renderRoomListContainer = (props) => {
   return (
     <div className="game-list-container">
       <h3 className="game-list-header">Or Select a Battle to Join</h3>
-      { props.rooms.map(room => renderRoomListItem(props, room)) }
+      { props.rooms.map((room, index) => renderRoomListItem(props, room, index)) }
     </div>
   );
 };
@@ -67,7 +68,7 @@ const ChatJoin = (props) =>
 ChatJoin.defaultProps = {
   className: 'chat-rpg-login',
   label: 'Room Id',
-  buttonText: 'Log Into Room',
+  buttonText: 'Create Room',
   autoFocus: false,
   inputValue: '',
   rooms: [],
