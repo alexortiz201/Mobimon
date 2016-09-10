@@ -2,8 +2,8 @@ import test from 'tape';
 import {
   SELECT_ROOM,
   selectRoom,
-  GET_ROOMS,
-  getRooms,
+  // GET_ROOMS,
+  // getRooms,
   GET_ROOMS_SUCCESS,
   getRoomsSuccess,
 } from './session-actions';

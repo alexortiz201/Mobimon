@@ -50,7 +50,7 @@ test('Logout', nest => {
     const msg = 'Logout should render good bye message.';
     const props = helpers.makeProps(
       defaultProps,
-      { message: 'Good bye... Logging out...', },
+      { message: 'Good bye... Logging out...' },
     );
 
     const $ = dom.load(render(<Logout {...props} />));
