@@ -142,7 +142,7 @@ export const GET_ROOMS = 'GET_ROOMS';
 export function getRooms() {
   return {
     type: GET_ROOMS,
-    resource: 'games',
+    resource: 'chatrpg/games',
   };
 }
 
