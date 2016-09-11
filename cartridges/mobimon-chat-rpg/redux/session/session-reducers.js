@@ -12,7 +12,7 @@ import {
   selectRoomSuccess,
   selectRoomFailure,
   GET_PLAYERS,
-  getPlayers,
+  // getPlayers,
 } from './session-actions';
 
 
@@ -47,7 +47,7 @@ export function room(state = {
         },
         Effects.promise(updateFirebase,
           `chatrpg/games/${action.room.key}/players`, action.updateObj),
-        Effects.constant(getPlayers()),
+        // Effects.constant(getPlayers()),
       );
 
     case SELECT_ROOM_SUCCESS:

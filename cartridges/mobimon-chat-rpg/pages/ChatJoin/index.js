@@ -26,8 +26,7 @@ const timeStampExpBool = (expMin = EXPIRE_TIMESTAMP) => {
   return expMin <= currTimeStamp - roomTimeStamp;
 };
 
-const handleSelection = (props, room, index) => {
-  const key = index;
+const handleSelection = (props, room) => {
   const name = room.name.toLowerCase().replace(/[^a-z0-9_]/g, '');
   const update = {};
 
@@ -39,26 +38,26 @@ const handleSelection = (props, room, index) => {
   props.selectRoom({
     ...room,
     name,
-    key,
   },
   update);
 
-  props.router.replace(`/chat-rpg/battle/${key}`);
+  props.router.replace(`/chat-rpg/battle/${room.key}`);
 };
 
 const onSubmit = (e, props, inputNode) => {
   e.preventDefault();
-  handleSelection(props, inputNode.value);
+  const val = inputNode.value;
+  handleSelection(props, { key: val, name: val });
 };
 
 const setUpFireBaseScripts = () => load().then(init);
 setUpFireBaseScripts();
 
-const renderRoomListItem = (props, room, index) =>
+const renderRoomListItem = (props, { key, name }) =>
   <button
-    key={`${name}-${index}`}
+    key={`${name}-${key}`}
     className={`button ${name}`}
-    onClick={() => handleSelection(props, room, index)}>
+    onClick={() => handleSelection(props, { key, name })}>
     {name}
   </button>;
 
@@ -75,7 +74,10 @@ const renderRoomListContainer = (props) => {
   return (
     <div className="game-list-container">
       <h3 className="game-list-header">Or Select a Battle to Join</h3>
-      { props.rooms.map((room, index) => renderRoomListItem(props, room, index)) }
+      { props.rooms.map((room, index) => {
+        room.key = index; // eslint-disable-line
+        return renderRoomListItem(props, room);
+      }) }
     </div>
   );
 };
