@@ -7,7 +7,14 @@ import {
   getRoomsSuccess,
   getRoomsFailure,
   SELECT_ROOM,
+  SELECT_ROOM_SUCCESS,
+  SELECT_ROOM_FAILURE,
+  selectRoomSuccess,
+  selectRoomFailure,
+  GET_PLAYERS,
+  getPlayers,
 } from './session-actions';
+
 
 export function fetchFromFirebase(resource) {
   return createDatabaseRef(resource)
@@ -17,49 +24,51 @@ export function fetchFromFirebase(resource) {
     .catch(getRoomsFailure);
 }
 
+
 export function updateFirebase(resource, updateObj) {
   return createDatabaseRef(resource)
     .update(updateObj)
-    .then((r) => r.val())
-    .then(() => {})
-    .catch(() => {});
+    .then(selectRoomSuccess)
+    .catch(selectRoomFailure);
 }
 
 export function room(state = {
-  roomKey: '',
-  roomName: '',
-  attendees: [],
+  key: '',
+  name: '',
+  players: [],
 }, action) {
   switch (action.type) {
     case SELECT_ROOM:
       return loop(
         {
           ...state,
-          ...action.selected,
+          ...action.room,
           loading: true,
         },
         Effects.promise(updateFirebase,
-          `chatrpg/games/${action.room.index}/attendees`, action.updateObj),
+          `chatrpg/games/${action.room.key}/players`, action.updateObj),
+        Effects.constant(getPlayers()),
       );
-    case 'LOADING_START':
+
+    case SELECT_ROOM_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case SELECT_ROOM_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+
+    case GET_PLAYERS:
       return loop(
         { ...state, loading: true },
-        Effects.promise(updateFirebase, action.payload),
+        Effects.promise(fetchFromFirebase,
+          `chatrpg/games/${action.room.index}/players`),
       );
-
-    case 'LOADING_SUCCESS':
-      return {
-        ...state,
-        loading: false,
-        details: action.payload,
-      };
-
-    case 'LOADING_FAILURE':
-      return {
-        ...state,
-        loading: false,
-        error: action.payload.message,
-      };
 
     default:
       return state;

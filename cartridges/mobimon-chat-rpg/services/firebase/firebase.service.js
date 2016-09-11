@@ -18,24 +18,41 @@ export const getApiKey = () => config.apiKey;
 
 export const init = () => {
   if (inited) {
-    return;
+    return Promise.resolve({
+      inited,
+    });
   }
 
   inited = true;
-  firebase.initializeApp(config);
+
+  return new Promise((resolve) => {
+    firebase.initializeApp(config);
+    resolve();
+  });
 };
 
-export const load = (cb) => {
+export const load = () => {
   if (loaded) {
-    return;
+    return Promise.resolve({
+      loaded,
+    });
   }
 
+  const promiseArray = [];
+
   loaded = true;
-  loadScript(firebaseAppUrl);
-  loadScript(firebaseDatabaseUrl, () => {
-    init();
-    cb();
+
+  const p1 = new Promise((resolve) => {
+    loadScript(firebaseAppUrl, () => resolve());
   });
+
+  const p2 = new Promise((resolve) => {
+    loadScript(firebaseDatabaseUrl, () => resolve());
+  });
+
+  promiseArray.push(p1, p2);
+
+  return Promise.all(promiseArray);
 };
 
 /**

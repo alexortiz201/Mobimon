@@ -1,7 +1,3 @@
-// import {
-//   COLORS,
-// } from '../utils/constants';
-
 
 // export const ADDING_BATTLE = 'ADDING_BATTLE';
 // export function addingBattle() {
@@ -44,48 +40,6 @@
 //   };
 // }
 
-// export const REQUEST_BATTLES = 'REQUEST_BATTLES';
-
-// export function requestBattles() {
-//   return {
-//     type: REQUEST_BATTLES,
-//     payload: {}
-//   };
-// }
-
-// export const RECEIVE_BATTLES = 'RECEIVE_BATTLES';
-
-// export function receiveBattles(battles) {
-//   return {
-//     type: RECEIVE_BATTLES,
-//     payload: {
-//       battles
-//     }
-//   };
-// }
-
-// export const JOINING_BATTLE = 'JOINING_BATTLE';
-
-// export function joiningBattle() {
-//   return {
-//     type: JOINING_BATTLE,
-//     payload: {
-//       joiningBattle: true
-//     }
-//   };
-// }
-
-// export const JOIN_SUCCESSFUL = 'JOIN_SUCCESSFUL';
-
-// export function joinSuccessful(currentBattleKey, currentBattleSession) {
-//   return {
-//     type: JOIN_SUCCESSFUL,
-//     payload: {
-//       currentBattleKey,
-//       currentBattleSession
-//     }
-//   };
-// }
 
 // // Add the user to the list of attendees on the
 // // game info.
@@ -114,21 +68,6 @@
 // }
 // export const FETCH_BATTLES = 'FETCH_BATTLES';
 
-// // Thunk for atually fetching battles
-// export function fetchBattles() {
-//   return function (dispatch) {
-//     // dispatch that the app is requesting battles
-//     dispatch(requestBattles());
-
-//     // return a firebase ref object
-//     getGamesRef().on('value', (battles) => {
-//       if(battles.val()) {
-//         // Once we get the battles send them out to the reducer.
-//         dispatch(receiveBattles(battles.val()));
-//       }
-//     });
-//   };
-// }
 
 export const GET_ROOMS = 'GET_ROOMS';
 export function getRooms() {
@@ -163,11 +102,27 @@ export function selectRoom(room, updateObj) {
   };
 }
 
-// export const SELECT_ROOM = 'SELECT_ROOM';
-// export function selectRoomSuccess(room) {
-//   return {
-//     type: SELECT_ROOM,
-//     selected: room,
-//   };
-// }
+export const SELECT_ROOM_SUCCESS = 'SELECT_ROOM_SUCCESS';
+export function selectRoomSuccess(attendees) {
+  return {
+    type: SELECT_ROOM_SUCCESS,
+    attendees,
+  };
+}
+
+export const SELECT_ROOM_FAILURE = 'SELECT_ROOM_FAILURE';
+export function selectRoomFailure(error) {
+  return {
+    type: SELECT_ROOM_FAILURE,
+    error,
+  };
+}
+
+
+export const GET_PLAYERS = 'GET_PLAYERS';
+export function getPlayers() {
+  return {
+    type: GET_PLAYERS,
+  };
+}
 

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import './ChatJoin.less';
 
-import { load } from '../../services/firebase/firebase.service';
+import { load, init } from '../../services/firebase/firebase.service';
 import createLogin from '../../../../core/public/pages/Login/Login.js';
 import { selectRoom, getRooms } from '../../redux/session/session-actions';
 
@@ -13,14 +13,23 @@ import { COLORS } from '../../../../core/shared/other';
 // eslint-disable-next-line no-unused-vars
 const Login = createLogin(React);
 
-const handleSelection = (props, value, index) => {
-  const roomName = value;
-  const roomKey = roomName.toLowerCase().replace(/[^a-z0-9_]/g, '');
-  const update = {};
+const EXPIRE_TIMESTAMP = 300000; // 5 min , 60000 = 1 min
+let roomTimeStamp = 0;
 
-  if (!roomKey) {
-    return;
-  }
+/**
+ * Timestap for busting cached rooms every five min
+ * @param  {int} expMin  expire amount milli
+ * @return {bool}
+ */
+const timeStampExpBool = (expMin = EXPIRE_TIMESTAMP) => {
+  const currTimeStamp = new Date(Date.now()).getTime();
+  return expMin <= currTimeStamp - roomTimeStamp;
+};
+
+const handleSelection = (props, room, index) => {
+  const key = index;
+  const name = room.name.toLowerCase().replace(/[^a-z0-9_]/g, '');
+  const update = {};
 
   update[props.userName] = {
     color: COLORS[Math.floor(Math.random() * 4)],
@@ -28,13 +37,13 @@ const handleSelection = (props, value, index) => {
 
   // addBattle
   props.selectRoom({
-    index,
-    roomKey,
-    roomName,
+    ...room,
+    name,
+    key,
   },
   update);
 
-  props.router.replace(`/chat-rpg/battle/${roomKey}`);
+  props.router.replace(`/chat-rpg/battle/${key}`);
 };
 
 const onSubmit = (e, props, inputNode) => {
@@ -42,23 +51,27 @@ const onSubmit = (e, props, inputNode) => {
   handleSelection(props, inputNode.value);
 };
 
-const setUpFireBaseScripts = (onLoadFn) => {
-  load(() => onLoadFn());
-};
+const setUpFireBaseScripts = () => load().then(init);
+setUpFireBaseScripts();
 
-const renderRoomListItem = (props, { name }, index) =>
+const renderRoomListItem = (props, room, index) =>
   <button
     key={`${name}-${index}`}
     className={`button ${name}`}
-    onClick={() => handleSelection(props, name, index)}>
+    onClick={() => handleSelection(props, room, index)}>
     {name}
   </button>;
 
 const renderRoomListContainer = (props) => {
-  if (!props.rooms.length) {
-    setUpFireBaseScripts(props.getRooms);
+  if (!props.rooms.length || timeStampExpBool()) {
+    setUpFireBaseScripts().then(() => {
+      props.getRooms();
+      roomTimeStamp = new Date(Date.now()).getTime();
+    });
+
     return null;
   }
+
   return (
     <div className="game-list-container">
       <h3 className="game-list-header">Or Select a Battle to Join</h3>

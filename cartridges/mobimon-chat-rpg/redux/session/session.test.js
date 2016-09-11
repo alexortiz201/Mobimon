@@ -15,9 +15,9 @@ import {
   updateFirebase } from './session-reducers';
 
 const initialRoomState = {
-  roomKey: '',
-  roomName: '',
-  attendees: [],
+  key: '',
+  name: '',
+  players: [],
 };
 
 const initialAvailableRoomsState = {
@@ -31,8 +31,8 @@ test('Session', nest => {
     const msg = 'session action creator should create a SELECT_ROOM action.';
     const roomState = {
       index: '1',
-      roomKey: '123',
-      roomName: '123',
+      key: '123',
+      name: '123',
     };
 
     const actual = selectRoom(roomState, {});
@@ -41,8 +41,8 @@ test('Session', nest => {
       type: SELECT_ROOM,
       room: {
         index: '1',
-        roomKey: '123',
-        roomName: '123',
+        key: '123',
+        name: '123',
       },
       updateObj: {},
     };
@@ -80,10 +80,9 @@ test('Session', nest => {
     const msg = 'room reducer should SELECT_ROOM.';
     const updateObj = {};
     const roomState = {
-      index: '1',
-      roomKey: '123',
-      roomName: '123',
-      attendees: [],
+      key: '123',
+      name: '123',
+      players: [],
     };
     const actual = room(undefined, {
       type: SELECT_ROOM,
@@ -92,9 +91,9 @@ test('Session', nest => {
     });
 
     const expected = loop(
-      { loading: true, roomKey: '', roomName: '', attendees: [] },
+      { loading: true, key: '123', name: '123', players: [] },
       Effects.promise(updateFirebase,
-        `chatrpg/games/${roomState.index}/attendees`, updateObj),
+        `chatrpg/games/${roomState.key}/players`, updateObj),
     );
 
     assert.deepEqual(actual, expected, msg);
