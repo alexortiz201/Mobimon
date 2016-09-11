@@ -12,30 +12,35 @@ import {
   selectRoomSuccess,
   selectRoomFailure,
   GET_PLAYERS,
+  GET_PLAYERS_SUCCESS,
+  GET_PLAYERS_FAILURE,
   // getPlayers,
+  getPlayersSuccess,
+  getPlayersFailure,
 } from './session-actions';
 
 
-export function fetchFromFirebase(resource) {
+export function fetchFromFirebase(resource, successFn, failFn) {
+  debugger // eslint-disable-line
   return createDatabaseRef(resource)
     .once('value')
-    .then((FirebaseObject) => FirebaseObject.val())
-    .then(getRoomsSuccess)
-    .catch(getRoomsFailure);
+    .then((FirebaseObj) => FirebaseObj.val())
+    .then(successFn)
+    .catch(failFn);
 }
 
 
-export function updateFirebase(resource, updateObj) {
+export function updateFirebase(resource, updateObj, successFn, failFn) {
   return createDatabaseRef(resource)
     .update(updateObj)
-    .then(selectRoomSuccess)
-    .catch(selectRoomFailure);
+    .then(successFn)
+    .catch(failFn);
 }
 
 export function room(state = {
   key: '',
   name: '',
-  players: [],
+  players: {},
 }, action) {
   switch (action.type) {
     case SELECT_ROOM:
@@ -46,8 +51,10 @@ export function room(state = {
           loading: true,
         },
         Effects.promise(updateFirebase,
-          `chatrpg/games/${action.room.key}/players`, action.updateObj),
-        // Effects.constant(getPlayers()),
+          `chatrpg/games/${action.room.key}/players`, action.updateObj,
+          selectRoomSuccess,
+          selectRoomFailure,
+        )
       );
 
     case SELECT_ROOM_SUCCESS:
@@ -67,8 +74,27 @@ export function room(state = {
       return loop(
         { ...state, loading: true },
         Effects.promise(fetchFromFirebase,
-          `chatrpg/games/${action.room.index}/players`),
+          `chatrpg/games/${action.key}/players`,
+          getPlayersSuccess,
+          getPlayersFailure,
+        ),
       );
+
+    case GET_PLAYERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        players: {
+          ...action.players,
+        },
+      };
+
+    case GET_PLAYERS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
 
     default:
       return state;
@@ -83,7 +109,10 @@ export function availableRooms(state = {
     case GET_ROOMS:
       return loop(
         { ...state, loading: true },
-        Effects.promise(fetchFromFirebase, 'chatrpg/games'),
+        Effects.promise(fetchFromFirebase, 'chatrpg/games',
+          getRoomsSuccess,
+          getRoomsFailure,
+        ),
       );
 
     case GET_ROOMS_SUCCESS:

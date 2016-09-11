@@ -6,7 +6,7 @@ import './ChatJoin.less';
 
 import { load, init } from '../../services/firebase/firebase.service';
 import createLogin from '../../../../core/public/pages/Login/Login.js';
-import { selectRoom, getRooms } from '../../redux/session/session-actions';
+import { selectRoom, getRooms, getPlayers } from '../../redux/session/session-actions';
 
 import { COLORS } from '../../../../core/shared/other';
 
@@ -40,6 +40,8 @@ const handleSelection = (props, room) => {
     name,
   },
   update);
+
+  props.getPlayers(room.key);
 
   props.router.replace(`/chat-rpg/battle/${room.key}`);
 };
@@ -116,6 +118,7 @@ const connectedChatJoin = withRouter(connect((state) => ({
 }), {
   selectRoom,
   getRooms,
+  getPlayers,
 })(ChatJoin));
 
 export default connectedChatJoin;

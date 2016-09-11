@@ -1,12 +1,23 @@
 import test from 'tape';
 import { Effects, loop } from 'redux-loop';
 import {
-  SELECT_ROOM,
-  selectRoom,
   GET_ROOMS,
-  // getRooms,
   GET_ROOMS_SUCCESS,
+  // GET_ROOMS_FAILURE,
   getRoomsSuccess,
+  getRoomsFailure,
+  SELECT_ROOM,
+  // SELECT_ROOM_SUCCESS,
+  // SELECT_ROOM_FAILURE,
+  selectRoom,
+  selectRoomSuccess,
+  selectRoomFailure,
+  // GET_PLAYERS,
+  // GET_PLAYERS_SUCCESS,
+  // GET_PLAYERS_FAILURE,
+  // getPlayers,
+  // getPlayersSuccess,
+  // getPlayersFailure,
 } from './session-actions';
 import {
   room,
@@ -17,7 +28,7 @@ import {
 const initialRoomState = {
   key: '',
   name: '',
-  players: [],
+  players: {},
 };
 
 const initialAvailableRoomsState = {
@@ -82,7 +93,7 @@ test('Session', nest => {
     const roomState = {
       key: '123',
       name: '123',
-      players: [],
+      players: {},
     };
     const actual = room(undefined, {
       type: SELECT_ROOM,
@@ -91,9 +102,12 @@ test('Session', nest => {
     });
 
     const expected = loop(
-      { loading: true, key: '123', name: '123', players: [] },
+      { loading: true, key: '123', name: '123', players: {} },
       Effects.promise(updateFirebase,
-        `chatrpg/games/${roomState.key}/players`, updateObj),
+        `chatrpg/games/${roomState.key}/players`, updateObj,
+        selectRoomSuccess,
+        selectRoomFailure,
+      ),
     );
 
     assert.deepEqual(actual, expected, msg);
@@ -117,7 +131,10 @@ test('Session', nest => {
 
     const expected = loop(
       { loading: true, rooms: [] },
-      Effects.promise(fetchFromFirebase, 'chatrpg/games')
+      Effects.promise(fetchFromFirebase, 'chatrpg/games',
+        getRoomsSuccess,
+        getRoomsFailure,
+      )
     );
 
     assert.deepEqual(actual, expected, msg);

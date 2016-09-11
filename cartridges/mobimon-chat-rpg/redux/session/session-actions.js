@@ -103,10 +103,9 @@ export function selectRoom(room, updateObj) {
 }
 
 export const SELECT_ROOM_SUCCESS = 'SELECT_ROOM_SUCCESS';
-export function selectRoomSuccess(attendees) {
+export function selectRoomSuccess() {
   return {
     type: SELECT_ROOM_SUCCESS,
-    attendees,
   };
 }
 
@@ -120,9 +119,26 @@ export function selectRoomFailure(error) {
 
 
 export const GET_PLAYERS = 'GET_PLAYERS';
-export function getPlayers() {
+export function getPlayers(key) {
   return {
     type: GET_PLAYERS,
+    key,
+  };
+}
+
+export const GET_PLAYERS_SUCCESS = 'GET_PLAYERS_SUCCESS';
+export function getPlayersSuccess(players) {
+  return {
+    type: GET_PLAYERS_SUCCESS,
+    players,
+  };
+}
+
+export const GET_PLAYERS_FAILURE = 'GET_PLAYERS_FAILURE';
+export function getPlayersFailure(error) {
+  return {
+    type: GET_PLAYERS_FAILURE,
+    error,
   };
 }
 
