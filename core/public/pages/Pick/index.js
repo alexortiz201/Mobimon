@@ -15,9 +15,9 @@ const Pick = createPick(React);
 const Character = createCharacter(React);
 
 // selectable mobimon
-const characters = allChars.filter((char) => char.type === 'mobimon');
+const characters = allChars.filter(char => char.type === 'mobimon');
 
-const renderCharacterList = (props) =>
+const renderCharacterList = props =>
   props.characters.map((char, index) =>
     <div
       key={`${char.name}-${index}`}
@@ -55,7 +55,7 @@ Pick.PropTypes = {
   onSelectCharacter: PropTypes.func.isRequired,
 };
 
-const connectedPick = connect((state) => ({
+const connectedPick = connect(state => ({
   user: state.user,
   character: state.character,
 }), {

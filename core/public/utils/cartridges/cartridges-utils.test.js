@@ -6,8 +6,8 @@ import {
   clearAllCartridges,
 } from './cartridges-utils';
 
-test('Cartridges-utils', nest => {
-  nest.test('... should load all cartridges', assert => {
+test('Cartridges-utils', (nest) => {
+  nest.test('... should load all cartridges', (assert) => {
     const msg = 'Cartridges-utils loads all cartridges.';
     const actual = loadCartridges().length;
     const expected = 0;
@@ -16,7 +16,7 @@ test('Cartridges-utils', nest => {
     assert.end();
   });
 
-  nest.test('... should register a cartridge', assert => {
+  nest.test('... should register a cartridge', (assert) => {
     const msg = 'Cartridges-utils registered a cartridge.';
     registerCartridge({
       path: '/test',
@@ -30,7 +30,7 @@ test('Cartridges-utils', nest => {
     assert.end();
   });
 
-  nest.test('... should clear all cartridges', assert => {
+  nest.test('... should clear all cartridges', (assert) => {
     const msg = 'Cartridges-utils should clear all cartridges.';
     registerCartridge({
       path: '/test',

@@ -39,7 +39,7 @@ Login.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-const connectedLogin = connect((state) => ({
+const connectedLogin = connect(state => ({
   user: state.user,
 }), {
   userLogin,

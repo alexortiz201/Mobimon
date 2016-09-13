@@ -18,8 +18,8 @@ const defaultProps = {
   renderTopBar: () => <div className="top-bar" />,
 };
 
-test('Main', nest => {
-  nest.test('... should render', assert => {
+test('Main', (nest) => {
+  nest.test('... should render', (assert) => {
     const msg = 'Main should render app-container.';
     const props = helpers.makeProps(defaultProps);
 
@@ -33,7 +33,7 @@ test('Main', nest => {
     assert.end();
   });
 
-  nest.test('... should render with top bar', assert => {
+  nest.test('... should render with top bar', (assert) => {
     const msg = 'Main should render with top bar.';
     const props = helpers.makeProps(defaultProps);
 
@@ -47,7 +47,7 @@ test('Main', nest => {
     assert.end();
   });
 
-  nest.test('... should render with child component', assert => {
+  nest.test('... should render with child component', (assert) => {
     const msg = 'Main should render with child component.';
     const props = helpers.makeProps(defaultProps);
 

@@ -14,7 +14,7 @@ const Pick = createPick(React);
 const defaultProps = {
   user: { name: 'Uncle Bob' },
   characters: [],
-  renderCharacterList: (props) =>
+  renderCharacterList: props =>
     props.characters.map((char, index) =>
       <div key={`${char.name}-${index}`} className="character"></div>
     ),
@@ -22,8 +22,8 @@ const defaultProps = {
   goToRoute: () => {},
 };
 
-test('Pick', nest => {
-  nest.test('... should render', assert => {
+test('Pick', (nest) => {
+  nest.test('... should render', (assert) => {
     const msg = 'Pick should render picking page.';
     const props = helpers.makeProps(defaultProps);
 
@@ -37,7 +37,7 @@ test('Pick', nest => {
     assert.end();
   });
 
-  nest.test('... should render user name', assert => {
+  nest.test('... should render user name', (assert) => {
     const msg = 'Pick should render user name on page.';
     const props = helpers.makeProps(defaultProps);
 
@@ -51,7 +51,7 @@ test('Pick', nest => {
     assert.end();
   });
 
-  nest.test('... should render single character', assert => {
+  nest.test('... should render single character', (assert) => {
     const msg = 'Pick should render single character.';
     const props = helpers.makeProps(defaultProps, {
       characters: [{ name: 'Bilsner' }],
@@ -67,7 +67,7 @@ test('Pick', nest => {
     assert.end();
   });
 
-  nest.test('... should render list of characters', assert => {
+  nest.test('... should render list of characters', (assert) => {
     const msg = 'Pick should render list of characters.';
     const props = helpers.makeProps(defaultProps, {
       characters: [{ name: 'Bilsner' }, { name: 'Bird' }],

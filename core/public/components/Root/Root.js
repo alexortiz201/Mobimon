@@ -3,7 +3,11 @@ import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 
-import routeHelpers from '../../utils/routes/routes-utils';
+import {
+  createRequire,
+  loggedInEval,
+  characterChoosenEval,
+} from '../../utils/routes/routes-utils';
 
 import Main from '../../pages/Main/';
 import About from '../../pages/About/';
@@ -13,11 +17,6 @@ import Pick from '../../pages/Pick/';
 import { load } from '../../../../cartridges/';
 
 const cartridges = load();
-const {
-  createRequire,
-  loggedInEval,
-  characterChoosenEval,
-} = routeHelpers;
 
 const Root = ({ store }) => {
   // Route is a React object needs to be capitalized

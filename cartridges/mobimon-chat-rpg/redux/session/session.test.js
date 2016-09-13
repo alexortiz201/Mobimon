@@ -36,9 +36,9 @@ const initialAvailableRoomsState = {
   rooms: [],
 };
 
-test('Session', nest => {
+test('Session', (nest) => {
   // Actions
-  nest.test('... should create a SELECT_ROOM action', assert => {
+  nest.test('... should create a SELECT_ROOM action', (assert) => {
     const msg = 'session action creator should create a SELECT_ROOM action.';
     const roomState = {
       index: '1',
@@ -62,7 +62,7 @@ test('Session', nest => {
     assert.end();
   });
 
-  nest.test('... should create a GET_ROOMS_SUCCESS action', assert => {
+  nest.test('... should create a GET_ROOMS_SUCCESS action', (assert) => {
     const msg = 'session action creator should create a GET_ROOMS_SUCCESS action.';
     const roomsState = [{ name: '123' }];
 
@@ -78,7 +78,7 @@ test('Session', nest => {
   });
 
   // Reducers
-  nest.test('... reducer should return initial state.', assert => {
+  nest.test('... reducer should return initial state.', (assert) => {
     const msg = 'room reducer should return initial state.';
     const actual = room(undefined, {});
     const expected = initialRoomState;
@@ -87,7 +87,7 @@ test('Session', nest => {
     assert.end();
   });
 
-  nest.test('... reducer should handle SELECT_ROOM.', assert => {
+  nest.test('... reducer should handle SELECT_ROOM.', (assert) => {
     const msg = 'room reducer should SELECT_ROOM.';
     const updateObj = {};
     const roomState = {
@@ -114,7 +114,7 @@ test('Session', nest => {
     assert.end();
   });
 
-  nest.test('... reducer should return initial state.', assert => {
+  nest.test('... reducer should return initial state.', (assert) => {
     const msg = 'availableRooms reducer should return initial state.';
     const actual = availableRooms(undefined, {});
     const expected = initialAvailableRoomsState;
@@ -123,7 +123,7 @@ test('Session', nest => {
     assert.end();
   });
 
-  nest.test('... reducer should handle GET_ROOMS.', assert => {
+  nest.test('... reducer should handle GET_ROOMS.', (assert) => {
     const msg = 'availableRooms reducer should GET_ROOMS.';
     const actual = availableRooms(undefined, {
       type: GET_ROOMS,
@@ -141,7 +141,7 @@ test('Session', nest => {
     assert.end();
   });
 
-  nest.test('... reducer should handle GET_ROOMS_SUCCESS.', assert => {
+  nest.test('... reducer should handle GET_ROOMS_SUCCESS.', (assert) => {
     const msg = 'availableRooms reducer should GET_ROOMS_SUCCESS.';
     const aRoomsState = {
       loading: false,

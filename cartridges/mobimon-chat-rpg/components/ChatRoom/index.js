@@ -16,7 +16,7 @@ ChatRoom.propTypes = {
   userCharacter: PropTypes.object.isRequired,
 };
 
-const connectedChatRoom = connect((state) => ({
+const connectedChatRoom = connect(state => ({
   userName: state.user.name,
   userCharacter: state.character,
 }), {})(ChatRoom);

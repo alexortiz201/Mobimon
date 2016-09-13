@@ -13,15 +13,15 @@ const ChatRoom = createChatRoom(React);
 
 const defaultProps = {
   connect: () => {},
-  renderMessage: (message) => <div>{message}</div>,
-  sendMessage: (message) => <div>{message}</div>,
+  renderMessage: message => <div>{message}</div>,
+  sendMessage: message => <div>{message}</div>,
   userName: '',
   userCharacter: {},
   otherUsers: [],
 };
 
-test('ChatRoom', nest => {
-  nest.test('... should render', assert => {
+test('ChatRoom', (nest) => {
+  nest.test('... should render', (assert) => {
     const msg = '... should render ChatRoom.';
     const props = helpers.makeProps(defaultProps);
 
@@ -35,7 +35,7 @@ test('ChatRoom', nest => {
     assert.end();
   });
 
-  nest.test('... should render children', assert => {
+  nest.test('... should render children', (assert) => {
     const msg = '... should render children.';
     const props = helpers.makeProps(defaultProps);
 

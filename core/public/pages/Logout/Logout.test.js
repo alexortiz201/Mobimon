@@ -16,9 +16,9 @@ const defaultProps = {
   logout: () => {},
 };
 
-test('Logout', nest => {
+test('Logout', (nest) => {
   // Component
-  nest.test('... should render', assert => {
+  nest.test('... should render', (assert) => {
     const msg = 'Logout should render.';
     const props = helpers.makeProps(defaultProps);
 
@@ -32,7 +32,7 @@ test('Logout', nest => {
     assert.end();
   });
 
-  nest.test('... should render message', assert => {
+  nest.test('... should render message', (assert) => {
     const msg = 'Logout should render rerouting message.';
     const props = helpers.makeProps(defaultProps);
 
@@ -46,7 +46,7 @@ test('Logout', nest => {
     assert.end();
   });
 
-  nest.test('... should render message', assert => {
+  nest.test('... should render message', (assert) => {
     const msg = 'Logout should render good bye message.';
     const props = helpers.makeProps(
       defaultProps,

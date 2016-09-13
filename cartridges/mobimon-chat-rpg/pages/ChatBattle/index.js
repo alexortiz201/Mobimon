@@ -12,12 +12,13 @@ import './ChatBattle.less';
 
 const chatRPGGreeting = 'Welcome to your Doom!';
 
-const ChatBattle = (props) =>
+const ChatBattle = props =>
   <div className="chat-battle">
     <ChatRoom {...props}>
       <ChatMessages
         messages={props.messages}
         greeting={chatRPGGreeting} />
+      {/* <ChatControls {...props} /> */}
     </ChatRoom>
   </div>;
 
@@ -36,7 +37,7 @@ ChatBattle.propTypes = {
   messages: PropTypes.array,
 };
 
-const connectedChatBattle = withRouter(connect((state) => ({
+const connectedChatBattle = withRouter(connect(state => ({
   userName: state.user.name,
   userCharacter: state.character,
 }), {})(ChatBattle));

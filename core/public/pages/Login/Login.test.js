@@ -20,9 +20,9 @@ const defaultProps = {
   goToRoute: () => {},
 };
 
-test('Login', nest => {
+test('Login', (nest) => {
   // Component
-  nest.test('... should render', assert => {
+  nest.test('... should render', (assert) => {
     const msg = 'Login should render.';
     const props = helpers.makeProps(defaultProps);
 
@@ -36,7 +36,7 @@ test('Login', nest => {
     assert.end();
   });
 
-  nest.test('... should render form', assert => {
+  nest.test('... should render form', (assert) => {
     const msg = 'Login should render form.';
     const props = helpers.makeProps(defaultProps);
 
@@ -50,7 +50,7 @@ test('Login', nest => {
     assert.end();
   });
 
-  nest.test('... should render form text input', assert => {
+  nest.test('... should render form text input', (assert) => {
     const msg = 'Login should render form text input.';
     const props = helpers.makeProps(defaultProps);
 
@@ -65,7 +65,7 @@ test('Login', nest => {
     assert.end();
   });
 
-  nest.test('... should render text input with default text', assert => {
+  nest.test('... should render text input with default text', (assert) => {
     const msg = 'Login should render text input with default text.';
     const props = helpers.makeProps(defaultProps);
 
@@ -79,7 +79,7 @@ test('Login', nest => {
     assert.end();
   });
 
-  nest.test('... should render text input with user name', assert => {
+  nest.test('... should render text input with user name', (assert) => {
     const msg = 'Login should render user name as default text.';
     const loginState = { user: { name: 'Uncle Bob' } };
     const props = helpers.makeProps(defaultProps, loginState);
@@ -94,7 +94,7 @@ test('Login', nest => {
     assert.end();
   });
 
-  nest.test('... should render button', assert => {
+  nest.test('... should render button', (assert) => {
     const msg = 'Login should render button.';
     const props = helpers.makeProps(defaultProps);
 
@@ -108,7 +108,7 @@ test('Login', nest => {
     assert.end();
   });
 
-  nest.test('... should render button with text', assert => {
+  nest.test('... should render button with text', (assert) => {
     const msg = 'Login should render button with text.';
     const props = helpers.makeProps(defaultProps);
 

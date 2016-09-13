@@ -7,9 +7,9 @@ import {
 } from './user-actions';
 import user from './user-reducers';
 
-test('User', nest => {
+test('User', (nest) => {
   // Actions
-  nest.test('... should create a LOGIN action', assert => {
+  nest.test('... should create a LOGIN action', (assert) => {
     const msg = 'user action creator should create a LOGIN action.';
     const name = 'Alex';
 
@@ -28,7 +28,7 @@ test('User', nest => {
     assert.end();
   });
 
-  nest.test('... should create an LOGOUT action', assert => {
+  nest.test('... should create an LOGOUT action', (assert) => {
     const msg = 'user action creator should create a LOGOUT action.';
 
     const actual = userLogout();
@@ -43,7 +43,7 @@ test('User', nest => {
   });
 
   // Reducers
-  nest.test('... should return initial state.', assert => {
+  nest.test('... should return initial state.', (assert) => {
     const msg = 'user reducer should return initial state.';
     const actual = user(undefined, {});
 
@@ -58,7 +58,7 @@ test('User', nest => {
     assert.end();
   });
 
-  nest.test('... should return updated state.', assert => {
+  nest.test('... should return updated state.', (assert) => {
     const msg = 'user reducer should handle LOGIN.';
     const userState = {
       name: 'Alex',
@@ -79,7 +79,7 @@ test('User', nest => {
     assert.end();
   });
 
-  nest.test('... should return updated state.', assert => {
+  nest.test('... should return updated state.', (assert) => {
     const msg = 'user reducer should handle LOGOUT.';
 
     const actual = user(undefined, {

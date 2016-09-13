@@ -16,8 +16,8 @@ const defaultProps = {
   render: () => {},
 };
 
-test('Incubator', nest => {
-  nest.test('... should render', assert => {
+test('Incubator', (nest) => {
+  nest.test('... should render', (assert) => {
     const msg = '... should render incubator-container.';
     const props = helpers.makeProps(defaultProps);
 
@@ -31,7 +31,7 @@ test('Incubator', nest => {
     assert.end();
   });
 
-  nest.test('... should render', assert => {
+  nest.test('... should render', (assert) => {
     const msg = '... should render incubator with mobimon.';
     const character = {
       character: { name: 'Bilsner' },

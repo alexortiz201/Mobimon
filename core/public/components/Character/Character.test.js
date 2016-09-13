@@ -16,8 +16,8 @@ const defaultProps = {
   className: '',
 };
 
-test('Character', nest => {
-  nest.test('... should render component.', assert => {
+test('Character', (nest) => {
+  nest.test('... should render component.', (assert) => {
     const msg = 'Character rendered character component.';
     const props = helpers.makeProps(defaultProps);
 
@@ -31,7 +31,7 @@ test('Character', nest => {
     assert.end();
   });
 
-  nest.test('... should render a specific character.', assert => {
+  nest.test('... should render a specific character.', (assert) => {
     const msg = 'Character rendered a specific character.';
     const props = helpers.makeProps(defaultProps, {
       character: {

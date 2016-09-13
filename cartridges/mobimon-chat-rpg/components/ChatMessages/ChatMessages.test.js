@@ -24,8 +24,8 @@ const defaultProps = {
   renderMessages: () => <div className="speech-bubble" />,
 };
 
-test('ChatMessages', nest => {
-  nest.test('... should render component', assert => {
+test('ChatMessages', (nest) => {
+  nest.test('... should render component', (assert) => {
     const msg = '... should render ChatMessages.';
     const props = helpers.makeProps(defaultProps);
 
@@ -39,7 +39,7 @@ test('ChatMessages', nest => {
     assert.end();
   });
 
-  nest.test('... should render greeting', assert => {
+  nest.test('... should render greeting', (assert) => {
     const msg = '... should render greeting if there are no messages.';
     const props = helpers.makeProps(defaultProps);
 
@@ -53,7 +53,7 @@ test('ChatMessages', nest => {
     assert.end();
   });
 
-  nest.test('... should render list of messages container', assert => {
+  nest.test('... should render list of messages container', (assert) => {
     const msg = '... should rendered list of messages container.';
     const props = helpers.makeProps(defaultProps, {
       messages: [
@@ -71,7 +71,7 @@ test('ChatMessages', nest => {
     assert.end();
   });
 
-  nest.test('... should render message', assert => {
+  nest.test('... should render message', (assert) => {
     const msg = '... should rendered message.';
     const props = helpers.makeProps(defaultProps, {
       messages: [

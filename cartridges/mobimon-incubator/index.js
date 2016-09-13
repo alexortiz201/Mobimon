@@ -40,7 +40,7 @@ Incubator.propTypes = {
   render: PropTypes.func.isRequired,
 };
 
-export const connectedIncubator = withRouter(connect((state) => ({
+export const connectedIncubator = withRouter(connect(state => ({
   character: state.character,
 }), {})(Incubator));
 

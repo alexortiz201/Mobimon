@@ -18,8 +18,8 @@ const defaultProps = {
   renderCharacter: () => <div />,
 };
 
-test('Speech Bubble', nest => {
-  nest.test('... should render component', assert => {
+test('Speech Bubble', (nest) => {
+  nest.test('... should render component', (assert) => {
     const msg = '... should render Speech Bubble.';
     const props = helpers.makeProps(defaultProps);
 
@@ -33,7 +33,7 @@ test('Speech Bubble', nest => {
     assert.end();
   });
 
-  nest.test('... should render anonamouse', assert => {
+  nest.test('... should render anonamouse', (assert) => {
     const msg = '... should render anonamouse character div.';
     const props = helpers.makeProps(defaultProps, {
       renderCharacter: () => <div className='anonamouse' />,
@@ -49,7 +49,7 @@ test('Speech Bubble', nest => {
     assert.end();
   });
 
-  nest.test('... should user and message', assert => {
+  nest.test('... should user and message', (assert) => {
     const msg = '... should render user and message.';
     const props = helpers.makeProps(defaultProps, {
       userName: 'Frodo',

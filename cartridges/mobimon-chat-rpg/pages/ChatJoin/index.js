@@ -84,7 +84,7 @@ const renderRoomListContainer = (props) => {
   );
 };
 
-const ChatJoin = (props) =>
+const ChatJoin = props =>
   <div className="chat-join">
     <Login {...props} />
     { renderRoomListContainer(props) }
@@ -111,7 +111,7 @@ ChatJoin.propTypes = {
   rooms: PropTypes.array,
 };
 
-const connectedChatJoin = withRouter(connect((state) => ({
+const connectedChatJoin = withRouter(connect(state => ({
   userName: state.user.name,
   userCharacter: state.character,
   rooms: state.chatRPG.availableRooms.rooms,

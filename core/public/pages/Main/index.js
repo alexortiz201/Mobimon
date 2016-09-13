@@ -12,7 +12,7 @@ const Main = createMain(React);
 // eslint-disable-next-line no-unused-vars
 const Character = createCharacter(React);
 
-const goToLogin = (props) => props.router.replace('/login');
+const goToLogin = props => props.router.replace('/login');
 
 const renderTopBar = ({ user = {}, character = {} }) => {
   const name = character.name && character.name.toLowerCase();
@@ -45,7 +45,7 @@ Main.propTypes = {
   renderTopBar: PropTypes.func.isRequired,
 };
 
-const connectedMain = connect((state) => ({
+const connectedMain = connect(state => ({
   user: state.user,
   character: state.character,
 }), {})(Main);

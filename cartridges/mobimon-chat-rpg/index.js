@@ -17,7 +17,7 @@ import allReducers from './redux/';
  * from cartridges
  */
 const path = '/chat-rpg';
-const ChatRPG = (props) =>
+const ChatRPG = props =>
   <div className="chat-rpg">
     {props.children}
   </div>;
@@ -31,12 +31,12 @@ export const hasBattleKeyEval = (state, replace) => {
   replace(route);
 };
 
-export const connectedChatRPG = withRouter(connect((state) => ({
+export const connectedChatRPG = withRouter(connect(state => ({
   userName: state.user.name,
   userCharacter: state.character,
 }), {})(ChatRPG));
 
-export const Route = (store) =>
+export const Route = store =>
   <Route
     key={path}
     path={path}

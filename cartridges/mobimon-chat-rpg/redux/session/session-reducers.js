@@ -21,10 +21,9 @@ import {
 
 
 export function fetchFromFirebase(resource, successFn, failFn) {
-  debugger // eslint-disable-line
   return createDatabaseRef(resource)
     .once('value')
-    .then((FirebaseObj) => FirebaseObj.val())
+    .then(FirebaseObj => FirebaseObj.val())
     .then(successFn)
     .catch(failFn);
 }

@@ -26,7 +26,7 @@ localForage.config(localForageConfig);
  */
 const loadState = () =>
   localForage.getItems()
-    .then(state => {
+    .then((state) => {
       // return undef if there is no saved state found.
       if (!Object.keys(state).length) {
         return undefined;
@@ -49,14 +49,14 @@ const clearState = () =>
  * @param  {string} key   key string value
  * @return {Promise}
  */
-const getItem = (key) => localForage.getItem(key);
+const getItem = key => localForage.getItem(key);
 
 /**
  * get array of stored items
  * @param  {array<string>} keysArray   array of key string values
  * @return {Promise}  that resloves to object with key value pairs
  */
-const getItems = (keysArray) => localForage.getItems(keysArray);
+const getItems = keysArray => localForage.getItems(keysArray);
 
 /**
  * save single stored item
@@ -70,7 +70,7 @@ const setItem = (key, value) => localForage.setItem(key, value);
  * @param  {[type]} state [description]
  * @return {[type]}       [description]
  */
-const removeItem = (key) => localForage.removeItem(key);
+const removeItem = key => localForage.removeItem(key);
 
 // const getDBLength = () => localForage.length().then(numberOfKeys => numberOfKeys);
 // const getKeyNameById = (id) => localForage.key(id).then(keyName => keyName);

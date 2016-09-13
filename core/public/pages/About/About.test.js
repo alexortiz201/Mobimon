@@ -10,8 +10,8 @@ const render = reactDom.renderToStaticMarkup;
 // eslint-disable-next-line no-unused-vars
 const About = createAbout(React);
 
-test('About', nest => {
-  nest.test('... should render', assert => {
+test('About', (nest) => {
+  nest.test('... should render', (assert) => {
     const msg = 'About should render about.';
     const props = {};
 
@@ -25,7 +25,7 @@ test('About', nest => {
     assert.end();
   });
 
-  nest.test('... should render info', assert => {
+  nest.test('... should render info', (assert) => {
     const msg = 'About should render info.';
     const props = {
       resume,
@@ -41,7 +41,7 @@ test('About', nest => {
     assert.end();
   });
 
-  nest.test('... should render resume', assert => {
+  nest.test('... should render resume', (assert) => {
     const msg = 'About should render resume.';
     const props = {
       resume,
@@ -57,7 +57,7 @@ test('About', nest => {
     assert.end();
   });
 
-  nest.test('... should render logo image', assert => {
+  nest.test('... should render logo image', (assert) => {
     const msg = 'About should render logo image.';
     const props = {
       img: 'test.png',

@@ -7,8 +7,8 @@ import {
  * Need to find out what the best way is to set up tests
  * for offline storage
  */
-test('Storage', nest => {
-  nest.test('... should retrieve stored state', assert => {
+test('Storage', (nest) => {
+  nest.test('... should retrieve stored state', (assert) => {
     const msg = 'Storage retrieved undefined';
     const expected = undefined;
     let actual;

@@ -8,7 +8,7 @@ const SpeechBubble = createSpeechBubble(React);
 // eslint-disable-next-line no-unused-vars
 const Character = createCharacter(React);
 
-const renderCharacter = (character) =>
+const renderCharacter = character =>
   <Character character={character} />;
 
 SpeechBubble.defaultProps = {

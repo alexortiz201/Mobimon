@@ -64,7 +64,7 @@ export const createDatabaseRef = (infoPath) => {
   return connections[infoPath];
 };
 
-export const getDatabaseRef = (infoPath) => connections[infoPath];
+export const getDatabaseRef = infoPath => connections[infoPath];
 
 export default {
   getDBUrl,

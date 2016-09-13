@@ -31,6 +31,6 @@ const mergeStores = (savedState) => {
   return store;
 };
 
-const configureStore = (savedState) => mergeStores(savedState);
+const configureStore = savedState => mergeStores(savedState);
 
 export default configureStore;

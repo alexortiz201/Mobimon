@@ -8,7 +8,7 @@ import './ChatMessages.less';
 const ChatMessages = createChatMessages(React);
 
 const renderMessages = (messages) => {
-  const messagesJSX = messages.map((message) => <SpeechBubble
+  const messagesJSX = messages.map(message => <SpeechBubble
           {...message}
           key={uuid.v1()} />);
 
