@@ -7,6 +7,9 @@ const firebaseDatabaseUrl = 'https://www.gstatic.com/firebasejs/3.3.0/firebase-d
 const connections = {};
 
 let config = privateConfig;
+let loadPromise;
+let initPromise;
+
 config = config.firebase || {};
 
 export const getDBUrl = () => config.databaseURL;
@@ -14,25 +17,21 @@ export const getDBUrl = () => config.databaseURL;
 export const getApiKey = () => config.apiKey;
 
 export const init = () => {
-  let p;
-
-  if (p) {
-    return p;
+  if (initPromise) {
+    return initPromise;
   }
 
-  p = new Promise((resolve) => {
+  initPromise = new Promise((resolve) => {
     firebase.initializeApp(config);
     resolve();
   });
 
-  return p;
+  return initPromise;
 };
 
 export const load = () => {
-  let p;
-
-  if (p) {
-    return p;
+  if (loadPromise) {
+    return loadPromise;
   }
 
   const promiseArray = [];
@@ -47,9 +46,9 @@ export const load = () => {
 
   promiseArray.push(p1, p2);
 
-  p = Promise.all(promiseArray);
+  loadPromise = Promise.all(promiseArray);
 
-  return p;
+  return loadPromise;
 };
 
 /**
