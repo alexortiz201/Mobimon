@@ -3,7 +3,7 @@ import { install } from 'redux-loop';
 // import { apiMiddleware } from 'redux-api-middleware';
 // import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
-import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 import app from '../../redux/root-reducer';
 import { setItem } from '../storage/storage';
 
@@ -24,7 +24,7 @@ const mergeStores = (savedState) => {
   );
 
   // persist store updates
-  store.subscribe(throttle(() => {
+  store.subscribe(debounce(() => {
     setItem('state', store.getState());
   }, 1000));
 
