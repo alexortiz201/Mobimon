@@ -13,11 +13,12 @@ import { COLORS } from '../../../../core/shared/other';
 // eslint-disable-next-line no-unused-vars
 const Login = createLogin(React);
 
-const EXPIRE_TIMESTAMP = 300000; // 5 min , 60000 = 1 min
+// 300000 = 5 min ,  120000 = 2 min, 60000 = 1 min
+const EXPIRE_TIMESTAMP = 120000;
 let roomTimeStamp = 0;
 
 /**
- * Timestap for busting cached rooms every 5 min
+ * Timestap for busting cached rooms every 2 min
  * @param  {int} expMin  expire amount milli
  * @return {bool}
  */
@@ -28,18 +29,25 @@ const timeStampExpBool = (expMin = EXPIRE_TIMESTAMP) => {
 
 const handleSelection = (props, room) => {
   const name = room.name.toLowerCase().replace(/[^a-z0-9_]/g, '');
-  const update = {};
-
-  update[props.userName] = {
-    color: COLORS[Math.floor(Math.random() * 4)],
+  const update = {
+    players: {
+      [props.userName]: {
+        color: COLORS[Math.floor(Math.random() * 4)],
+      },
+    },
   };
 
-  // addBattle
-  props.selectRoom({
+  const newRoom = {
     ...room,
     name,
-  },
-  update);
+  };
+
+  props.selectRoom({
+    ...newRoom,
+  }, {
+    ...newRoom,
+    ...update,
+  });
 
   props.getPlayers(room.key);
 
@@ -63,27 +71,17 @@ const renderRoomListItem = (props, { key, name }) =>
     {name}
   </button>;
 
-/**
- * This decides whether or not to render list of rooms.
- * @param  {object} props
- * @return {boolean}       is it refreshing list.
- */
 const refreshRoomList = (props) => {
-  if (Object.keys(props.rooms).length || !timeStampExpBool()) {
-    return false;
-  }
-
   setUpFireBaseScripts()
     .then(() => {
       props.getRooms();
       roomTimeStamp = new Date(Date.now()).getTime();
     });
-
-  return true;
 };
 
 const renderRoomListContainer = (props) => {
-  if (refreshRoomList(props)) {
+  if (timeStampExpBool()) {
+    refreshRoomList(props);
     return null;
   }
 

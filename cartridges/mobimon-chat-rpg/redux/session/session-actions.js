@@ -43,8 +43,6 @@
 
 // // Add the user to the list of attendees on the
 // // game info.
-// export const JOIN_BATTLE = 'JOIN_BATTLE';
-
 // export function joinBattle(battleKey) {
 //   return function (dispatch, getState) {
 //     dispatch(addingBattle());
@@ -66,7 +64,6 @@
 //     });
 //   };
 // }
-// export const FETCH_BATTLES = 'FETCH_BATTLES';
 
 
 export const GET_ROOMS = 'GET_ROOMS';

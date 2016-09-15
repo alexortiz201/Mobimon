@@ -48,7 +48,7 @@ export function room(state = {
           loading: true,
         },
         Effects.promise(updateFirebase,
-          `chatrpg/games/${action.room.key}/players`, action.updateObj,
+          `chatrpg/games/${action.room.key}`, action.updateObj,
           selectRoomSuccess,
           selectRoomFailure,
         )
@@ -156,24 +156,6 @@ export function players(state = {
 // function battle(state = initialState, action) {
 //   let payload = action.payload;
 //   switch(action.type) {
-//   // case SELECT_BATTLE:
-//   //   return {
-//   //     ...state,
-//   //     currentBattle: payload.currentBattle
-//   //   };
-
-//   case REQUEST_BATTLES:
-//     return {
-//       ...state,
-//       requestingBattles: true
-//     };
-
-//   case RECEIVE_BATTLES:
-//     return {
-//       ...state,
-//       battles: payload.battles
-//     };
-
 //   case JOINING_BATTLE:
 //     return {
 //       ...state,
