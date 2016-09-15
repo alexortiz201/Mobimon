@@ -11,6 +11,11 @@ import {
   SELECT_ROOM_FAILURE,
   selectRoomSuccess,
   selectRoomFailure,
+  LEAVE_ROOM,
+  LEAVE_ROOM_SUCCESS,
+  LEAVE_ROOM_FAILURE,
+  leaveRoomSuccess,
+  leaveRoomFailure,
   GET_PLAYERS,
   GET_PLAYERS_SUCCESS,
   GET_PLAYERS_FAILURE,
@@ -61,6 +66,34 @@ export function room(state = {
       };
 
     case SELECT_ROOM_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+
+
+    case LEAVE_ROOM:
+      return loop(
+        {
+          ...state,
+          loading: true,
+        },
+        Effects.promise(updateFirebase,
+          `chatrpg/games/${action.room.key}`, action.updateObj,
+          leaveRoomSuccess,
+          leaveRoomFailure,
+        )
+      );
+
+    case LEAVE_ROOM_SUCCESS:
+      return {
+        ...state,
+        ...{ key: '', name: '' },
+        loading: false,
+      };
+
+    case LEAVE_ROOM_FAILURE:
       return {
         ...state,
         loading: false,
@@ -136,43 +169,6 @@ export function players(state = {
       return state;
   }
 }
-
-// //////////////////////////////////////////////
-// import {
-//   // SELECT_BATTLE,
-//   REQUEST_BATTLES,
-//   RECEIVE_BATTLES,
-//   JOINING_BATTLE,
-//   JOIN_SUCCESSFUL,
-// } from '../actions/battle';
-
-// const initialState = {
-//   currentBattleKey: '',
-//   currentBattleSession: {
-//     attendees: []
-//   }
-// };
-
-// function battle(state = initialState, action) {
-//   let payload = action.payload;
-//   switch(action.type) {
-//   case JOINING_BATTLE:
-//     return {
-//       ...state,
-//       joiningBattle: payload.joiningBattle
-//     };
-
-//   case JOIN_SUCCESSFUL:
-//     return {
-//       ...state,
-//       currentBattleKey: payload.currentBattleKey,
-//       currentBattleSession: payload.currentBattleSession,
-//       joined: true
-//     };
-//   default:
-//     return state;
-//   }
-// }
 
 export default {
   room,

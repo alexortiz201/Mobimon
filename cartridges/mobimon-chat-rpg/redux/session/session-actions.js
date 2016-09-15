@@ -115,6 +115,31 @@ export function selectRoomFailure(error) {
 }
 
 
+export const LEAVE_ROOM = 'LEAVE_ROOM';
+export function leaveRoom(room, updateObj) {
+  return {
+    type: LEAVE_ROOM,
+    room,
+    updateObj,
+  };
+}
+
+export const LEAVE_ROOM_SUCCESS = 'LEAVE_ROOM_SUCCESS';
+export function leaveRoomSuccess() {
+  return {
+    type: LEAVE_ROOM_SUCCESS,
+  };
+}
+
+export const LEAVE_ROOM_FAILURE = 'LEAVE_ROOM_FAILURE';
+export function leaveRoomFailure(error) {
+  return {
+    type: LEAVE_ROOM_FAILURE,
+    error,
+  };
+}
+
+
 export const GET_PLAYERS = 'GET_PLAYERS';
 export function getPlayers(key) {
   return {

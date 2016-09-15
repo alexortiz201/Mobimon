@@ -13,6 +13,12 @@ import {
   selectRoom,
   selectRoomSuccess,
   selectRoomFailure,
+  LEAVE_ROOM,
+  LEAVE_ROOM_SUCCESS,
+  LEAVE_ROOM_FAILURE,
+  leaveRoom,
+  leaveRoomSuccess,
+  leaveRoomFailure,
   GET_PLAYERS,
   GET_PLAYERS_SUCCESS,
   GET_PLAYERS_FAILURE,
@@ -91,6 +97,54 @@ test('Session - Room', (nest) => {
     assert.end();
   });
 
+  nest.test('... should create a LEAVE_ROOM action', (assert) => {
+    const msg = 'session action creator should create a LEAVE_ROOM action.';
+    const roomState = {
+      key: '123',
+      name: '123',
+    };
+
+    const actual = leaveRoom(roomState, {});
+
+    const expected = {
+      type: LEAVE_ROOM,
+      room: {
+        key: '123',
+        name: '123',
+      },
+      updateObj: {},
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should create a LEAVE_ROOM_SUCCESS action', (assert) => {
+    const msg = 'session action creator should create a LEAVE_ROOM_SUCCESS action.';
+
+    const actual = leaveRoomSuccess();
+    const expected = {
+      type: LEAVE_ROOM_SUCCESS,
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should create a LEAVE_ROOM_FAILURE action', (assert) => {
+    const msg = 'session action creator should create a LEAVE_ROOM_FAILURE action.';
+    const error = 'LEAVE_ROOM_FAILURE error message'
+
+    const actual = leaveRoomFailure(error);
+    const expected = {
+      type: LEAVE_ROOM_FAILURE,
+      error,
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
   // Reducers
   nest.test('... reducer should return initial state.', (assert) => {
     const msg = 'room reducer should return initial state.';
@@ -117,11 +171,82 @@ test('Session - Room', (nest) => {
     const expected = loop(
       { loading: true, key: '123', name: '123' },
       Effects.promise(updateFirebase,
-        `chatrpg/games/${roomState.key}/players`, updateObj,
+        `chatrpg/games/${roomState.key}`, updateObj,
         selectRoomSuccess,
         selectRoomFailure,
       ),
     );
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... reducer should handle LEAVE_ROOM.', (assert) => {
+    const msg = 'room reducer should LEAVE_ROOM.';
+    const updateObj = {};
+    const roomState = {
+      key: '123',
+      name: '123',
+    };
+    const actual = room(roomState, {
+      type: LEAVE_ROOM,
+      room: { ...roomState },
+      updateObj,
+    });
+
+    const expected = loop(
+      { loading: true, key: '123', name: '123' },
+      Effects.promise(updateFirebase,
+        `chatrpg/games/${roomState.key}`, updateObj,
+        leaveRoomSuccess,
+        leaveRoomFailure,
+      ),
+    );
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... reducer should handle LEAVE_ROOM_SUCCESS.', (assert) => {
+    const msg = 'room reducer should LEAVE_ROOM_SUCCESS.';
+    const updateObj = {};
+    const roomState = {
+      key: '123',
+      name: '123',
+    };
+    const actual = room(roomState, {
+      type: LEAVE_ROOM_SUCCESS,
+      ...roomState,
+    });
+
+    const expected = {
+        ...roomState,
+        ...{ key: '', name: '', },
+        loading: false,
+      };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... reducer should handle LEAVE_ROOM_FAILURE.', (assert) => {
+    const msg = 'room reducer should LEAVE_ROOM_FAILURE.';
+    const updateObj = {};
+    const error = 'LEAVE_ROOM_FAILURE error';
+    const roomState = {
+      key: '123',
+      name: '123',
+    };
+    const actual = room(roomState, {
+      type: LEAVE_ROOM_FAILURE,
+      error,
+    });
+
+    const expected = {
+        ...roomState,
+        loading: false,
+        error,
+      };
 
     assert.deepEqual(actual, expected, msg);
     assert.end();

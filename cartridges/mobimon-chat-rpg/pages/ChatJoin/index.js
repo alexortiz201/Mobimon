@@ -2,11 +2,12 @@
 import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import uuid from 'node-uuid';
 import './ChatJoin.less';
 
 import { load, init } from '../../services/firebase/firebase.service';
 import createLogin from '../../../../core/public/pages/Login/Login.js';
-import { selectRoom, getRooms, getPlayers } from '../../redux/session/session-actions';
+import { selectRoom, leaveRoom, getRooms, getPlayers } from '../../redux/session/session-actions';
 
 import { COLORS } from '../../../../core/shared/other';
 
@@ -31,6 +32,7 @@ const handleSelection = (props, room) => {
   const name = room.name.toLowerCase().replace(/[^a-z0-9_]/g, '');
   const update = {
     players: {
+      ...props.players,
       [props.userName]: {
         color: COLORS[Math.floor(Math.random() * 4)],
       },
@@ -57,7 +59,7 @@ const handleSelection = (props, room) => {
 const onSubmit = (e, props, inputNode) => {
   e.preventDefault();
   const val = inputNode.value;
-  handleSelection(props, { key: val, name: val });
+  handleSelection(props, { key: uuid.v4(), name: val });
 };
 
 const setUpFireBaseScripts = () => load().then(init);
@@ -82,6 +84,9 @@ const refreshRoomList = (props) => {
 const renderRoomListContainer = (props) => {
   if (timeStampExpBool()) {
     refreshRoomList(props);
+  }
+
+  if (!Object.keys(props.rooms).length) {
     return null;
   }
 
@@ -127,8 +132,10 @@ const connectedChatJoin = withRouter(connect(state => ({
   userName: state.user.name,
   userCharacter: state.character,
   rooms: state.chatRPG.availableRooms.rooms,
+  players: state.chatRPG.players.available,
 }), {
   selectRoom,
+  leaveRoom,
   getRooms,
   getPlayers,
 })(ChatJoin));
