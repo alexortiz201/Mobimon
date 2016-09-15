@@ -14,7 +14,6 @@ import {
   GET_PLAYERS,
   GET_PLAYERS_SUCCESS,
   GET_PLAYERS_FAILURE,
-  // getPlayers,
   getPlayersSuccess,
   getPlayersFailure,
 } from './session-actions';
@@ -39,7 +38,6 @@ export function updateFirebase(resource, updateObj, successFn, failFn) {
 export function room(state = {
   key: '',
   name: '',
-  players: {},
 }, action) {
   switch (action.type) {
     case SELECT_ROOM:
@@ -69,6 +67,48 @@ export function room(state = {
         error: action.error,
       };
 
+    default:
+      return state;
+  }
+}
+
+export function availableRooms(state = {
+  loading: false,
+  rooms: {},
+}, action) {
+  switch (action.type) {
+    case GET_ROOMS:
+      return loop(
+        { ...state, loading: true },
+        Effects.promise(fetchFromFirebase, 'chatrpg/games',
+          getRoomsSuccess,
+          getRoomsFailure,
+        ),
+      );
+
+    case GET_ROOMS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        rooms: { ...action.rooms },
+      };
+
+    case GET_ROOMS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+
+    default:
+      return state;
+  }
+}
+
+export function players(state = {
+  players: {},
+}, action) {
+  switch (action.type) {
     case GET_PLAYERS:
       return loop(
         { ...state, loading: true },
@@ -89,39 +129,6 @@ export function room(state = {
       };
 
     case GET_PLAYERS_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
-
-    default:
-      return state;
-  }
-}
-
-export function availableRooms(state = {
-  loading: false,
-  rooms: [],
-}, action) {
-  switch (action.type) {
-    case GET_ROOMS:
-      return loop(
-        { ...state, loading: true },
-        Effects.promise(fetchFromFirebase, 'chatrpg/games',
-          getRoomsSuccess,
-          getRoomsFailure,
-        ),
-      );
-
-    case GET_ROOMS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        rooms: [...action.rooms],
-      };
-
-    case GET_ROOMS_FAILURE:
       return {
         ...state,
         loading: false,
@@ -190,5 +197,6 @@ export function availableRooms(state = {
 
 export default {
   room,
+  players,
   availableRooms,
 };

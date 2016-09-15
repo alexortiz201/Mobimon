@@ -33,7 +33,7 @@ const initialRoomState = {
 
 const initialAvailableRoomsState = {
   loading: false,
-  rooms: [],
+  rooms: {},
 };
 
 test('Session', (nest) => {
@@ -64,13 +64,17 @@ test('Session', (nest) => {
 
   nest.test('... should create a GET_ROOMS_SUCCESS action', (assert) => {
     const msg = 'session action creator should create a GET_ROOMS_SUCCESS action.';
-    const roomsState = [{ name: '123' }];
+    const roomsState = {
+      '123': { name: '123' }
+    };
 
     const actual = getRoomsSuccess(roomsState);
 
     const expected = {
       type: GET_ROOMS_SUCCESS,
-      rooms: [{ name: '123' }],
+      rooms: {
+        '123': { name: '123' },
+      },
     };
 
     assert.deepEqual(actual, expected, msg);
@@ -130,7 +134,7 @@ test('Session', (nest) => {
     });
 
     const expected = loop(
-      { loading: true, rooms: [] },
+      { loading: true, rooms: {} },
       Effects.promise(fetchFromFirebase, 'chatrpg/games',
         getRoomsSuccess,
         getRoomsFailure,
@@ -145,11 +149,15 @@ test('Session', (nest) => {
     const msg = 'availableRooms reducer should GET_ROOMS_SUCCESS.';
     const aRoomsState = {
       loading: false,
-      rooms: [{ name: '123' }],
+      rooms: {
+        '123' : { name: '123' },
+      },
     };
     const actual = availableRooms(undefined, {
       type: GET_ROOMS_SUCCESS,
-      rooms: [{ name: '123' }],
+      rooms: {
+        '123' : { name: '123' },
+      },
     });
 
     const expected = aRoomsState;

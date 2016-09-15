@@ -64,11 +64,12 @@ const renderRoomListItem = (props, { key, name }) =>
   </button>;
 
 const renderRoomListContainer = (props) => {
-  if (!props.rooms.length || timeStampExpBool()) {
-    setUpFireBaseScripts().then(() => {
-      props.getRooms();
-      roomTimeStamp = new Date(Date.now()).getTime();
-    });
+  if (!Object.keys(props.rooms).length || timeStampExpBool()) {
+    setUpFireBaseScripts()
+      .then(() => {
+        props.getRooms();
+        roomTimeStamp = new Date(Date.now()).getTime();
+      });
 
     return null;
   }
@@ -76,8 +77,8 @@ const renderRoomListContainer = (props) => {
   return (
     <div className="game-list-container">
       <h3 className="game-list-header">Or Select a Battle to Join</h3>
-      { props.rooms.map((room, index) => {
-        room.key = index; // eslint-disable-line
+      { Object.keys(props.rooms).map((key) => {
+        const room = props.rooms[key];
         return renderRoomListItem(props, room);
       }) }
     </div>
@@ -96,7 +97,7 @@ ChatJoin.defaultProps = {
   buttonText: 'Create Room',
   autoFocus: false,
   inputValue: '',
-  rooms: [],
+  rooms: {},
   onSubmit,
 };
 
@@ -108,7 +109,7 @@ ChatJoin.propTypes = {
   userLogin: PropTypes.func,
   history: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  rooms: PropTypes.array,
+  rooms: PropTypes.object,
 };
 
 const connectedChatJoin = withRouter(connect(state => ({
