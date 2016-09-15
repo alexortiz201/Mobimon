@@ -127,10 +127,10 @@ export function getPlayers(key) {
 }
 
 export const GET_PLAYERS_SUCCESS = 'GET_PLAYERS_SUCCESS';
-export function getPlayersSuccess(players) {
+export function getPlayersSuccess(available) {
   return {
     type: GET_PLAYERS_SUCCESS,
-    players,
+    available,
   };
 }
 

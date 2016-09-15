@@ -73,7 +73,6 @@ export function room(state = {
 }
 
 export function availableRooms(state = {
-  loading: false,
   rooms: {},
 }, action) {
   switch (action.type) {
@@ -106,7 +105,7 @@ export function availableRooms(state = {
 }
 
 export function players(state = {
-  players: {},
+  available: {},
 }, action) {
   switch (action.type) {
     case GET_PLAYERS:
@@ -123,9 +122,7 @@ export function players(state = {
       return {
         ...state,
         loading: false,
-        players: {
-          ...action.players,
-        },
+        available: { ...action.available },
       };
 
     case GET_PLAYERS_FAILURE:

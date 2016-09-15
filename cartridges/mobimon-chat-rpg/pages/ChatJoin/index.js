@@ -17,7 +17,7 @@ const EXPIRE_TIMESTAMP = 300000; // 5 min , 60000 = 1 min
 let roomTimeStamp = 0;
 
 /**
- * Timestap for busting cached rooms every five min
+ * Timestap for busting cached rooms every 5 min
  * @param  {int} expMin  expire amount milli
  * @return {bool}
  */
@@ -63,14 +63,27 @@ const renderRoomListItem = (props, { key, name }) =>
     {name}
   </button>;
 
-const renderRoomListContainer = (props) => {
-  if (!Object.keys(props.rooms).length || timeStampExpBool()) {
-    setUpFireBaseScripts()
-      .then(() => {
-        props.getRooms();
-        roomTimeStamp = new Date(Date.now()).getTime();
-      });
+/**
+ * This decides whether or not to render list of rooms.
+ * @param  {object} props
+ * @return {boolean}       is it refreshing list.
+ */
+const refreshRoomList = (props) => {
+  if (Object.keys(props.rooms).length || !timeStampExpBool()) {
+    return false;
+  }
 
+  setUpFireBaseScripts()
+    .then(() => {
+      props.getRooms();
+      roomTimeStamp = new Date(Date.now()).getTime();
+    });
+
+  return true;
+};
+
+const renderRoomListContainer = (props) => {
+  if (refreshRoomList(props)) {
     return null;
   }
 

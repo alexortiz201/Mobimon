@@ -3,45 +3,49 @@ import { Effects, loop } from 'redux-loop';
 import {
   GET_ROOMS,
   GET_ROOMS_SUCCESS,
-  // GET_ROOMS_FAILURE,
+  GET_ROOMS_FAILURE,
+  getRooms,
   getRoomsSuccess,
   getRoomsFailure,
   SELECT_ROOM,
-  // SELECT_ROOM_SUCCESS,
-  // SELECT_ROOM_FAILURE,
+  SELECT_ROOM_SUCCESS,
+  SELECT_ROOM_FAILURE,
   selectRoom,
   selectRoomSuccess,
   selectRoomFailure,
-  // GET_PLAYERS,
-  // GET_PLAYERS_SUCCESS,
-  // GET_PLAYERS_FAILURE,
-  // getPlayers,
-  // getPlayersSuccess,
-  // getPlayersFailure,
+  GET_PLAYERS,
+  GET_PLAYERS_SUCCESS,
+  GET_PLAYERS_FAILURE,
+  getPlayers,
+  getPlayersSuccess,
+  getPlayersFailure,
 } from './session-actions';
 import {
   room,
+  players,
   availableRooms,
   fetchFromFirebase,
-  updateFirebase } from './session-reducers';
+  updateFirebase
+} from './session-reducers';
 
 const initialRoomState = {
   key: '',
   name: '',
-  players: {},
+};
+
+const initialPlayersState = {
+  available: {},
 };
 
 const initialAvailableRoomsState = {
-  loading: false,
   rooms: {},
 };
 
-test('Session', (nest) => {
+test('Session - Room', (nest) => {
   // Actions
   nest.test('... should create a SELECT_ROOM action', (assert) => {
     const msg = 'session action creator should create a SELECT_ROOM action.';
     const roomState = {
-      index: '1',
       key: '123',
       name: '123',
     };
@@ -51,7 +55,6 @@ test('Session', (nest) => {
     const expected = {
       type: SELECT_ROOM,
       room: {
-        index: '1',
         key: '123',
         name: '123',
       },
@@ -62,19 +65,26 @@ test('Session', (nest) => {
     assert.end();
   });
 
-  nest.test('... should create a GET_ROOMS_SUCCESS action', (assert) => {
-    const msg = 'session action creator should create a GET_ROOMS_SUCCESS action.';
-    const roomsState = {
-      '123': { name: '123' }
+  nest.test('... should create a SELECT_ROOM_SUCCESS action', (assert) => {
+    const msg = 'session action creator should create a SELECT_ROOM_SUCCESS action.';
+
+    const actual = selectRoomSuccess();
+    const expected = {
+      type: SELECT_ROOM_SUCCESS,
     };
 
-    const actual = getRoomsSuccess(roomsState);
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
 
+  nest.test('... should create a SELECT_ROOM_FAILURE action', (assert) => {
+    const msg = 'session action creator should create a SELECT_ROOM_FAILURE action.';
+    const error = 'SELECT_ROOM_FAILURE error message'
+
+    const actual = selectRoomFailure(error);
     const expected = {
-      type: GET_ROOMS_SUCCESS,
-      rooms: {
-        '123': { name: '123' },
-      },
+      type: SELECT_ROOM_FAILURE,
+      error,
     };
 
     assert.deepEqual(actual, expected, msg);
@@ -97,7 +107,6 @@ test('Session', (nest) => {
     const roomState = {
       key: '123',
       name: '123',
-      players: {},
     };
     const actual = room(undefined, {
       type: SELECT_ROOM,
@@ -106,7 +115,7 @@ test('Session', (nest) => {
     });
 
     const expected = loop(
-      { loading: true, key: '123', name: '123', players: {} },
+      { loading: true, key: '123', name: '123' },
       Effects.promise(updateFirebase,
         `chatrpg/games/${roomState.key}/players`, updateObj,
         selectRoomSuccess,
@@ -117,7 +126,51 @@ test('Session', (nest) => {
     assert.deepEqual(actual, expected, msg);
     assert.end();
   });
+});
 
+test('Session - AvailableRooms', (nest) => {
+  // Actions
+  nest.test('... should create a GET_ROOMS action', (assert) => {
+    const msg = 'session action creator should create a GET_ROOMS action.';
+    const actual = getRooms();
+    const expected = {
+      type: GET_ROOMS,
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should create a GET_ROOMS_SUCCESS action', (assert) => {
+    const msg = 'session action creator should create a GET_ROOMS_SUCCESS action.';
+    const roomsState = {
+      '123': { name: '123' }
+    };
+
+    const actual = getRoomsSuccess(roomsState);
+    const expected = {
+      type: GET_ROOMS_SUCCESS,
+      rooms: { ...roomsState, },
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should create a GET_ROOMS_FAILURE action', (assert) => {
+    const msg = 'session action creator should create a GET_ROOMS_FAILURE action.';
+    const error = 'GET_ROOMS_FAILURE Error';
+    const actual = getRoomsFailure(error);
+    const expected = {
+      type: GET_ROOMS_FAILURE,
+      error,
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  // Reducers
   nest.test('... reducer should return initial state.', (assert) => {
     const msg = 'availableRooms reducer should return initial state.';
     const actual = availableRooms(undefined, {});
@@ -161,6 +214,105 @@ test('Session', (nest) => {
     });
 
     const expected = aRoomsState;
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+});
+
+test('Session - Players', (nest) => {
+  // Actions
+  nest.test('... should create a GET_PLAYERS action', (assert) => {
+    const msg = 'session action creator should create a GET_PLAYERS action.';
+    const playerState = {};
+    const actual = getPlayers('123');
+    const expected = {
+      type: GET_PLAYERS,
+      key: '123',
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should create a GET_PLAYERS_SUCCESS action', (assert) => {
+    const msg = 'session action creator should create a GET_PLAYERS_SUCCESS action.';
+    const playersState = {
+      Case: {
+        color: 'purple',
+      }
+    };
+
+    const actual = getPlayersSuccess(playersState);
+    const expected = {
+      type: GET_PLAYERS_SUCCESS,
+      available: playersState,
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should create a GET_PLAYERS_FAILURE action', (assert) => {
+    const msg = 'session action creator should create a GET_PLAYERS_FAILURE action.';
+    const errorMsg = 'GET_PLAYERS_FAILURE Error';
+
+    const actual = getPlayersFailure(errorMsg);
+    const expected = {
+      type: GET_PLAYERS_FAILURE,
+      error: errorMsg,
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  // Reducers
+  nest.test('... reducer should return initial state.', (assert) => {
+    const msg = 'players reducer should return initial state.';
+    const actual = players(undefined, {});
+    const expected = initialPlayersState;
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... reducer should handle GET_PLAYERS.', (assert) => {
+    const msg = 'players reducer should GET_PLAYERS.';
+    const actual = players(undefined, {
+      type: GET_PLAYERS,
+      key: '123',
+    });
+
+    const expected = loop(
+      { loading: true, available: {} },
+      Effects.promise(fetchFromFirebase,
+        `chatrpg/games/123/players`,
+        getPlayersSuccess,
+        getPlayersFailure,
+      ),
+    );
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... reducer should handle GET_PLAYERS_SUCCESS.', (assert) => {
+    const msg = 'players reducer should GET_PLAYERS_SUCCESS.';
+    const playersState = {
+      Case: {
+        color: 'purple'
+      },
+    };
+    const actual = players(undefined, {
+      type: GET_PLAYERS_SUCCESS,
+      available: { ...playersState },
+    });
+
+    const expected = {
+      loading: false,
+      available: { ...playersState },
+    };
 
     assert.deepEqual(actual, expected, msg);
     assert.end();
