@@ -53,6 +53,7 @@ export const connectedChatRPG = withRouter(connect(state => ({
   userCharacter: state.character,
 }), {})(ChatRPG));
 
+// onEnter={createOnLeave(store, triggerRoomLeft)}
 export const Route = store =>
   <Route
     key={path}
@@ -64,8 +65,7 @@ export const Route = store =>
     <Route path="battle" onEnter={createOnEnter(store, requireBattleKeyEval)} />
     <Route
       path="battle/:battleKey"
-      component={ChatBattle}
-      onEnter={createOnLeave(store, triggerRoomLeft)} />
+      component={ChatBattle} />
   </Route>;
 
 export default {
