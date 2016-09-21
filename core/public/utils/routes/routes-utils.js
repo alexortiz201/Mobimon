@@ -5,8 +5,18 @@
  * @param  {Function} evalFn      callback
  * @return {Function}        Function that takes state
  */
-export const createRequire = (store, evalFn) =>
-  (nextState, replace) => evalFn(store.getState(), replace);
+export const createOnEnter = (store, evalFn) =>
+  (nextState, replace) => evalFn(store, replace);
+
+/**
+ * Captures store in closure to later use on leave, and
+ * inverts function evaluation.
+ * @param  {Object} store  [description]
+ * @param  {Function} evalFn      callback
+ * @return {Function}        Function that takes state
+ */
+export const createOnLeave = (store, evalFn) =>
+  () => evalFn(store);
 
 
 /**
@@ -14,7 +24,8 @@ export const createRequire = (store, evalFn) =>
  */
 
 /** Evalute user is signed in */
-export const loggedInEval = (state, replace) => {
+export const loggedInEval = (store, replace) => {
+  const state = store.getState();
   const loggedIn = state.user && state.user.loggedIn;
 
   if (!loggedIn) {
@@ -22,7 +33,8 @@ export const loggedInEval = (state, replace) => {
   }
 };
 
-export const characterChoosenEval = (state, replace) => {
+export const characterChoosenEval = (store, replace) => {
+  const state = store.getState();
   const charChosen = state.character && state.character.name;
 
   if (!charChosen) {
@@ -31,7 +43,8 @@ export const characterChoosenEval = (state, replace) => {
 };
 
 export default {
-  createRequire,
+  createOnEnter,
+  createOnLeave,
   loggedInEval,
   characterChoosenEval,
 };

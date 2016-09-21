@@ -1,71 +1,3 @@
-
-// export const ADDING_BATTLE = 'ADDING_BATTLE';
-// export function addingBattle() {
-//   return {
-//     type: ADDING_BATTLE,
-//     payload: {
-//       addingBattle: true
-//     }
-//   };
-// }
-
-// export const ADD_BATTLE_SUCCESSFUL = 'ADD_BATTLE_SUCCESSFUL';
-
-// export function addBattleSuccessful(battle) {
-//   return {
-//     type: ADD_BATTLE_SUCCESSFUL,
-//     payload: battle
-//   };
-// }
-
-// export function addBattle(battle) {
-//   return function(dispatch) {
-//     dispatch(addingBattle());
-
-//     let newBattle = {};
-//     newBattle[battle.battleKey] = {
-//       name: battle.battleName
-//     };
-
-//     let battlesRef = getGamesRef();
-//     battlesRef.update(newBattle);
-
-//     battlesRef.once('value', (battles) => {
-//       if(battles.val()) {
-//         // Once we have the value, send the battlekey and the battle objectA
-//         dispatch(addBattleSuccessful());
-//         dispatch(joinBattle(battle.battleKey));
-//       }
-//     });
-//   };
-// }
-
-
-// // Add the user to the list of attendees on the
-// // game info.
-// export function joinBattle(battleKey) {
-//   return function (dispatch, getState) {
-//     dispatch(addingBattle());
-
-//     let battleRef = getGamesRef().child(`${battleKey}`),
-//       currentUserName = getState().login.userName;
-
-//     // Add the current user to the list of attendees on the game in Firebase.
-//     battleRef.child('attendees').update({
-//       [currentUserName]: {
-//         color: COLORS[Math.floor(Math.random() * 4)]
-//       }
-//     });
-//     battleRef.on('value', (battle) => {
-//       if(battle.val()) {
-//         // Once we have the value, send the battlekey and the battle objectA
-//         dispatch(joinSuccessful(battleKey, battle.val()));
-//       }
-//     });
-//   };
-// }
-
-
 export const GET_ROOMS = 'GET_ROOMS';
 export function getRooms() {
   return {
@@ -89,7 +21,7 @@ export function getRoomsFailure(error) {
   };
 }
 
-
+// This also creates a room if non-existing.
 export const SELECT_ROOM = 'SELECT_ROOM';
 export function selectRoom(room, updateObj) {
   return {
@@ -114,28 +46,12 @@ export function selectRoomFailure(error) {
   };
 }
 
-
 export const LEAVE_ROOM = 'LEAVE_ROOM';
-export function leaveRoom(room, updateObj) {
+export function leaveRoom(room, userName) {
   return {
     type: LEAVE_ROOM,
     room,
-    updateObj,
-  };
-}
-
-export const LEAVE_ROOM_SUCCESS = 'LEAVE_ROOM_SUCCESS';
-export function leaveRoomSuccess() {
-  return {
-    type: LEAVE_ROOM_SUCCESS,
-  };
-}
-
-export const LEAVE_ROOM_FAILURE = 'LEAVE_ROOM_FAILURE';
-export function leaveRoomFailure(error) {
-  return {
-    type: LEAVE_ROOM_FAILURE,
-    error,
+    userName,
   };
 }
 
@@ -160,6 +76,31 @@ export const GET_PLAYERS_FAILURE = 'GET_PLAYERS_FAILURE';
 export function getPlayersFailure(error) {
   return {
     type: GET_PLAYERS_FAILURE,
+    error,
+  };
+}
+
+export const REMOVE_PLAYERS = 'REMOVE_PLAYERS';
+export function removePlayers(roomKey, playerNames = []) {
+  return {
+    type: REMOVE_PLAYERS,
+    roomKey,
+    playerNames,
+  };
+}
+
+export const REMOVE_PLAYERS_SUCCESS = 'REMOVE_PLAYERS_SUCCESS';
+export function removePlayersSuccess(available) {
+  return {
+    type: REMOVE_PLAYERS_SUCCESS,
+    available,
+  };
+}
+
+export const REMOVE_PLAYERS_FAILURE = 'REMOVE_PLAYERS_FAILURE';
+export function removePlayersFailure(error) {
+  return {
+    type: REMOVE_PLAYERS_FAILURE,
     error,
   };
 }

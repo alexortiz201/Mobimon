@@ -25,7 +25,7 @@ let roomTimeStamp = 0;
  */
 const timeStampExpBool = (expMin = EXPIRE_TIMESTAMP) => {
   const currTimeStamp = new Date(Date.now()).getTime();
-  return expMin <= currTimeStamp - roomTimeStamp;
+  return expMin <= (currTimeStamp - roomTimeStamp);
 };
 
 const handleSelection = (props, room) => {
@@ -50,8 +50,6 @@ const handleSelection = (props, room) => {
     ...newRoom,
     ...update,
   });
-
-  props.getPlayers(room.key);
 
   props.router.replace(`/chat-rpg/battle/${room.key}`);
 };

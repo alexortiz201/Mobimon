@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 
 import {
-  createRequire,
+  createOnEnter,
   loggedInEval,
   characterChoosenEval,
 } from '../../utils/routes/routes-utils';
@@ -22,8 +22,8 @@ const Root = ({ store }) => {
   // Route is a React object needs to be capitalized
   // eslint-disable-next-line new-cap
   const cartridgesRoutes = cartridges.map(c => c.Route(store));
-  const requireLogin = createRequire(store, loggedInEval);
-  const requireCharacter = createRequire(store, characterChoosenEval);
+  const requireLogin = createOnEnter(store, loggedInEval);
+  const requireCharacter = createOnEnter(store, characterChoosenEval);
 
   return (
     <Provider store={store}>

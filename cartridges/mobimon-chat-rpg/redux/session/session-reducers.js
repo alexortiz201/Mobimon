@@ -12,15 +12,18 @@ import {
   selectRoomSuccess,
   selectRoomFailure,
   LEAVE_ROOM,
-  LEAVE_ROOM_SUCCESS,
-  LEAVE_ROOM_FAILURE,
-  leaveRoomSuccess,
-  leaveRoomFailure,
   GET_PLAYERS,
   GET_PLAYERS_SUCCESS,
   GET_PLAYERS_FAILURE,
+  getPlayers,
   getPlayersSuccess,
   getPlayersFailure,
+  REMOVE_PLAYERS,
+  REMOVE_PLAYERS_SUCCESS,
+  REMOVE_PLAYERS_FAILURE,
+  removePlayers,
+  removePlayersSuccess,
+  removePlayersFailure,
 } from './session-actions';
 
 
@@ -52,11 +55,14 @@ export function room(state = {
           ...action.room,
           loading: true,
         },
-        Effects.promise(updateFirebase,
-          `chatrpg/games/${action.room.key}`, action.updateObj,
-          selectRoomSuccess,
-          selectRoomFailure,
-        )
+        Effects.batch([
+          Effects.promise(updateFirebase,
+            `chatrpg/games/${action.room.key}`, action.updateObj,
+            selectRoomSuccess,
+            selectRoomFailure,
+          ),
+          Effects.call(getPlayers, action.room.key),
+        ])
       );
 
     case SELECT_ROOM_SUCCESS:
@@ -77,28 +83,10 @@ export function room(state = {
       return loop(
         {
           ...state,
-          loading: true,
+          ...{ key: '', name: '' },
         },
-        Effects.promise(updateFirebase,
-          `chatrpg/games/${action.room.key}`, action.updateObj,
-          leaveRoomSuccess,
-          leaveRoomFailure,
-        )
+        Effects.call(removePlayers, action.room.key, [action.userName]),
       );
-
-    case LEAVE_ROOM_SUCCESS:
-      return {
-        ...state,
-        ...{ key: '', name: '' },
-        loading: false,
-      };
-
-    case LEAVE_ROOM_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
 
     default:
       return state;
@@ -137,6 +125,23 @@ export function availableRooms(state = {
   }
 }
 
+/**
+ * Functional iterative loop to run against Object
+ * props.
+ * @param  {Object}  hash    object to be cloned and traversed
+ * @param  {Array}   keyList  array of keys
+ * @param  {Function} fn      operation on keys
+ * @return {Object}           clone with fn ran against each prop
+ * in the keyList.
+ */
+const operateOnObjectKeyList = (hash, keyList, fn) => {
+  const hashCopy = Object.assign({}, hash);
+  keyList.forEach(key => fn(hash, key, hashCopy[key]));
+};
+
+// eslint-disable-next-line
+const deletePlayer = (hash, key, val) => val && delete hash[key];
+
 export function players(state = {
   available: {},
 }, action) {
@@ -159,6 +164,36 @@ export function players(state = {
       };
 
     case GET_PLAYERS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+
+    case REMOVE_PLAYERS:
+      return loop(
+        {
+          ...state,
+          ...{
+            available: operateOnObjectKeyList(state.available, action.playerNames, deletePlayer),
+          },
+          loading: true,
+        },
+        Effects.promise(updateFirebase,
+          `chatrpg/games/${action.roomKey}/players`, state.available,
+          removePlayersSuccess,
+          removePlayersFailure,
+        ),
+      );
+
+    case REMOVE_PLAYERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        available: { ...action.available },
+      };
+
+    case REMOVE_PLAYERS_FAILURE:
       return {
         ...state,
         loading: false,

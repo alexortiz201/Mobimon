@@ -8,7 +8,12 @@ import { connect } from 'react-redux';
 /* eslint-disable no-unused-vars */
 import ChatBattle from './pages/ChatBattle/';
 import ChatJoin from './pages/ChatJoin/';
-import { createRequire } from '../../core/public/utils/routes/routes-utils';
+import {
+  createOnEnter,
+  createOnLeave,
+} from '../../core/public/utils/routes/routes-utils';
+import { leaveRoom } from './redux/session/session-actions';
+
 import allReducers from './redux/';
 /* eslint-enable no-unused-vars */
 
@@ -25,7 +30,19 @@ const ChatRPG = props =>
 ChatRPG.defaultProps = {};
 ChatRPG.propTypes = {};
 
-export const hasBattleKeyEval = (state, replace) => {
+// export const triggerRoomLeft = (store) => {
+//   const state = store.getState();
+//   const userName = state.user.name;
+
+//   // submit spliced updateObj,
+//   // after removing self from list.
+//   console.log(state, userName);
+//   debugger // eslint-disable-line
+//   // leaveRoom()
+// };
+
+export const requireBattleKeyEval = (store, replace) => {
+  const state = store.getState();
   const battleKey = state.chatRPG && state.chatRPG.battleKey;
   const route = battleKey ? `${path}/battle/${battleKey}` : `${path}/join`;
   replace(route);
@@ -41,11 +58,14 @@ export const Route = store =>
     key={path}
     path={path}
     component={connectedChatRPG}>
-    <IndexRoute onEnter={createRequire(store, hasBattleKeyEval)} />
+    <IndexRoute onEnter={createOnEnter(store, requireBattleKeyEval)} />
     <Route path="join" component={ChatJoin} />
 
-    <Route path="battle" onEnter={createRequire(store, hasBattleKeyEval)} />
-    <Route path="battle/:battleKey" component={ChatBattle} />
+    <Route path="battle" onEnter={createOnEnter(store, requireBattleKeyEval)} />
+    <Route
+      path="battle/:battleKey"
+      component={ChatBattle}
+      onEnter={createOnLeave(store, triggerRoomLeft)} />
   </Route>;
 
 export default {

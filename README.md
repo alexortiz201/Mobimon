@@ -44,6 +44,7 @@ Testing:
 
 Quirks:
   * props.router.replace('/login') does not rewrite url in dev server.
+  * redux-logger middleware does not print redux-loop side effects.
 
 
 Commands Available:
