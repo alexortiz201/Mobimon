@@ -22,11 +22,11 @@ import {
   getPlayersSuccess,
   getPlayersFailure,
   REMOVE_PLAYERS,
-  // REMOVE_PLAYERS_SUCCESS,
-  // REMOVE_PLAYERS_FAILURE,
+  REMOVE_PLAYERS_SUCCESS,
+  REMOVE_PLAYERS_FAILURE,
   removePlayers,
-  // removePlayersSuccess,
-  // removePlayersFailure,
+  removePlayersSuccess,
+  removePlayersFailure,
 } from './session-actions';
 import {
   room,
@@ -338,6 +338,36 @@ test('Session - Players', (nest) => {
     assert.end();
   });
 
+  nest.test('... should create a REMOVE_PLAYERS_SUCCESS action', (assert) => {
+    const msg = 'session action creator should create a REMOVE_PLAYERS_SUCCESS action.';
+    const playersState = {
+      Case: {
+        color: 'purple',
+      },
+    };
+    const actual = removePlayersSuccess(playersState);
+    const expected = {
+      type: REMOVE_PLAYERS_SUCCESS,
+      available: playersState,
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... should create a REMOVE_PLAYERS_FAILURE action', (assert) => {
+    const msg = 'session action creator should create a REMOVE_PLAYERS_FAILURE action.';
+    const error = 'REMOVE_PLAYERS_FAILURE error';
+    const actual = removePlayersFailure(error);
+    const expected = {
+      type: REMOVE_PLAYERS_FAILURE,
+      error,
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
   // Reducers
   nest.test('... reducer should return initial state.', (assert) => {
     const msg = 'players reducer should return initial state.';
@@ -383,6 +413,107 @@ test('Session - Players', (nest) => {
     const expected = {
       loading: false,
       available: { ...playersState },
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... reducer should handle GET_PLAYERS_FAILURE.', (assert) => {
+    const msg = 'players reducer should GET_PLAYERS_FAILURE.';
+    const error = 'GET_PLAYERS_FAILURE error';
+    const playersState = {
+      available: {
+        Case: {
+          color: 'space blue',
+        },
+      },
+    };
+    const actual = players({ ...playersState }, {
+      type: GET_PLAYERS_FAILURE,
+      error,
+    });
+
+    const expected = {
+      ...playersState,
+      loading: false,
+      error,
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... reducer should handle REMOVE_PLAYERS.', (assert) => {
+    const msg = 'players reducer should REMOVE_PLAYERS.';
+    const playersState = {
+      available: {
+        Case: {
+          color: 'space blue',
+        },
+      },
+    };
+    const playerNames = ['Case'];
+    const roomKey = '123';
+
+    const actual = players({ ...playersState }, {
+      type: REMOVE_PLAYERS,
+      roomKey,
+      playerNames,
+    });
+
+    const expected = loop(
+      {
+        ...playersState,
+        ...{ available: {} },
+        loading: true,
+      },
+      Effects.promise(updateFirebase,
+        `chatrpg/games/${roomKey}/players`, { ...playersState.available },
+        removePlayersSuccess,
+        removePlayersFailure,
+      ),
+    );
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... reducer should handle REMOVE_PLAYERS_SUCCESS.', (assert) => {
+    const msg = 'players reducer should REMOVE_PLAYERS_SUCCESS.';
+    const actual = players(undefined, {
+      type: REMOVE_PLAYERS_SUCCESS,
+      available: {},
+    });
+
+    const expected = {
+      loading: false,
+      available: {},
+    };
+
+    assert.deepEqual(actual, expected, msg);
+    assert.end();
+  });
+
+  nest.test('... reducer should handle REMOVE_PLAYERS_FAILURE.', (assert) => {
+    const msg = 'players reducer should REMOVE_PLAYERS_FAILURE.';
+    const error = 'REMOVE_PLAYERS_FAILURE error';
+    const playersState = {
+      available: {
+        Case: {
+          color: 'space blue',
+        },
+      },
+    };
+    const actual = players({ ...playersState }, {
+      type: REMOVE_PLAYERS_FAILURE,
+      error,
+    });
+
+    const expected = {
+      loading: false,
+      ...playersState,
+      error,
     };
 
     assert.deepEqual(actual, expected, msg);

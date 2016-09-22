@@ -136,11 +136,16 @@ export function availableRooms(state = {
  */
 const operateOnObjectKeyList = (hash, keyList, fn) => {
   const hashCopy = Object.assign({}, hash);
-  keyList.forEach(key => fn(hash, key, hashCopy[key]));
+  keyList.forEach(key => fn(hashCopy, key));
+
+  return hashCopy;
 };
 
-// eslint-disable-next-line
-const deletePlayer = (hash, key, val) => val && delete hash[key];
+const deleteProp = (hash, key) =>
+  hash[key] && Reflect.deleteProperty(hash, key);
+
+const deletePlayer = (hash, keyList) =>
+  operateOnObjectKeyList(hash, keyList, deleteProp);
 
 export function players(state = {
   available: {},
@@ -175,7 +180,7 @@ export function players(state = {
         {
           ...state,
           ...{
-            available: operateOnObjectKeyList(state.available, action.playerNames, deletePlayer),
+            available: deletePlayer(state.available, action.playerNames),
           },
           loading: true,
         },

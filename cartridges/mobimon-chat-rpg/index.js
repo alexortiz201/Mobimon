@@ -30,21 +30,18 @@ const ChatRPG = props =>
 ChatRPG.defaultProps = {};
 ChatRPG.propTypes = {};
 
-// export const triggerRoomLeft = (store) => {
-//   const state = store.getState();
-//   const userName = state.user.name;
+export const exitRoom = (store) => {
+  const state = store.getState();
+  const key = state.chatRPG && state.chatRPG.room.key;
+  const userName = state.user.name;
 
-//   // submit spliced updateObj,
-//   // after removing self from list.
-//   console.log(state, userName);
-//   debugger // eslint-disable-line
-//   // leaveRoom()
-// };
+  leaveRoom({ key }, userName);
+};
 
 export const requireBattleKeyEval = (store, replace) => {
   const state = store.getState();
-  const battleKey = state.chatRPG && state.chatRPG.battleKey;
-  const route = battleKey ? `${path}/battle/${battleKey}` : `${path}/join`;
+  const roomKey = state.chatRPG && state.chatRPG.room.key;
+  const route = roomKey ? `${path}/battle/${roomKey}` : `${path}/join`;
   replace(route);
 };
 
@@ -53,7 +50,6 @@ export const connectedChatRPG = withRouter(connect(state => ({
   userCharacter: state.character,
 }), {})(ChatRPG));
 
-// onEnter={createOnLeave(store, triggerRoomLeft)}
 export const Route = store =>
   <Route
     key={path}
@@ -65,7 +61,8 @@ export const Route = store =>
     <Route path="battle" onEnter={createOnEnter(store, requireBattleKeyEval)} />
     <Route
       path="battle/:battleKey"
-      component={ChatBattle} />
+      component={ChatBattle}
+      onLeave={createOnLeave(store, exitRoom)} />
   </Route>;
 
 export default {
