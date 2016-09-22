@@ -32,9 +32,11 @@ import {
   room,
   players,
   availableRooms,
+} from './session-reducers';
+import {
   fetchFromFirebase,
   updateFirebase,
-} from './session-reducers';
+} from '../../services/firebase/firebase.service';
 
 const initialRoomState = {
   key: '',

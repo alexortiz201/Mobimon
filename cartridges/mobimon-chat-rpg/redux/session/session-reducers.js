@@ -1,5 +1,8 @@
 import { Effects, loop } from 'redux-loop';
-import { createDatabaseRef } from '../../services/firebase/firebase.service';
+import {
+  fetchFromFirebase,
+  updateFirebase,
+} from '../../services/firebase/firebase.service';
 import {
   GET_ROOMS,
   GET_ROOMS_SUCCESS,
@@ -25,30 +28,6 @@ import {
   removePlayersSuccess,
   removePlayersFailure,
 } from './session-actions';
-
-
-export function fetchFromFirebase(resource, successFn, failFn) {
-  return createDatabaseRef(resource)
-    .once('value')
-    .then(FirebaseObj => FirebaseObj.val())
-    .then(successFn)
-    .catch(failFn);
-}
-
-
-export function updateFirebase(resource, updateObj, successFn, failFn) {
-  return createDatabaseRef(resource)
-    .update(updateObj)
-    .then(successFn)
-    .catch(failFn);
-}
-
-export function setFirebase(resource, updateObj, successFn, failFn) {
-  return createDatabaseRef(resource)
-    .set(updateObj)
-    .then(successFn)
-    .catch(failFn);
-}
 
 export function room(state = {
   key: '',

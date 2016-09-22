@@ -65,6 +65,29 @@ export const createDatabaseRef = (infoPath) => {
 
 export const getDatabaseRef = infoPath => connections[infoPath];
 
+export function fetchFromFirebase(resource, successFn, failFn) {
+  return createDatabaseRef(resource)
+    .once('value')
+    .then(FirebaseObj => FirebaseObj.val())
+    .then(successFn)
+    .catch(failFn);
+}
+
+
+export function updateFirebase(resource, updateObj, successFn, failFn) {
+  return createDatabaseRef(resource)
+    .update(updateObj)
+    .then(successFn)
+    .catch(failFn);
+}
+
+export function setFirebase(resource, updateObj, successFn, failFn) {
+  return createDatabaseRef(resource)
+    .set(updateObj)
+    .then(successFn)
+    .catch(failFn);
+}
+
 export default {
   getDBUrl,
   getApiKey,
@@ -72,4 +95,7 @@ export default {
   load,
   createDatabaseRef,
   getDatabaseRef,
+  fetchFromFirebase,
+  updateFirebase,
+  setFirebase,
 };
