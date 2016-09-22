@@ -16,7 +16,7 @@ export const createOnEnter = (store, evalFn) =>
  * @return {Function}        Function that takes state
  */
 export const createOnLeave = (store, evalFn) =>
-  () => evalFn(store);
+  prevState => evalFn(store, prevState);
 
 
 /**

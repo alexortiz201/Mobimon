@@ -90,10 +90,9 @@ export function removePlayers(roomKey, playerNames = []) {
 }
 
 export const REMOVE_PLAYERS_SUCCESS = 'REMOVE_PLAYERS_SUCCESS';
-export function removePlayersSuccess(available) {
+export function removePlayersSuccess() {
   return {
     type: REMOVE_PLAYERS_SUCCESS,
-    available,
   };
 }
 

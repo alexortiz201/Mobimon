@@ -43,6 +43,13 @@ export function updateFirebase(resource, updateObj, successFn, failFn) {
     .catch(failFn);
 }
 
+export function setFirebase(resource, updateObj, successFn, failFn) {
+  return createDatabaseRef(resource)
+    .set(updateObj)
+    .then(successFn)
+    .catch(failFn);
+}
+
 export function room(state = {
   key: '',
   name: '',
@@ -144,8 +151,15 @@ const operateOnObjectKeyList = (hash, keyList, fn) => {
 const deleteProp = (hash, key) =>
   hash[key] && Reflect.deleteProperty(hash, key);
 
-const deletePlayer = (hash, keyList) =>
+const deletePlayers = (hash, keyList) =>
   operateOnObjectKeyList(hash, keyList, deleteProp);
+
+const nullifyProp = (hash, key) =>
+  hash[key] && Reflect.set(hash, key, null);
+
+// damn firebase, needs prop to be set to null
+const nullifyPlayer = (hash, keyList) =>
+  operateOnObjectKeyList(hash, keyList, nullifyProp);
 
 export function players(state = {
   available: {},
@@ -180,12 +194,13 @@ export function players(state = {
         {
           ...state,
           ...{
-            available: deletePlayer(state.available, action.playerNames),
+            available: deletePlayers(state.available, action.playerNames),
           },
           loading: true,
         },
         Effects.promise(updateFirebase,
-          `chatrpg/games/${action.roomKey}/players`, state.available,
+          `chatrpg/games/${action.roomKey}/players`,
+          nullifyPlayer(state.available, action.playerNames),
           removePlayersSuccess,
           removePlayersFailure,
         ),
@@ -195,7 +210,6 @@ export function players(state = {
       return {
         ...state,
         loading: false,
-        available: { ...action.available },
       };
 
     case REMOVE_PLAYERS_FAILURE:

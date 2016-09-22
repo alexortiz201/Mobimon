@@ -340,15 +340,9 @@ test('Session - Players', (nest) => {
 
   nest.test('... should create a REMOVE_PLAYERS_SUCCESS action', (assert) => {
     const msg = 'session action creator should create a REMOVE_PLAYERS_SUCCESS action.';
-    const playersState = {
-      Case: {
-        color: 'purple',
-      },
-    };
-    const actual = removePlayersSuccess(playersState);
+    const actual = removePlayersSuccess();
     const expected = {
       type: REMOVE_PLAYERS_SUCCESS,
-      available: playersState,
     };
 
     assert.deepEqual(actual, expected, msg);
@@ -469,7 +463,7 @@ test('Session - Players', (nest) => {
         loading: true,
       },
       Effects.promise(updateFirebase,
-        `chatrpg/games/${roomKey}/players`, { ...playersState.available },
+        `chatrpg/games/${roomKey}/players`, { Case: null },
         removePlayersSuccess,
         removePlayersFailure,
       ),
@@ -481,14 +475,20 @@ test('Session - Players', (nest) => {
 
   nest.test('... reducer should handle REMOVE_PLAYERS_SUCCESS.', (assert) => {
     const msg = 'players reducer should REMOVE_PLAYERS_SUCCESS.';
-    const actual = players(undefined, {
+    const playersState = {
+      available: {
+        Case: {
+          color: 'space blue',
+        },
+      },
+    };
+    const actual = players(playersState, {
       type: REMOVE_PLAYERS_SUCCESS,
-      available: {},
     });
 
     const expected = {
       loading: false,
-      available: {},
+      ...playersState,
     };
 
     assert.deepEqual(actual, expected, msg);

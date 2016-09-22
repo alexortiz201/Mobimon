@@ -34,8 +34,7 @@ export const exitRoom = (store) => {
   const state = store.getState();
   const key = state.chatRPG && state.chatRPG.room.key;
   const userName = state.user.name;
-
-  leaveRoom({ key }, userName);
+  store.dispatch(leaveRoom({ key }, userName));
 };
 
 export const requireBattleKeyEval = (store, replace) => {
