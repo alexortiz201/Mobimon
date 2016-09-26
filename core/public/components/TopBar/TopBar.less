@@ -1,0 +1,44 @@
+@import '../../utils/less/variables.less';
+
+.top-bar {
+  @top-bar-square-size: 40px;
+
+  padding: 15px 10px 15px;
+  border-bottom: 2px solid @color-mobi-green;
+
+  .character {
+    height: @top-bar-square-size;
+    width: @top-bar-square-size;
+    display: inline-block;
+    border-radius: 50%;
+    border: 2px solid @color-mobi-green;
+    float: left;
+
+    .character-inner {
+      height: @top-bar-square-size + 20px;
+      width: @top-bar-square-size + 20px;
+      transform: translateX(-18%);
+    }
+  }
+
+  .top-bar-name {
+    @top-bar-name-padding: 12px;
+    padding: @top-bar-name-padding 0 0 5px;
+    height: @top-bar-square-size - @top-bar-name-padding;
+    display: inline-block;
+  }
+
+  .button {
+    background: @color-mobi-green;
+    float: right;
+    margin: 0;
+    height: 40px;
+
+    &:hover {
+      background: darken(@color-mobi-green, 10%);
+    }
+    &:active {
+      background: darken(@color-mobi-green, 20%);
+    }
+  }
+}

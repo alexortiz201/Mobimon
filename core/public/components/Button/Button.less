@@ -1,0 +1,25 @@
+@import '../../utils/less/variables.less';
+
+.button {
+  flex-grow: 1;
+  margin-top: 8px;
+  padding: 8px;
+  height: 6ex;
+  background: @default-button-color;
+  color: #fff;
+  border-radius: 4px;
+  text-transform: capitalize;
+  border: none;
+
+  &:hover {
+    background: darken(@default-button-color, 10%);
+    cursor: pointer;
+  }
+  &:active {
+    background: darken(@default-button-color, 20%);
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+}

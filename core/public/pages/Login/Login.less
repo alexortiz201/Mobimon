@@ -22,32 +22,16 @@
   }
 
   .button {
-    flex-grow: 1;
-    margin-top: 8px;
-    padding: 8px;
-    height: 6ex;
     background: @color-mobi-green;
-    color: #fff;
-    border-radius: 4px;
-    text-transform: capitalize;
   }
-}
 
-.button {
-  text-transform: uppercase;
-  background: #ddd;
-  border: none;
-
-  &:hover {
-    background: darken(@color-mobi-green, 10%);
-    cursor: pointer;
-  }
-  &:active {
-    background: darken(@color-mobi-green, 20%);
-    cursor: pointer;
-  }
-  &:focus {
-    outline: none;
+  .button {
+    &:hover {
+      background: darken(@color-mobi-green, 10%);
+    }
+    &:active {
+      background: darken(@color-mobi-green, 20%);
+    }
   }
 }
 

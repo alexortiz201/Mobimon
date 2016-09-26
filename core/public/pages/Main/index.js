@@ -6,15 +6,22 @@ import 'normalize.css';
 import createMain from './Main.js';
 import './Main.less';
 
+import createTopBar from '../../components/TopBar/';
+import createButton from '../../components/Button/';
 import createCharacter from '../../components/Character/';
 
 const Main = createMain(React);
-// eslint-disable-next-line no-unused-vars
+/* eslint-disable no-unused-vars */
 const Character = createCharacter(React);
+const TopBar = createTopBar(React);
+const Button = createButton(React);
+/* eslint-enable no-unused-vars */
 
 const goToLogin = props => props.router.replace('/login');
+const goToChatRPG = props => props.router.replace('/chat-rpg');
 
-const renderTopBar = ({ user = {}, character = {} }) => {
+const renderTopBar = (props) => {
+  const { user = {}, character = {} } = props;
   const name = character.name && character.name.toLowerCase();
 
   if (!name) {
@@ -22,12 +29,16 @@ const renderTopBar = ({ user = {}, character = {} }) => {
   }
 
   return (
-    <div className="top-bar">
+    <TopBar>
       <Character
         character={character}
-        className={name} />
-      <span className="top-bar-name">{`${user.name} : ${character.name}`}</span>
-    </div>
+        className={character.name.toLowerCase()} />
+      <span className="top-bar-name">{`${user.name}`}</span>
+      <Button
+        className="top-bar-nav"
+        text="Chat RPG"
+        onClick={() => goToChatRPG(props)} />
+    </TopBar>
   );
 };
 
@@ -35,6 +46,7 @@ Main.defaultProps = {
   user: {},
   character: {},
   goToLogin,
+  goToChatRPG,
   renderTopBar,
 };
 
@@ -42,6 +54,7 @@ Main.propTypes = {
   user: PropTypes.object.isRequired,
   character: PropTypes.object.isRequired,
   goToLogin: PropTypes.func.isRequired,
+  goToChatRPG: PropTypes.func.isRequired,
   renderTopBar: PropTypes.func.isRequired,
 };
 
