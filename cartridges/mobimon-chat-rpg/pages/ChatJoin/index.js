@@ -102,6 +102,7 @@ const renderRoomListContainer = (props) => {
 
 const ChatJoin = props =>
   <div className="chat-join">
+    <h2>Choose your fate...</h2>
     <Login {...props} />
     { renderRoomListContainer(props) }
   </div>;
