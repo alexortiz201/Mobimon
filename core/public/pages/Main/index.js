@@ -36,7 +36,7 @@ const renderTopBar = (props) => {
       <span className="top-bar-name">{`${user.name}`}</span>
       <Button
         className="top-bar-nav"
-        text="Chat RPG"
+        text="Battle RPG Arena"
         onClick={() => goToChatRPG(props)} />
     </TopBar>
   );

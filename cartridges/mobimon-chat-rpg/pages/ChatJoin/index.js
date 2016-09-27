@@ -56,8 +56,9 @@ const handleSelection = (props, room) => {
 
 const onSubmit = (e, props, inputNode) => {
   e.preventDefault();
-  const val = inputNode.value;
-  handleSelection(props, { key: uuid.v4(), name: val });
+  const key = uuid.v4();
+  const name = inputNode.value || key;
+  handleSelection(props, { key, name });
 };
 
 const setUpFireBaseScripts = () => load().then(init);

@@ -19,9 +19,6 @@ const ChatBattle = props =>
         messages={props.messages}
         greeting={chatRPGGreeting} />
       {/* <ChatControls {...props} /> */}
-      <button onClick={() => {
-        props.router.push('/chat-rpg/join');
-      }}>Exit</button>
     </ChatRoom>
   </div>;
 
